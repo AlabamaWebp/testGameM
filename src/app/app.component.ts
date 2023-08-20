@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ErrorService } from './services/data/error.service';
 import { Subscription } from 'rxjs';
+import { SharedService } from './services/data/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,13 @@ export class AppComponent {
 
   private subs: Subscription = new Subscription;
 
-  constructor(private readonly er: ErrorService){}
+  constructor(private readonly er: ErrorService, private shared: SharedService){}
 
   ngOnInit() {
     this.subs = this.er.errorsIn$.subscribe((d: string) => {
       this.addError(d);
     });
+    this.initLocalS();
   }
 
   errors: string[] = [];
@@ -36,6 +38,15 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+  }
+
+  initLocalS() {
+    if (localStorage.getItem("ip")) {
+      this.shared.setUrl(localStorage.getItem("ip") as string);
+    }
+    if (localStorage.getItem("name")) {
+      this.shared.setName(localStorage.getItem("name") as string);
+    }
   }
 
   // createError() {

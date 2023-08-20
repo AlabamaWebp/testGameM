@@ -115,11 +115,6 @@ export class HomeComponent implements OnInit {
       this.router.navigate(["/lob"]);
     });
   }
-  roomOut(room: string) {
-    this.cors.getHttp().post(this.path + `/rooms/out_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
-      this.dataTable(d);
-    });
-  }
   // create_room?room=s&max_players=3
   createRoom(max: number) {
     this.cors.getHttp().post(this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {

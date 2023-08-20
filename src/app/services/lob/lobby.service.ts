@@ -22,7 +22,12 @@ export class LobbyService {
     return this.http.get<any>(this.url + `/game/ready?player=${player}&room=${room}&ready=` + bool);
   }
   setSex(player: string, bool: boolean) {
-    return this.http.get<any>(this.url + "set_sex?player=" + player +"&woman=false" + bool);
+    return this.http.get<any>(this.url + "/game/set_sex?player=" + player +"&woman=" + bool);
   }
-
+  roomOut(room: string, player: string) {
+    return this.http.post(this.url + `/rooms/out_room?room=${room}&nickname=${player}`, undefined)
+  }
+  checkStatus(player: string) {
+    return this.http.get(this.url + "/game/lobby_status?name=" + player)
+  }
 }
