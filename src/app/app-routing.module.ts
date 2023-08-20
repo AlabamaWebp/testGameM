@@ -7,13 +7,11 @@ import { TestingPageComponent } from './comp/testing-page/testing-page.component
 
 const routes: Routes = [
   // {path: "home", component}
-  // {path: "**" , redirectTo: "home"},
   {path: "home" , component: HomeComponent},
-  {path: "pl" , component: PlayerCardComponent},
+  // {path: "pl" , component: PlayerCardComponent},
   {path: "lob" , component: LobbiComponent},
-  {path: "test" , component: TestingPageComponent},
-
-
+  // {path: "test" , component: TestingPageComponent},
+  {path: "**" , redirectTo: "home"},
 ];
 
 @NgModule({
