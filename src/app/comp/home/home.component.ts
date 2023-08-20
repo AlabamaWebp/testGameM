@@ -82,7 +82,9 @@ export class HomeComponent implements OnInit {
   roomIn(room: string) {
     this.cors.getHttp().post("http://"+this.path + `/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
       console.log(d);
+      
       // this.roomOut(room);
+        
     });
   }
   roomOut(room: string) {

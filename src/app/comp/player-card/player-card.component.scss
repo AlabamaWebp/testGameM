@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    border: 0;
+}
+.container{
+    min-width: 80px;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+.card{
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.pl-logo{
+    height: 100px;
+    
+}
+img{
+        justify-content: center;
+    }
+.pl-title{
+    padding: 5px;
+}
+.pt-description{
+    display: flex;
+    justify-content: center; 
+}
