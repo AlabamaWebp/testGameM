@@ -1,6 +1,11 @@
+@import "../../../styles.scss";
+
 .wrapper{
     margin: 0;
     padding: 0;
+    background: url('../../../assets/image/таверна1.jpg');
+    width: 100%;
+    background-size: cover;
 }
 .header{
     min-height: 150px;
@@ -25,14 +30,32 @@
 
     flex-direction: row;
     justify-content: center;
+
 }
 .footer{
     min-height: 50px;  
 }
+
+// .back-blur{
+//     background-color: rgb(0,0,0); /* Fallback color */
+//   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+//   filter: blur(5px);
+// }
+
 .lob-container{
-    display: block;
-    text-align: center;
+    position: relative;
+    // display: block;
+    // text-align: center;
     margin: 10px;
+    background: inherit;
+}
+
+.lob-container::before{
+    content: '';
+    position: absolute;
+    background: inherit;
+    border: 2px black solid;
+    filter: blur(5px);
 }
 .btn{
     width: 200px;
@@ -87,9 +110,9 @@ display: block;
 }
 
 .bl9red{
-    background-color: red;
+    background-color: #a24a53;
 }
 .bl9green{
-    background-color: green;
+    background-color: #9aad7c;
     // пиздец весело
 }

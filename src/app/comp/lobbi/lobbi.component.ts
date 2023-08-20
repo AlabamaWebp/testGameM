@@ -38,5 +38,10 @@ export class LobbiComponent implements OnInit{
     this.pl_reay = !this.pl_reay; 
   }
 
+  exitRoom(){
+    // выйти из лобби
+    console.log('ti vishel');
+  }
+
   
 }
