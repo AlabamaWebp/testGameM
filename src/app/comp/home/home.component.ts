@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from 'src/app/services/cors/home.service';
+import { ErrorService } from 'src/app/services/data/error.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { HomeService } from 'src/app/services/cors/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public cors: HomeService) { }
+  constructor(public cors: HomeService, public err: ErrorService) { }
 
   path = "192.168.0.1:8081"
   nickname = ""
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
 
   ////// setters
   setIp(value: string) {
-    localStorage.setItem("ip", value);
+    this.err.setUrl(value);
     this.path = value;
     this.fetchRooms();
     // this.refresh();
@@ -44,11 +45,6 @@ export class HomeComponent implements OnInit {
     localStorage.setItem("name", value);
     this.nickname = value;
   }
-
-
-  // refresh() {
-  //   this.fetchRooms();
-  // }
 
 
   /////data
@@ -82,10 +78,7 @@ export class HomeComponent implements OnInit {
   // ?room=s&nickname=1
   roomIn(room: string) {
     this.cors.getHttp().post("http://"+this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
-      // console.log(d);
-      
-      // this.roomOut(room);
-        
+
     });
   }
   roomOut(room: string) {
@@ -96,7 +89,6 @@ export class HomeComponent implements OnInit {
   // create_room?room=s&max_players=3
   createRoom(max: number) {
     this.cors.getHttp().post("http://"+this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {
-      // this.dataTable(d);
       this.roomIn(`server_${this.nickname}`);
       console.log(d);
       this.fetchRooms();
@@ -114,6 +106,5 @@ export class HomeComponent implements OnInit {
 
   test(a:any) {
     console.log(a);
-    // return true;
   }
 }
