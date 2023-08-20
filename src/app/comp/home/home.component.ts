@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HomeService } from 'src/app/services/cors/home.service';
 import { ErrorService } from 'src/app/services/data/error.service';
+import { PlayerService } from 'src/app/services/player/player.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,12 @@ import { ErrorService } from 'src/app/services/data/error.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public cors: HomeService, public err: ErrorService) { }
+  constructor(
+    private cors: HomeService,
+    private err: ErrorService,
+    private player: PlayerService,
+    private router: Router,
+    ) { }
 
   path = "192.168.0.1:8081"
   nickname = ""
@@ -17,6 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.initLocalS();
   }
+
 
   ngAfterViewInit() {
     this.fetchRooms();
@@ -31,7 +39,20 @@ export class HomeComponent implements OnInit {
     }
     if (localStorage.getItem("name")) {
       this.nickname = localStorage.getItem("name") as string;
+      this.checkGame();
     }
+  }
+
+  checkGame() {
+    this.cors.getHttp().get("http://"+this.path + "/game/lobby_status?name=" + this.nickname).subscribe((d: any) => {
+      if (d.status == "r") {
+        this.player.setRoomIn(d);
+        this.router.navigate(["/lob"]);
+      }
+      else if (d.status == "g") {
+        // Дописать надо когда будет игра
+      }
+    });
   }
 
   ////// setters
@@ -78,7 +99,8 @@ export class HomeComponent implements OnInit {
   // ?room=s&nickname=1
   roomIn(room: string) {
     this.cors.getHttp().post("http://"+this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
-
+      this.player.setRoomIn(d);
+      this.router.navigate(["/lob"]);
     });
   }
   roomOut(room: string) {
