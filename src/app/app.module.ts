@@ -12,13 +12,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/http-interceptor/interceptor.service';
 import { LobbiComponent } from './comp/lobbi/lobbi.component';
 import { PlayerCardComponent } from './comp/player-card/player-card.component';
+import { TestingPageComponent } from './comp/testing-page/testing-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LobbiComponent,
-    PlayerCardComponent
+    PlayerCardComponent,
+    TestingPageComponent
   ],
   imports: [
     BrowserModule,
