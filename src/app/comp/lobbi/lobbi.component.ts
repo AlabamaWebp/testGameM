@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IPlyayer } from 'src/app/models/player';
+import { RoomIn } from 'src/app/models/shared';
 import { LobbyService } from 'src/app/services/lob/lobby.service';
+import { PlayerService } from 'src/app/services/player/player.service';
 
 @Component({
   selector: 'app-lobbi',
@@ -9,11 +11,12 @@ import { LobbyService } from 'src/app/services/lob/lobby.service';
 })
 export class LobbiComponent implements OnInit{
 
-  constructor(private lobbyService: LobbyService){}
+  constructor(private lobbyService: LobbyService, private playerService: PlayerService){}
 
   gender: boolean = true;
   pl_reay: boolean = true
   player: IPlyayer[] = [];
+  lobby_data: RoomIn = this.playerService.getRoomIn();
 
   ngOnInit(): void {
     // this.lobbyService.get_count_player_in_lobby().subscribe(data => {

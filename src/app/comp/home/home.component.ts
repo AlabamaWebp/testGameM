@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     ) { }
 
-  path = "192.168.0.1:8081"
+  path = "http://192.168.0.1:8081"
   nickname = ""
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   checkGame() {
-    this.cors.getHttp().get("http://"+this.path + "/game/lobby_status?name=" + this.nickname).subscribe((d: any) => {
+    this.cors.getHttp().get(this.path + "/game/lobby_status?name=" + this.nickname).subscribe((d: any) => {
       if (d.status == "r") {
         this.player.setRoomIn(d);
         this.router.navigate(["/lob"]);
@@ -57,11 +57,23 @@ export class HomeComponent implements OnInit {
 
   ////// setters
   setIp(value: string) {
+    if (!value.includes("http://")) {
+      value = "http://" + value;
+    }
+    console.log(value);
     this.err.setUrl(value);
     this.path = value;
     this.fetchRooms();
     // this.refresh();
   }
+
+  getIpWithoutHttp() {
+    if (this.path.includes("http://")) {
+      return this.path.replace("http://", "")
+    }
+    return this.path
+  }
+
   setNick(value: string) {
     localStorage.setItem("name", value);
     this.nickname = value;
@@ -92,32 +104,32 @@ export class HomeComponent implements OnInit {
   data: any;
   rooms: string[] = [];
   fetchRooms() {
-    this.cors.getHttp().get("http://"+this.path + "/rooms/rooms").subscribe((d: any) => {
+    this.cors.getHttp().get(this.path + "/rooms/rooms").subscribe((d: any) => {
       this.dataTable(d);
     });
   }
   // ?room=s&nickname=1
   roomIn(room: string) {
-    this.cors.getHttp().post("http://"+this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
+    this.cors.getHttp().post(this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
       this.player.setRoomIn(d);
       this.router.navigate(["/lob"]);
     });
   }
   roomOut(room: string) {
-    this.cors.getHttp().post("http://"+this.path + `/rooms/out_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
+    this.cors.getHttp().post(this.path + `/rooms/out_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
       this.dataTable(d);
     });
   }
   // create_room?room=s&max_players=3
   createRoom(max: number) {
-    this.cors.getHttp().post("http://"+this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {
+    this.cors.getHttp().post(this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {
       this.roomIn(`server_${this.nickname}`);
       console.log(d);
       this.fetchRooms();
     });
   }
   delRoom(room: string) {
-    this.cors.getHttp().delete("http://"+this.path + `/rooms/delete_room?room=${room}`).subscribe((d: any) => {
+    this.cors.getHttp().delete(this.path + `/rooms/delete_room?room=${room}`).subscribe((d: any) => {
       this.dataTable(d);
     });
   }

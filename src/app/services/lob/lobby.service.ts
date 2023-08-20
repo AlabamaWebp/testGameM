@@ -1,16 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ErrorService } from '../data/error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LobbyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errors: ErrorService) { }
 
-  url = ''
+  // get_count_player_in_lobby(){
+  //   return this.http.get<any>(this.url);
+  // }
 
-  get_count_player_in_lobby(){
+  url = this.errors.getUrl();
+
+  get_ready_players() {
     return this.http.get<any>(this.url);
   }
+
 }
