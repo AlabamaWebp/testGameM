@@ -22,9 +22,7 @@
 }
 .body{
     display: flex;
-    // display: table-row;
-    /* Чтобы ряд занимал всё оставшееся пространство, так как табличная разметка не позволит ему вытолкнуть header и footer */
-    // height: 100%;
+
     flex-direction: row;
     justify-content: center;
 }
@@ -84,6 +82,14 @@
     z-index: 1;
 }
 
-  .dropmenu:hover .item {
-    display: block;
-  }
+.dropmenu:hover .item {
+display: block;
+}
+
+.bl9red{
+    background-color: red;
+}
+.bl9green{
+    background-color: green;
+    // пиздец весело
+}

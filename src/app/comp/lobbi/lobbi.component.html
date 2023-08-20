@@ -18,11 +18,28 @@
         </div>
     </div>
     <div class="body">
-        <div class="lob-container">
+        <div class="lob-container" > 
+            <!-- *ngFor="let pl in player" -->
             
             <app-player-card></app-player-card>
             <div class="btn_ready">
-                <button class="btn">Ready</button>
+                <button class="btn" type="button" (click)="playerReady()"
+                [ngClass]="{
+                    'bl9red': !pl_reay,
+                    'bl9green': pl_reay
+                }"
+                >{{pl_reay ? 'Готов' : 'Не готов'}}</button>
+            </div>
+            <div class="btn_gender">
+                <button class="btn2" style="background-color: burlywood;" (click)="genderChange()">Man</button>
+                <button class="btn2" style="background-color: pink;" (click)="genderChange()">Woman</button>
+            </div>
+        </div>
+        <!-- <div class="lob-container">
+            
+            <app-player-card></app-player-card>
+            <div class="btn_ready">
+                <button class="btn" type="button">{{pl_reay ? 'Готов' : 'Не готов'}}</button>
             </div>
             <div class="btn_gender">
                 <button class="btn2" style="background-color: burlywood;">Man</button>
@@ -33,24 +50,13 @@
             
             <app-player-card></app-player-card>
             <div class="btn_ready">
-                <button class="btn">Ready</button>
-            </div>
-            <div class="btn_gender">
-                <button class="btn2" style="background-color: burlywood;">Man</button>
-                <button class="btn2" style="background-color: pink;">Woman</button>
-            </div>
-        </div>
-        <div class="lob-container">
-            
-            <app-player-card></app-player-card>
-            <div class="btn_ready">
-                <button class="btn">Ready</button>
+                <button class="btn" type="button">{{pl_reay ? 'Готов' : 'Не готов'}}</button>
             </div>
             <div class="btn_gender">
                     <button class="btn2" style="background-color: burlywood;">Man</button>
                     <button class="btn2" style="background-color: pink;">Woman</button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="footer">
         <button class="btn" style="background-color: brown;">Exit</button>

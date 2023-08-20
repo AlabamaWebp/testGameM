@@ -10,7 +10,7 @@ export class LobbyService {
 
   url = ''
 
-  get_count_player_in_lobby(count: number){
+  get_count_player_in_lobby(){
     return this.http.get<any>(this.url);
   }
 }
