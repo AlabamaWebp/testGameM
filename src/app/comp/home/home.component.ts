@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeService } from 'src/app/services/cors/home.service';
-import { ErrorService } from 'src/app/services/data/error.service';
+import { SharedService } from 'src/app/services/data/shared.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private cors: HomeService,
-    private err: ErrorService,
+    private err: SharedService,
     private player: PlayerService,
     private router: Router,
     ) { }
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   checkGame() {
     this.cors.getHttp().get(this.path + "/game/lobby_status?name=" + this.nickname).subscribe((d: any) => {
       if (d.status == "r") {
-        this.player.setRoomIn(d);
+        this.player.setRoomIn(d.room, d.name);
         this.router.navigate(["/lob"]);
       }
       else if (d.status == "g") {
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
   }
 
   setNick(value: string) {
-    localStorage.setItem("name", value);
+    this.err.setName(value)
     this.nickname = value;
   }
 
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
   // ?room=s&nickname=1
   roomIn(room: string) {
     this.cors.getHttp().post(this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
-      this.player.setRoomIn(d);
+      this.player.setRoomIn(d.room, d.name);
       this.router.navigate(["/lob"]);
     });
   }

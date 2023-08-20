@@ -13,19 +13,21 @@ export class PlayerService {
 
   url = ''
 
-  private room_in: any
+  private room_in: any;
+  private room_name: string = ""
 
 
-  get_card() {
-    return this.http.get<ICard>(this.url)
-  }
+  // get_card() {
+  //   return this.http.get<ICard>(this.url)
+  // }
 
-  setRoomIn(value: any) {
+  setRoomIn(value: any, name: string) {
     this.room_in = value
+    this.room_name = name
   }
 
   getRoomIn() {
-    return this.room_in
+    return [this.room_in, this.room_name]
   }
 
 }

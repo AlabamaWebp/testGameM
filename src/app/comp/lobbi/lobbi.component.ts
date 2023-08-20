@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IPlyayer } from 'src/app/models/player';
 import { RoomIn } from 'src/app/models/shared';
+import { SharedService } from 'src/app/services/data/shared.service';
 import { LobbyService } from 'src/app/services/lob/lobby.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 
@@ -11,12 +12,13 @@ import { PlayerService } from 'src/app/services/player/player.service';
 })
 export class LobbiComponent implements OnInit{
 
-  constructor(private lobbyService: LobbyService, private playerService: PlayerService){}
+  constructor(private lobbyService: LobbyService, private playerService: PlayerService, private shared: SharedService){}
 
   gender: boolean = true;
   pl_reay: boolean = true
   player: IPlyayer[] = [];
-  lobby_data: RoomIn = this.playerService.getRoomIn();
+  lobby_data: RoomIn = this.playerService.getRoomIn()[0];
+  lobby_name = this.playerService.getRoomIn()[1];
 
   ngOnInit(): void {
     // this.lobbyService.get_count_player_in_lobby().subscribe(data => {
@@ -24,16 +26,9 @@ export class LobbiComponent implements OnInit{
     // });
   }
 
-  genderChange(){
-    this.gender = !this.gender;
-    console.log(this.gender);
-    if(this.gender === false){
-      // womanLogo лого девушуи  
-    }
-    else{
-      // лого мужика
-    }
-    
+  genderChange(bool: boolean){
+    this.gender = bool;
+    this.lobbyService.setSex(this.shared.getName(), bool) 
   }
 
 
