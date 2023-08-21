@@ -13,7 +13,11 @@
 .card{
     padding: 10px;
     border-radius: 20px;
-    border: 2px solid gold;
+    // border: 2px dashed Gold;
+    // border: 30px solid transparent;
+    border: 50px solid transparent;
+    border-image: url('../../../assets/image/5a1d4356928104.3161662615118672226001.png') 16.66666667% / 1 / 0 stretch;
+//   border-image: url('/examples/images/border.png') 16.66666667% / 1 / 0 stretch; хочу норм рамочку сделать потом
 }
 .pl-logo{
     height: 100px;
@@ -28,4 +32,7 @@ img{
 .pt-description{
     display: flex;
     justify-content: center; 
+}
+span{
+    color: white;
 }

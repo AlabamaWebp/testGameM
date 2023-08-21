@@ -60,19 +60,20 @@
 
 .lob-container{
     position: relative;
-    // display: block;
-    // text-align: center;
     margin: 10px;
     background: inherit;
     padding: 40px 15px 20px;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    text-align: center;
+    background: #fff5;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
 }
 
-// .lob-container::before{
-//     content: '';
-//     position: absolute;
-//     background: inherit;
-//     border: 2px black solid;
-// }
 .btn{
     width: 200px;
     margin: 10px;
@@ -80,7 +81,7 @@
     font-size: 30px;
     border-radius: 10px;
     border: none;
-    background-color: red;
+    // background-color: red;
     z-index: 1;
     position: relative;
 }
@@ -98,6 +99,14 @@
     border-radius: 10px;
     border: none;
     width: 90px;
+    // background-color: black;
+    // color: orange;
+    
+    
+}
+
+.btn2:active{
+    box-shadow: 0px 0px 10px gold;
 }
 
 .dropmenu{
@@ -128,17 +137,17 @@ display: block;
 }
 
 .bl9red{
-    background-color: #a24a53;
+    background-color: #e31919;
 }
 .bl9green{
-    background-color: #9aad7c;
+    background-color: #3bb02c;
     // пиздец весело
 }
 .blur {
-    position: absolute;
-    // top: -20px;bottom: -10px;right: -10px;left: -10px;
-    top: 0;bottom: 0;right: 0;left: 0;
-    filter: blur(5px);
-    background-color: #9b9b9ba9;
-    border-radius: 20px;
+    // position: absolute;
+    // // top: -20px;bottom: -10px;right: -10px;left: -10px;
+    // top: 0;bottom: 0;right: 0;left: 0;
+    // filter: blur(5px);
+    // background-color: #9b9b9ba9;
+    // border-radius: 20px;
 }
