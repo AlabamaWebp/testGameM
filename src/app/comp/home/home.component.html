@@ -4,7 +4,7 @@
       <button class="button1 refresh" (click)="toggleRefresh()" [class.ind]="!interval_fetch">обновление списка</button>
       <div class="input">
         Backend IPv4:
-        <input type="text" #ip (change)="setIp(ip.value)" name="ip" [value]="path">
+        <input type="text" #ip (change)="setIp(ip.value)" name="ip" [value]="getIpWithoutHttp()">
         <!-- style="width: 300px;" -->
       </div>
     </div>
@@ -33,7 +33,7 @@
         </span>
         <span class="right">Макс: {{data[room].count_players}}</span>
         <span class="r2">
-          <div class="button3" style="margin: 0 10px 0 0;" (click)="roomIn(room)" routerLink="/lob" >Войти</div>
+          <div class="button3" style="margin: 0 10px 0 0;" (click)="roomIn(room)">Войти</div>
           <div class="button2" *ngIf="data[room].players.length == 0" (click)="delRoom(room)">Удалить</div>
         </span>
       </div>

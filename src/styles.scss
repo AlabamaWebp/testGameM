@@ -3,7 +3,7 @@ $main_color: #86a093;
 
 $back_color: #45313c;
 
-
+$tree: #59351b;
 
 * {
   color: white;
@@ -108,4 +108,53 @@ html, body {
           transform: scale(0.95);
       }
   }
+}
+.button4 {
+  z-index: 1; //Я ДОБАВИЛ ДЛЯ idisabled
+  user-select: none;
+  height: 40px;
+  // @include violet_bgc;
+  background-color: $main_color;
+  border: 1px solid $main_color !important;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: .2s;
+  padding: 0 10px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.error {
+  width: 100%;
+  max-height: 75px;
+  background-color: rgb(207, 97, 97);
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 21px;
+  // color: black;
+  text-shadow: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 1s;
+  &:hover {
+      max-height: 1000px;
+  }
+  &.removing {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+$maxWidth: 1280;
+@mixin adaptiv-font($pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$addMobSize: $addSize + $addSize * 0.7;
+	@media (max-width: 767px) {
+		font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+	}
+	@media (min-width: 767px) {
+		font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+	}
 }

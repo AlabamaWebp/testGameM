@@ -1,0 +1,178 @@
+@import "../../../styles.scss";
+$size_y: 150px;
+$size_x: 10%;
+$padding: 20%;
+$minWidth: 100px;
+$imgTree: url('../../../assets/image/tree.jpg');
+.wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    .header {
+        // border-bottom: 1px solid brown;
+        background: $tree;
+        display: flex;
+        flex: 0 0 $size_y;
+        border-bottom: 1px solid black;
+        justify-content: space-between;
+        padding: 5px 30px;
+        min-height: 150px;
+        height: 150px;
+        .player {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 100px;
+        }
+    }
+
+    .body {
+        flex: 1 1 auto;
+        background: rgb(122, 91, 44);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        border-bottom: 1px solid black;
+
+        .left {
+            background: $tree;
+            height: 100%;
+            flex: 0 0 $size_x;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right {
+            background: $tree;
+            height: 100%;
+            flex: 0 0 $size_x;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .center {
+            height: 100%;
+            flex: 1 1 auto;
+            display: flex;
+            .info {
+                height: 100%;
+                width: 170px;
+                padding: 10px;
+            }
+            .cards {
+                height: 100%;
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    }
+
+    .footer {
+        background: $tree;
+        display: flex;
+        flex: 0 0 $size_y;
+        justify-content: center;
+        .fcenter {
+            width: 100%;
+            // border-left: 1px solid black;
+            // border-right: 1px solid black;
+            display: flex;
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                padding: 5px 10px 5px 30px;
+                border-right: 1px solid black;
+                flex: 1 1 auto;
+                span {
+                    white-space: nowrap;
+                    // margin: 5px 0 ;
+                }
+            }
+            .cards {
+                padding: 5px;
+                display: flex;
+                overflow: auto;
+                flex: 1 1 auto;
+                .cont {
+                    display: flex;
+                    padding: 0 10px;
+                    margin: 0 10px;
+                }
+                .card {
+                    display: flex;
+                    margin: 0 5px;
+                    width: 100px;
+                    height: 100%;
+                    border: 1px solid black;
+                    border-radius: 5px;
+                }
+            }
+            .actions {
+                flex: 1 1 200px;
+                // padding: 5px 30px 5px 5px;
+                border-left: 1px solid black;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                // align-items: center;
+                user-select: none;
+                // padding: 0 20px;
+                overflow: hidden;
+                // flex: 1 1 auto;
+                // width: 200px;
+                // cursor: default;
+                .act {
+                    cursor: pointer;
+                    display: flex;
+                    padding: 10px 20px;
+                    border-bottom: 1px solid black;
+                    // white-space: nowrap;
+                    // display: block;
+                    // position: relative;
+                    // top: 79px;
+                    // left: 2px;
+                    // transform: rotate(90deg);
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+.btn {
+    padding: $padding 0px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .5s;
+    user-select: none;
+    &:hover {
+        background: $main_color;
+    }
+}
+.btnl {
+    border: 1px solid $main_color;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+}
+.btnr {
+    border: 1px solid $main_color;
+    border-right: none;
+    border-radius: 10px 0 0 10px ;
+}
+.name {
+    display: inline;
+    // border-bottom: 1px solid black;
+    // border-top: 1px solid black;
+    // padding: 20px 0;
+    text-align: center;
+    @include adaptiv-font(24, 16)
+}

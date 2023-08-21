@@ -9,9 +9,11 @@ import { HomeComponent } from './comp/home/home.component';
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/http-interceptor/interceptor.service';
 import { LobbiComponent } from './comp/lobbi/lobbi.component';
 import { PlayerCardComponent } from './comp/player-card/player-card.component';
 import { TestingPageComponent } from './comp/testing-page/testing-page.component';
+import { GameRoomComponent } from './comp/game-room/game-room.component';
 import { CardCursesComponent } from './comp/cards/card-curses/card-curses.component';
 import { CardMonsterComponent } from './comp/cards/card-monster/card-monster.component';
 import { CardTreasureComponent } from './comp/cards/card-treasure/card-treasure.component';
@@ -32,7 +34,13 @@ import { CardTreasureComponent } from './comp/cards/card-treasure/card-treasure.
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

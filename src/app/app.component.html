@@ -1,1 +1,8 @@
 <router-outlet></router-outlet>
+
+<div class="error_cont" id="error_cont">
+    <div class="error {{er}}" *ngFor="let er of errors"
+    (auxclick)="removeError(er)">
+        {{er}}
+    </div>
+</div>

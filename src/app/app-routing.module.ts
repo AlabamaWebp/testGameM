@@ -10,9 +10,8 @@ import { CardTreasureComponent } from './comp/cards/card-treasure/card-treasure.
 
 const routes: Routes = [
   // {path: "home", component}
-  // {path: "**" , redirectTo: "home"},
   {path: "home" , component: HomeComponent},
-  {path: "pl" , component: PlayerCardComponent},
+  // {path: "pl" , component: PlayerCardComponent},
   {path: "lob" , component: LobbiComponent},
   {path: "test" , component: TestingPageComponent},
   {path: "cur" , component: CardCursesComponent},
