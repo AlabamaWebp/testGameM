@@ -44,19 +44,7 @@
 	height: 80px;
 }
 
-.back-blur{
-    background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-  position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(20px);
-    z-index: 1;
-}
+
 
 .lob-container{
     position: relative;
@@ -118,18 +106,22 @@
     border: none;
     cursor: pointer;
     border-radius: 10px;
+    background-color: #fffa;
 }
 
 .item{
     display: none;
     position: absolute;
-    // background-color: #f9f9f9;
+    background-color: #fffa;
+    opacity: 0.8;
     // min-width: 125px;
     padding: 10px;
     font-size: 16px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
+
+    
 }
 
 .dropmenu:hover .item {
