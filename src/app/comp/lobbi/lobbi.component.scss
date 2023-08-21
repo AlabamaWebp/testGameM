@@ -106,18 +106,22 @@
     border: none;
     cursor: pointer;
     border-radius: 10px;
+    background-color: #fffa;
 }
 
 .item{
     display: none;
     position: absolute;
-    // background-color: #f9f9f9;
+    background-color: #fffa;
+    opacity: 0.8;
     // min-width: 125px;
     padding: 10px;
     font-size: 16px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
+
+    
 }
 
 .dropmenu:hover .item {
