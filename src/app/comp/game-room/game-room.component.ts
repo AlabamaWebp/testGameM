@@ -30,7 +30,6 @@ export class GameRoomComponent implements OnInit {
   players = [
     "kard",
     "kard",
-    "kard",
   ]
 
 }
