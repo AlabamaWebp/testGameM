@@ -12,6 +12,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LobbiComponent } from './comp/lobbi/lobbi.component';
 import { PlayerCardComponent } from './comp/player-card/player-card.component';
 import { TestingPageComponent } from './comp/testing-page/testing-page.component';
+import { CardCursesComponent } from './comp/cards/card-curses/card-curses.component';
+import { CardMonsterComponent } from './comp/cards/card-monster/card-monster.component';
+import { CardTreasureComponent } from './comp/cards/card-treasure/card-treasure.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { TestingPageComponent } from './comp/testing-page/testing-page.component
     HomeComponent,
     LobbiComponent,
     PlayerCardComponent,
-    TestingPageComponent
+    TestingPageComponent,
+    CardCursesComponent,
+    CardMonsterComponent,
+    CardTreasureComponent
   ],
   imports: [
     BrowserModule,
