@@ -13,6 +13,7 @@ import { InterceptorService } from './services/http-interceptor/interceptor.serv
 import { LobbiComponent } from './comp/lobbi/lobbi.component';
 import { PlayerCardComponent } from './comp/player-card/player-card.component';
 import { TestingPageComponent } from './comp/testing-page/testing-page.component';
+import { GameRoomComponent } from './comp/game-room/game-room.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TestingPageComponent } from './comp/testing-page/testing-page.component
     HomeComponent,
     LobbiComponent,
     PlayerCardComponent,
-    TestingPageComponent
+    TestingPageComponent,
+    GameRoomComponent
   ],
   imports: [
     BrowserModule,

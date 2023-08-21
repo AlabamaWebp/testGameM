@@ -9,7 +9,6 @@ export class SharedService {
 
   private url: string = "192.168.0.1:8081"
   getUrl() {
-    console.log(this.url);
     return this.url;
   }
   setUrl(value: string) {

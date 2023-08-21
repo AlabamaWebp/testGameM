@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(["/lob"]);
       }
       else if (d.status == "g") {
+        this.router.navigate(["/game"]);
         // Дописать надо когда будет игра
       }
     });
@@ -60,7 +61,6 @@ export class HomeComponent implements OnInit {
     if (!value.includes("http://")) {
       value = "http://" + value;
     }
-    console.log(value);
     this.err.setUrl(value);
     this.path = value;
     this.fetchRooms();
@@ -84,7 +84,8 @@ export class HomeComponent implements OnInit {
   interval_fetch: any = undefined;
   intervalFetch() {
     this.interval_fetch = setInterval(() => {
-      this.fetchRooms()
+      this.fetchRooms();
+      
     }, 800)
   }
   ngOnDestroy() {
@@ -119,7 +120,6 @@ export class HomeComponent implements OnInit {
   createRoom(max: number) {
     this.cors.getHttp().post(this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {
       this.roomIn(`server_${this.nickname}`);
-      console.log(d);
       this.fetchRooms();
     });
   }
