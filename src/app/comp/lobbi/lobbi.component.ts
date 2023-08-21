@@ -45,8 +45,14 @@ export class LobbiComponent implements OnInit{
   }
 
   setLobbyData() {
-    this.lobby_data = this.playerService.getRoomIn()[0];
+    console.log(this.lobby_data);
+    let tmp: RoomIn = this.playerService.getRoomIn()[0]
+    if (tmp.woman_players == undefined) {
+      tmp.woman_players = []
+    }
+    this.lobby_data = tmp;
     this.lobby_name = this.playerService.getRoomIn()[1];
+    
   }
 
   ngOnInit(): void {
@@ -99,9 +105,9 @@ export class LobbiComponent implements OnInit{
 }
 
 
-export interface RoomIn {
-  "players": string[],
-  "count_players": number,
-  "ready_players": string[],
-  "woman_players": string[],
+export class RoomIn {
+  "players": string[] = []
+  "count_players": number = 2
+  "ready_players": string[] = []
+  "woman_players": string[] = []
 }
