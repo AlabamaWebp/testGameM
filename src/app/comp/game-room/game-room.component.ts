@@ -12,4 +12,25 @@ export class GameRoomComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  your_cards = [
+    "kard",
+    "kard",
+    "kard",
+    "kard",
+    "kard",
+    "kard",
+    "kard",
+    "kard",
+  ]
+  actions = [
+    "kard",
+    "kard",
+    "kard",
+  ]
+  players = [
+    "kard",
+    "kard",
+    "kard",
+  ]
+
 }
