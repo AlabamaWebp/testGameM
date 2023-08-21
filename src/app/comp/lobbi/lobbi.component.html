@@ -18,8 +18,9 @@
         </div>
     </div>
     <div class="body">
+        <!-- <div class="back-blur" style="width: 500px; height: 200px; border: 2px red solid;"></div> -->
         <div class="player" *ngFor="let player of getPlayers(); let i = index"> 
-            <!-- <div class="blur"></div> -->
+            <div class="blur"></div>
             <div class="cont" *ngIf="player == nickname">
                 <!-- *ngFor="let pl in player" -->
                 
@@ -39,9 +40,11 @@
                 <!-- *ngFor="let pl in player" -->
                 <span class="name">Пусто</span>
             </div>
-            <div class="btn_gender">
-                <button class="btn2 button3" style="background-color: burlywood;" (click)="genderChange()">Man</button>
-                <button class="btn2 button3" style="background-color: pink;" (click)="genderChange()">Woman</button>
+            <div class="cont" *ngIf="player != 'Пусто' && player != nickname">
+                <!-- *ngFor="let pl in player" -->
+                <div class="name">{{player}}</div>
+                <div class="name">{{lobby_data.ready_players.includes(player) ? "Готов" : "Неготов"}}</div>
+                <div class="name">{{!lobby_data.woman_players.includes(player) ? "Мэн" : "Вумэн"}}</div>
             </div>
         </div>
         <!-- <div class="lob-container">
@@ -68,6 +71,6 @@
         </div> -->
     </div>
     <div class="footer">
-        <button class="btn" style="background-color: brown;" (click)="exitRoom()">Exit</button>
+        <button class="btn button3" style="background-color: brown;" (click)="exitRoom()">Exit</button>
     </div>
 </div>
