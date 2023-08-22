@@ -1,7 +1,11 @@
 <div class="wrapper">
     <div class="header">
-        <div class="player" *ngFor="let player of players">
-            {{player}}
+        <div class="player" 
+        *ngFor="let player of players">
+        <span>{{player.nickname}}</span>
+        <span>lvl: {{player.lvl}}</span>
+        <span>сила: {{player.strongest}}</span>
+            <!-- {{player}} -->
         </div>
     </div>
     <div class="body">
@@ -27,8 +31,8 @@
     <div class="footer">
         <div class="fcenter">
             <div class="info">
-                <span>lvl: 1</span>
-                <span>Сила: 2</span>
+                <span>lvl: {{current_player?.lvl}}</span>
+                <span>Сила: {{current_player?.strongest}}</span>
                 <span>Пол: man</span>
                 <span>Раса: орк</span>
                 <span>Класс: вор</span>
@@ -36,7 +40,24 @@
             <div class="cards">
                 <div class="cont">
                     <div class="card" *ngFor="let card of your_cards">
-                        {{card}}
+                        <div class="treasure item" *ngIf="card.type == 'treasure'">
+                            {{card.name}}
+                            {{card.strong}}
+                            {{card.template}}
+                            {{card.test}}
+                        </div>
+                        <div class="monsters item"  *ngIf="card.type == 'monsters'">
+                            {{card.name}}
+                            {{card.lvl}}
+                            {{card.punishment}}
+                            {{card.gold}}
+                            {{card.undead}}
+                        </div>
+                        <div class="curses item"  *ngIf="card.type == 'curses'">
+                            {{card.name}}
+                            {{card.action}}
+                            {{card.strongest}}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -21,11 +21,13 @@ $imgTree: url('../../../assets/image/tree.jpg');
         height: 150px;
         .player {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
+            flex-direction: column;
             border: 1px solid black;
             border-radius: 10px;
             width: 100px;
+            background-color: #6f6f6f;
         }
     }
 

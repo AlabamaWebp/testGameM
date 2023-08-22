@@ -17,6 +17,9 @@ export class SharedService {
   }
   private nickname: string = ""
   getName() {
+    if (this.nickname.length == 0) {
+      this.nickname = "Dimka"
+    }
     return this.nickname;
   }
   setName(value: string) {

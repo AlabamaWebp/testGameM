@@ -16,25 +16,14 @@ export class GameRoomComponent implements OnInit {
     // this.intervalFetch();
   }
 
-  your_cards = [
-    "kard",
-    "kard",
-    "kard",
-    "kard",
-    "kard",
-    "kard",
-    "kard",
-    "kard",
-  ]
+  your_cards: any;
+  current_player: Player | undefined;
   actions = [
     "kard",
     "kard",
     "kard",
   ]
-  players = [
-    "kard",
-    "kard",
-  ]
+  players: Player[] | undefined;
 
   /////data
   interval_fetch: any = undefined;
@@ -52,6 +41,8 @@ export class GameRoomComponent implements OnInit {
     this.query.getData().subscribe((d: any) => {
       this.processingData(d)
     }, (err) => {
+      console.log(" err " + err);
+      
       this.query.getTest().subscribe((d: any) => {
         this.processingData(d)
       })
@@ -60,13 +51,17 @@ export class GameRoomComponent implements OnInit {
   processingData(d: any) {
     this.fetch_data = d;
       if (this.fetch_data != undefined) {
+        
         for (let i = 0; i < this.fetch_data.players.length; i++) {
+          console.log(this.fetch_data.players[i].nickname, this.shared.getName());
           if (this.fetch_data.players[i].nickname == this.shared.getName()) {
+            this.current_player = this.fetch_data.players[i];
             this.your_cards = this.fetch_data.players[i].cards;
             console.log(this.your_cards);
             break;
           }
         }
+        this.players = this.fetch_data.players
       }
   }
 }
@@ -116,3 +111,19 @@ export class CourseCard extends AbstractCard {
   action: string = "test"
   strongest: number = 0
 }    
+// name	"Меч5"
+// strong	"5"
+// template	"hand"
+// test	"900"
+// type	"treasure"
+
+// name	"Удар"
+// action	"ll"
+// strongest	"1"
+// type	"curses"
+
+// name	"Чувырла5"
+// lvl	"20"
+// punishment	"1"
+// gold	"5"
+// undead	"0"
