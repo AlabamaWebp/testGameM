@@ -17,4 +17,7 @@ export class GameRoomService {
   getData() {
     return this.http.get(this.shared.getUrl() + "/game/game?room=" + this.player.getRoomIn().name)
   }
+  getTest() {
+    return this.http.get(this.shared.getUrl() + "/game/test")
+  }
 }

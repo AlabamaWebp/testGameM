@@ -28,6 +28,9 @@ export class PlayerService {
 
   getRoomIn(): RoomIn2 {
     // return [this.room_in, this.room_name]
+    if (this.room_name.length == 0) {
+      this.room_name = "test"
+    }
     let room = new RoomIn2()
     room.data = this.room_in
     room.name = this.room_name

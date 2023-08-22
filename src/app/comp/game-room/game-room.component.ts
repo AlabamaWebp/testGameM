@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameRoomService } from 'src/app/services/cors/game-room.service';
+import { SharedService } from 'src/app/services/data/shared.service';
 
 @Component({
   selector: 'app-game-room',
@@ -8,9 +9,11 @@ import { GameRoomService } from 'src/app/services/cors/game-room.service';
 })
 export class GameRoomComponent implements OnInit {
 
-  constructor(private query: GameRoomService) { }
+  constructor(private query: GameRoomService, private shared: SharedService) { }
 
   ngOnInit(): void {
+    this.fetchStatus();
+    // this.intervalFetch();
   }
 
   your_cards = [
@@ -38,18 +41,35 @@ export class GameRoomComponent implements OnInit {
   intervalFetch() {
     this.interval_fetch = setInterval(() => {
       this.fetchStatus();
-    }, 800)
+    }, 500)
   }
   ngOnDestroy() {
     clearInterval(this.interval_fetch);
   }
 
+  fetch_data: GameRoom | undefined
   fetchStatus() {
-    this.query.getData().subscribe
+    this.query.getData().subscribe((d: any) => {
+      this.processingData(d)
+    }, (err) => {
+      this.query.getTest().subscribe((d: any) => {
+        this.processingData(d)
+      })
+    })
   }
-
+  processingData(d: any) {
+    this.fetch_data = d;
+      if (this.fetch_data != undefined) {
+        for (let i = 0; i < this.fetch_data.players.length; i++) {
+          if (this.fetch_data.players[i].nickname == this.shared.getName()) {
+            this.your_cards = this.fetch_data.players[i].cards;
+            console.log(this.your_cards);
+            break;
+          }
+        }
+      }
+  }
 }
-
 
 export class GameRoom {
   players: Player[] = []
