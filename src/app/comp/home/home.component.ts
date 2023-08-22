@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     ) { }
 
-  path = "http://192.168.0.1:8081"
+  path = "http://127.0.0.1:78"
   nickname = ""
 
   ngOnInit(): void {
@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
   initLocalS() {
     if (localStorage.getItem("ip")) {
       this.path = localStorage.getItem("ip") as string;
+    }
+    else {
+      this.err.setUrl(this.path);
     }
     if (localStorage.getItem("name")) {
       this.nickname = localStorage.getItem("name") as string;
@@ -85,7 +88,6 @@ export class HomeComponent implements OnInit {
   intervalFetch() {
     this.interval_fetch = setInterval(() => {
       this.fetchRooms();
-      
     }, 800)
   }
   ngOnDestroy() {

@@ -11,7 +11,7 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
-  url = ''
+  // url = ''
 
   private room_in: any;
   private room_name: string = ""
@@ -26,8 +26,16 @@ export class PlayerService {
     this.room_name = name
   }
 
-  getRoomIn() {
-    return [this.room_in, this.room_name]
+  getRoomIn(): RoomIn2 {
+    // return [this.room_in, this.room_name]
+    let room = new RoomIn2()
+    room.data = this.room_in
+    room.name = this.room_name
+    return room;
   }
 
+}
+export class RoomIn2 {
+  data: any = "test"
+  name: string = "test"
 }

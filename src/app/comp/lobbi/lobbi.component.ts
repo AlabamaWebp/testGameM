@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPlyayer } from 'src/app/models/player';
 import { SharedService } from 'src/app/services/data/shared.service';
-import { LobbyService } from 'src/app/services/lob/lobby.service';
+import { LobbyService } from 'src/app/services/cors/lobby.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 
 @Component({
@@ -22,8 +22,8 @@ export class LobbiComponent implements OnInit{
   gender: boolean = true;
   pl_ready: boolean = false;
   player: IPlyayer[] = [];
-  lobby_data: RoomIn = this.playerService.getRoomIn()[0];
-  lobby_name = this.playerService.getRoomIn()[1];
+  lobby_data: RoomIn = this.playerService.getRoomIn().data;
+  lobby_name = this.playerService.getRoomIn().name;
   nickname = this.shared.getName();
   interval: any;
 
@@ -46,12 +46,12 @@ export class LobbiComponent implements OnInit{
 
   setLobbyData() {
     console.log(this.lobby_data);
-    let tmp: RoomIn = this.playerService.getRoomIn()[0]
+    let tmp: RoomIn = this.playerService.getRoomIn().data
     if (tmp.woman_players == undefined) {
       tmp.woman_players = []
     }
     this.lobby_data = tmp;
-    this.lobby_name = this.playerService.getRoomIn()[1];
+    this.lobby_name = this.playerService.getRoomIn().name;
     
   }
 

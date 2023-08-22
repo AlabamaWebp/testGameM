@@ -7,7 +7,7 @@ export class SharedService {
 
   constructor() { }
 
-  private url: string = "192.168.0.1:8081"
+  private url: string = "192.168.0.1:78"
   getUrl() {
     return this.url;
   }
