@@ -58,6 +58,8 @@ export class GameRoomComponent implements OnInit {
             this.current_player = this.fetch_data.players[i];
             this.your_cards = this.fetch_data.players[i].cards;
             console.log(this.your_cards);
+            console.log(d);
+            
             break;
           }
         }
