@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GameRoomService } from 'src/app/services/cors/game-room.service';
 import { SharedService } from 'src/app/services/data/shared.service';
+import { webSocket } from 'rxjs/webSocket';
+import { PlayerService } from 'src/app/services/player/player.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-game-room',
@@ -8,10 +12,22 @@ import { SharedService } from 'src/app/services/data/shared.service';
   styleUrls: ['./game-room.component.scss']
 })
 export class GameRoomComponent implements OnInit {
+  constructor(private query: GameRoomService, private shared: SharedService, private player: PlayerService) { }
 
-  constructor(private query: GameRoomService, private shared: SharedService) { }
+  websubject$ = webSocket("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
+    this.processingData(d)
+    console.log("po" + d);
+  }, (err) => {
+    console.log("err" + err);
+    this.query.getTest().subscribe((d: any) => {
+      this.processingData(d)
+    })
+  }, () => {
+    console.log("complete");
+  });
 
   ngOnInit(): void {
+    // this.websubject$.subscribe()
     this.fetchStatus();
     // this.intervalFetch();
   }
@@ -26,27 +42,32 @@ export class GameRoomComponent implements OnInit {
   players: Player[] | undefined;
 
   /////data
-  interval_fetch: any = undefined;
-  intervalFetch() {
-    this.interval_fetch = setInterval(() => {
-      this.fetchStatus();
-    }, 500)
-  }
+  // interval_fetch: any = undefined;
+  // intervalFetch() {
+  //   this.interval_fetch = setInterval(() => {
+  //     this.fetchStatus();
+  //   }, 500)
+  // }
   ngOnDestroy() {
-    clearInterval(this.interval_fetch);
+    // clearInterval(this.interval_fetch);
+    // this.websubject$.complete();
   }
 
   fetch_data: GameRoom | undefined
   fetchStatus() {
-    this.query.getData().subscribe((d: any) => {
-      this.processingData(d)
-    }, (err) => {
-      console.log(" err " + err);
-      
-      this.query.getTest().subscribe((d: any) => {
-        this.processingData(d)
-      })
-    })
+    
+    
+    // this.websubject$.subscribe((d: any) => {
+    //   this.processingData(d)
+    //   console.log("po" + d);
+    // }, (err) => {
+    //   console.log("err" + err);
+    //   this.query.getTest().subscribe((d: any) => {
+    //     this.processingData(d)
+    //   })
+    // }, () => {
+    //   console.log("complete");
+    // })
   }
   processingData(d: any) {
     this.fetch_data = d;
@@ -84,6 +105,7 @@ export class Player {
   lvl: number = 1
   strongest: number = this.lvl
   one_fight_strong: number = 0
+  sex: boolean = true
   cards: any = []
   field_cards: any = []
 }

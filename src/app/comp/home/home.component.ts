@@ -84,25 +84,25 @@ export class HomeComponent implements OnInit {
 
 
   /////data
-  interval_fetch: any = undefined;
-  intervalFetch() {
-    this.interval_fetch = setInterval(() => {
-      this.fetchRooms();
-    }, 800)
-  }
+  // interval_fetch: any = undefined;
+  // intervalFetch() {
+  //   this.interval_fetch = setInterval(() => {
+  //     this.fetchRooms();
+  //   }, 800)
+  // }
   ngOnDestroy() {
-    clearInterval(this.interval_fetch);
+    // clearInterval(this.interval_fetch);
   }
 
-  toggleRefresh() {
-    if (this.interval_fetch == undefined) {
-      this.intervalFetch();
-    }
-    else {
-      clearInterval(this.interval_fetch);
-      this.interval_fetch = undefined
-    }
-  }
+  // toggleRefresh() {
+  //   if (this.interval_fetch == undefined) {
+  //     this.intervalFetch();
+  //   }
+  //   else {
+  //     clearInterval(this.interval_fetch);
+  //     this.interval_fetch = undefined
+  //   }
+  // }
 
   data: any;
   rooms: string[] = [];

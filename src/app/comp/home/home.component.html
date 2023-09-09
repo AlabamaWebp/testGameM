@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="header">
     <div class="l f">
-      <button class="button1 refresh" (click)="toggleRefresh()" [class.ind]="!interval_fetch">обновление списка</button>
+      <!-- <button class="button1 refresh" (click)="toggleRefresh()" [class.ind]="!interval_fetch">обновление списка</button> -->
       <div class="input">
         Backend IPv4:
         <input type="text" #ip (change)="setIp(ip.value)" name="ip" [value]="getIpWithoutHttp()">

@@ -11,6 +11,12 @@ export class SharedService {
   getUrl() {
     return this.url;
   }
+  getUrlWithoutHttp() {
+    if (this.url.includes("http://")) {
+      return this.url.replace("http://", "")
+    }
+    return this.url
+  }
   setUrl(value: string) {
     this.url = value;
     localStorage.setItem("ip", value);
