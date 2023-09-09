@@ -14,17 +14,17 @@ import { Observable } from 'rxjs';
 export class GameRoomComponent implements OnInit {
   constructor(private query: GameRoomService, private shared: SharedService, private player: PlayerService) { }
 
-  websubject$ = webSocket("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
-    this.processingData(d)
-    console.log("po" + d);
-  }, (err) => {
-    console.log("err" + err);
-    this.query.getTest().subscribe((d: any) => {
-      this.processingData(d)
-    })
-  }, () => {
-    console.log("complete");
-  });
+  // websubject$ = webSocket("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
+  //   this.processingData(d)
+  //   console.log("po" + d);
+  // }, (err) => {
+  //   console.log("err" + err);
+  //   this.query.getTest().subscribe((d: any) => {
+  //     this.processingData(d)
+  //   })
+  // }, () => {
+  //   console.log("complete");
+  // });
 
   ngOnInit(): void {
     // this.websubject$.subscribe()
@@ -55,8 +55,22 @@ export class GameRoomComponent implements OnInit {
 
   fetch_data: GameRoom | undefined
   fetchStatus() {
-    
-    
+
+
+    this.query.connect().subscribe((d: any) => {
+      this.processingData(d);
+      console.log("po " + d);
+    }, (err) => { 
+      console.log("err " + err);
+      // this.query.getTest().subscribe((d: any) => {
+      //   this.processingData(d)
+      // })
+    }, 
+    () => {
+      console.log("complete");
+    }
+    )
+
     // this.websubject$.subscribe((d: any) => {
     //   this.processingData(d)
     //   console.log("po" + d);
@@ -71,21 +85,21 @@ export class GameRoomComponent implements OnInit {
   }
   processingData(d: any) {
     this.fetch_data = d;
-      if (this.fetch_data != undefined) {
-        
-        for (let i = 0; i < this.fetch_data.players.length; i++) {
-          console.log(this.fetch_data.players[i].nickname, this.shared.getName());
-          if (this.fetch_data.players[i].nickname == this.shared.getName()) {
-            this.current_player = this.fetch_data.players[i];
-            this.your_cards = this.fetch_data.players[i].cards;
-            console.log(this.your_cards);
-            console.log(d);
-            
-            break;
-          }
+    if (this.fetch_data != undefined) {
+
+      for (let i = 0; i < this.fetch_data.players.length; i++) {
+        console.log(this.fetch_data.players[i].nickname, this.shared.getName());
+        if (this.fetch_data.players[i].nickname == this.shared.getName()) {
+          this.current_player = this.fetch_data.players[i];
+          this.your_cards = this.fetch_data.players[i].cards;
+          console.log(this.your_cards);
+          console.log(d);
+
+          break;
         }
-        this.players = this.fetch_data.players
       }
+      this.players = this.fetch_data.players
+    }
   }
 }
 
@@ -134,7 +148,7 @@ export class MonsterCard extends AbstractCard {
 export class CourseCard extends AbstractCard {
   action: string = "test"
   strongest: number = 0
-}    
+}
 // name	"Меч5"
 // strong	"5"
 // template	"hand"
