@@ -36,8 +36,9 @@ export class GameRoomComponent implements OnInit {
   fetchStatus() {
     this.query.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name)
       .onmessage = (d: any) => {
-        console.log(d);
+        d = JSON.parse(d.data);
         this.processingData(d);
+        // this.query.closeConnection()
     }
 
   }
@@ -46,13 +47,9 @@ export class GameRoomComponent implements OnInit {
     if (this.fetch_data != undefined) {
 
       for (let i = 0; i < this.fetch_data.players.length; i++) {
-        console.log(this.fetch_data.players[i].nickname, this.shared.getName());
         if (this.fetch_data.players[i].nickname == this.shared.getName()) {
           this.current_player = this.fetch_data.players[i];
           this.your_cards = this.fetch_data.players[i].cards;
-          console.log(this.your_cards);
-          console.log(d);
-
           break;
         }
       }
