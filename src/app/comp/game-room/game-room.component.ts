@@ -14,22 +14,9 @@ import { Observable } from 'rxjs';
 export class GameRoomComponent implements OnInit {
   constructor(private query: GameRoomService, private shared: SharedService, private player: PlayerService) { }
 
-  // websubject$ = webSocket("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
-  //   this.processingData(d)
-  //   console.log("po" + d);
-  // }, (err) => {
-  //   console.log("err" + err);
-  //   this.query.getTest().subscribe((d: any) => {
-  //     this.processingData(d)
-  //   })
-  // }, () => {
-  //   console.log("complete");
-  // });
 
   ngOnInit(): void {
-    // this.websubject$.subscribe()
     this.fetchStatus();
-    // this.intervalFetch();
   }
 
   your_cards: any;
@@ -41,47 +28,18 @@ export class GameRoomComponent implements OnInit {
   ]
   players: Player[] | undefined;
 
-  /////data
-  // interval_fetch: any = undefined;
-  // intervalFetch() {
-  //   this.interval_fetch = setInterval(() => {
-  //     this.fetchStatus();
-  //   }, 500)
-  // }
   ngOnDestroy() {
-    // clearInterval(this.interval_fetch);
-    // this.websubject$.complete();
+    this.query.closeConnection();
   }
 
   fetch_data: GameRoom | undefined
   fetchStatus() {
-
-
-    this.query.connect().subscribe((d: any) => {
-      this.processingData(d);
-      console.log("po " + d);
-    }, (err) => { 
-      console.log("err " + err);
-      // this.query.getTest().subscribe((d: any) => {
-      //   this.processingData(d)
-      // })
-    }, 
-    () => {
-      console.log("complete");
+    this.query.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name)
+      .onmessage = (d: any) => {
+        console.log(d);
+        this.processingData(d);
     }
-    )
 
-    // this.websubject$.subscribe((d: any) => {
-    //   this.processingData(d)
-    //   console.log("po" + d);
-    // }, (err) => {
-    //   console.log("err" + err);
-    //   this.query.getTest().subscribe((d: any) => {
-    //     this.processingData(d)
-    //   })
-    // }, () => {
-    //   console.log("complete");
-    // })
   }
   processingData(d: any) {
     this.fetch_data = d;

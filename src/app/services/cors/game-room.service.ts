@@ -5,7 +5,7 @@ import { PlayerService } from '../player/player.service';
 // import { IWsMessage, WebsocketService } from 'src/app/websocket';
 import { Observable } from 'rxjs';
 import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
-import * as WebSocket from 'ws'
+// import * as WebSocket from 'ws'
 
 @Injectable({
   providedIn: 'root'
@@ -19,34 +19,33 @@ export class GameRoomService {
     private player: PlayerService,
     // private wsService: WebsocketService
   ) { 
-    this.socket$ = webSocket("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name); // здесь указывается URL Вашего WebSocket сервера
+  }
+  socket: any
+
+  connect(str: string) {
+    this.socket = new WebSocket(str);
+
+    this.socket.onopen = () => {
+      console.log('WebSocket connection established.');
+    };
+
+    // this.socket.onmessage = (event: any) => {
+    //   console.log('Received message:', event.data);
+    // };
+    this.socket.onclose = (event: any) => {
+      console.log('WebSocket connection closed:', event);
+    };
+    this.socket.onerror = (error: any) => {
+      console.error('WebSocket error:', error);
+    };
+    return this.socket
+  }
+  sendMessage(message: any): void {
+    this.socket.send(JSON.stringify(message));
   }
 
-  // websubject = webSocket("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name);
-  // getData() {
-  //   return this.websubject
-  // }
-  // sendData(data: any) {
-  //   // this.websubject.subscribe();
-  //   this.websubject.next(data);
-  //   // this.websubject.complete();
-  // }
-  // getTest() {
-  //   return this.http.get(this.shared.getUrl() + "/game/test");
-  // }
-
-  private socket$: WebSocketSubject<any>;
-
-  public connect() {
-    return this.socket$
-  }
-
-  public disconnect(): void {
-    this.socket$.complete();
-  }
-
-  public sendMessage(message: any): void {
-    this.socket$.next(message);
+  closeConnection(): void {
+    this.socket.close();
   }
 
 }
