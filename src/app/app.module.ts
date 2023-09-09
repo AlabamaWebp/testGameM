@@ -14,6 +14,9 @@ import { LobbiComponent } from './comp/lobbi/lobbi.component';
 import { PlayerCardComponent } from './comp/player-card/player-card.component';
 import { TestingPageComponent } from './comp/testing-page/testing-page.component';
 import { GameRoomComponent } from './comp/game-room/game-room.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { GameRoomComponent } from './comp/game-room/game-room.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     {

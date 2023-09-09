@@ -4,6 +4,7 @@ import { SharedService } from 'src/app/services/data/shared.service';
 import { webSocket } from 'rxjs/webSocket';
 import { PlayerService } from 'src/app/services/player/player.service';
 import { Observable } from 'rxjs';
+import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-service.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./game-room.component.scss']
 })
 export class GameRoomComponent implements OnInit {
-  constructor(private query: GameRoomService, private shared: SharedService, private player: PlayerService) { }
+  constructor(private query: GameRoomService, private shared: SharedService, private player: PlayerService, private wsss: WebSocketServiceService) { }
 
 
   ngOnInit(): void {
@@ -34,12 +35,17 @@ export class GameRoomComponent implements OnInit {
 
   fetch_data: GameRoom | undefined
   fetchStatus() {
-    this.query.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name)
-      .onmessage = (d: any) => {
-        d = JSON.parse(d.data);
-        this.processingData(d);
-        // this.query.closeConnection()
-    }
+    // this.query.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name)
+    //   .onmessage = (d: any) => {
+    //     d = JSON.parse(d.data);
+    //     this.processingData(d);
+    //     // this.query.closeConnection()
+    // }
+    this.wsss.connect("/game/game?game_room=" + this.player.getRoomIn().name)
+    this.wsss.getMessage().subscribe((d: any) => {
+      console.log(d);
+      
+    })
 
   }
   processingData(d: any) {
