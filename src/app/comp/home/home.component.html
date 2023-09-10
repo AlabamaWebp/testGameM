@@ -20,6 +20,7 @@
         Nickname:
         <input type="text" #name [value]="nickname" name="name" (change)="setNick(name.value)">
       </div>
+      <div class="backdrop" *ngIf="nickname.length == 0"></div>
     </div>
   </div>
   <div class="body">
