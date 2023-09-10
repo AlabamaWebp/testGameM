@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
   checkGame() {
-    this.cors.getHttp().get(this.path + "/game/lobby_status?name=" + this.nickname).subscribe((d: any) => {
+    this.cors.getHttp().get(this.path + "/lobby/lobby_status?name=" + this.nickname).subscribe((d: any) => {
       if (d.status == "r") {
         this.player.setRoomIn(d.room, d.name);
         this.socket.disconnect()
