@@ -21,6 +21,9 @@ export class WebSocketServiceService {
   getMessage() {
     return this.socket
   }
+  getStatus() {
+    return this.socket.status
+  }
   connect(url: string) {
     this.socket.ngOnDestroy()
     this.socket = new WebsocketService({url: url});

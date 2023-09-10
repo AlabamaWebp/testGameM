@@ -7,6 +7,7 @@
         <input type="text" #ip (change)="setIp(ip.value)" name="ip" [value]="getIpWithoutHttp()">
         <!-- style="width: 300px;" -->
       </div>
+      <div class="backdrop" *ngIf="!isConnected"></div>
     </div>
     <!-- <div class="c f">
     </div> -->
