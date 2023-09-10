@@ -2,10 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SharedService } from '../data/shared.service';
 import { PlayerService } from '../player/player.service';
-// import { IWsMessage, WebsocketService } from 'src/app/websocket';
-import { Observable } from 'rxjs';
-import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
-// import * as WebSocket from 'ws'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +13,6 @@ export class GameRoomService {
     private http: HttpClient,
     private shared: SharedService,
     private player: PlayerService,
-    // private wsService: WebsocketService
   ) { 
   }
   socket: any

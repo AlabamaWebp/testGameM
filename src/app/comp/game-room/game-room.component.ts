@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameRoomService } from 'src/app/services/cors/game-room.service';
 import { SharedService } from 'src/app/services/data/shared.service';
-import { webSocket } from 'rxjs/webSocket';
 import { PlayerService } from 'src/app/services/player/player.service';
-import { Observable } from 'rxjs';
 import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-service.service';
 
 
