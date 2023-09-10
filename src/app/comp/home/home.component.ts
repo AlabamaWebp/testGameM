@@ -98,19 +98,9 @@ export class HomeComponent implements OnInit {
   fetchRooms() {
     this.socket.disconnect();
     this.socket.connect("ws://" + this.shar.getUrlWithoutHttp() + "/rooms/rooms").subscribe((d: any) => {
-      if (typeof d == "string") {
-        // this.roomIn(`server_${this.nickname}`)
-        this.roomIn(d);
-      }
-      // this.isConnected = true;
       this.dataTable(d);
-      // if (d.event == "create") {
-      //   this.roomIn(`server_${this.nickname}`);
-      // }
     }, (err) => {
-      if (err.status == 500) {
-        this.er.errorsIn$.next(this.er.getCount() + ".  " + err.error.detail)
-      }
+      // Не работает
     });
     this.socket.getStatus().subscribe((d2: boolean) => {
       this.isConnected = d2;
@@ -118,35 +108,21 @@ export class HomeComponent implements OnInit {
   }
   // ?room=s&nickname=1
   roomIn(room: string) {
-    try {
-      this.socket.getMessage().send("roomIn", {
-        name: this.nickname,
-        room: room
-      })
-      this.player.setRoomIn(room, this.nickname);
-      this.socket.disconnect();
+    this.cors.getHttp().post(this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
+      this.player.setRoomIn(d.room, d.name);
       this.router.navigate(["/lob"]);
-    }
-    catch {console.error("roomIn");
-    }
+    });
   }
   // create_room?room=s&max_players=3
   createRoom(max: number) {
-    try {
-      this.socket.getMessage().send("create", //JSON.stringfy
-      {
-        name: this.nickname,
-        max: max
-      });
-    }
-    catch {
-      console.error("create");
-    }
+    this.cors.getHttp().post(this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {
+      this.roomIn(`server_${this.nickname}`);
+      this.fetchRooms();
+    });
   }
   delRoom(room: string) {
-    this.socket.getMessage().send("delete", //JSON.stringfy
-    {
-      room: room
+    this.cors.getHttp().delete(this.path + `/rooms/delete_room?room=${room}`).subscribe((d: any) => {
+      this.dataTable(d);
     });
   }
   dataTable(d: any) {
