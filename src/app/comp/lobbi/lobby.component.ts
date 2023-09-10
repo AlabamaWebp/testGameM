@@ -10,7 +10,7 @@ import { PlayerService } from 'src/app/services/player/player.service';
   templateUrl: './lobbi.component.html',
   styleUrls: ['./lobbi.component.scss']
 })
-export class LobbiComponent implements OnInit{
+export class LobbyComponent implements OnInit{
 
   constructor(
     private lobbyService: LobbyService,
@@ -25,16 +25,6 @@ export class LobbiComponent implements OnInit{
   lobby_data: RoomIn = this.playerService.getRoomIn().data;
   lobby_name = this.playerService.getRoomIn().name;
   nickname = this.shared.getName();
-  interval: any;
-
-  setInter() {
-    this.interval = setInterval(() => {
-      this.checkStatus();
-    }, 500)
-  }
-  clearInter() {
-    this.interval ? clearInterval(this.interval) : 0;
-  }
 
   getPlayers() {
     let tmp = this.lobby_data.players;
@@ -56,21 +46,22 @@ export class LobbiComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.lobbyService.get_count_player_in_lobby().subscribe(data => {
-    //   this.player = data;
-    // });
     this.checkStatus();
-    this.setInter();
   }
   ngOnDestroy() {
-    this.clearInter();
+    setTimeout(() => {
+      this.lobbyService.disconnect()
+    }, 1);
   }
   checkStatus() {
-    this.lobbyService.checkStatus(this.nickname).subscribe((d: any) => {
+    this.lobbyService.connect(this.nickname).subscribe((d: any) => {
       this.statusHelper(d);
     });
   }
   statusHelper(d: any) {
+    if (d.status != "r") {
+      this.lobbyService.disconnect();
+    }
     if (d.status == "r") {
       this.playerService.setRoomIn(d.room, d.name);
       this.setLobbyData();
@@ -87,13 +78,15 @@ export class LobbiComponent implements OnInit{
 
   genderChange(bool: boolean){
     this.gender = bool;
-    this.lobbyService.setSex(this.nickname, this.lobby_name, !bool).subscribe(() => {this.checkStatus()}) 
+    this.lobbyService.setSex(this.nickname, this.lobby_name, !bool).subscribe(() => {
+      // this.checkStatus()
+    }) 
   }
 
 
   playerReady() {
     this.lobbyService.setReady(this.nickname,this.lobby_name, !this.pl_ready).subscribe((d) => {
-      this.checkStatus()
+      // this.checkStatus()
     })
   }
 

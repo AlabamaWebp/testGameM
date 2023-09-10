@@ -10,7 +10,7 @@ import { HomeComponent } from './comp/home/home.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/http-interceptor/interceptor.service';
-import { LobbiComponent } from './comp/lobbi/lobbi.component';
+import { LobbyComponent } from './comp/lobbi/lobby.component';
 import { PlayerCardComponent } from './comp/player-card/player-card.component';
 import { TestingPageComponent } from './comp/testing-page/testing-page.component';
 import { GameRoomComponent } from './comp/game-room/game-room.component';
@@ -23,7 +23,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   declarations: [
     AppComponent,
     HomeComponent,
-    LobbiComponent,
+    LobbyComponent,
     PlayerCardComponent,
     TestingPageComponent,
     GameRoomComponent

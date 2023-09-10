@@ -52,13 +52,14 @@ export class HomeComponent implements OnInit {
 
   checkGame() {
     this.cors.getHttp().get(this.path + "/lobby/lobby_status?name=" + this.nickname).subscribe((d: any) => {
+      if (d.status != "n") {
+        this.socket.disconnect()
+      }
       if (d.status == "r") {
         this.player.setRoomIn(d.room, d.name);
-        this.socket.disconnect()
         this.router.navigate(["/lob"]);
       }
       else if (d.status == "g") {
-        this.socket.disconnect()
         this.router.navigate(["/game"]);
         // Дописать надо когда будет игра
       }
@@ -87,11 +88,12 @@ export class HomeComponent implements OnInit {
     this.nickname = value;
   }
 
-
   ngOnDestroy() {
-    this.socket.disconnect();
+    setTimeout(() => {
+      this.socket.disconnect();
+      console.log(1);
+    }, 1);
   }
-
 
   data: any;
   rooms: string[] = [];

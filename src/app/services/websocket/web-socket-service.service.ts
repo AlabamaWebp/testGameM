@@ -36,4 +36,7 @@ export class WebSocketServiceService {
   disconnect() {
     this.socket.ngOnDestroy()
   }
+  ngOnDestroy() {
+    this.socket.ngOnDestroy()
+  }
 }
