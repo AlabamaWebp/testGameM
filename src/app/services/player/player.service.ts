@@ -7,7 +7,7 @@ import { __values } from 'tslib';
 @Injectable({
   providedIn: 'root'
 })
-export class PlayerService {
+export class RoomService {
 
   constructor(private http: HttpClient) { }
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameRoomService } from 'src/app/services/cors/game-room.service';
 import { SharedService } from 'src/app/services/data/shared.service';
-import { PlayerService } from 'src/app/services/player/player.service';
+import { RoomService } from 'src/app/services/player/player.service';
 import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-service.service';
 
 
@@ -12,10 +13,11 @@ import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-s
 })
 export class GameRoomComponent implements OnInit {
   constructor(
-    // private query: GameRoomService,
+    private query: GameRoomService,
     private shared: SharedService,
-    private player: PlayerService,
-    private socket: WebSocketServiceService) { }
+    private player: RoomService,
+    private socket: WebSocketServiceService,
+    private router: Router) { }
 
 
   ngOnInit(): void {
@@ -37,10 +39,18 @@ export class GameRoomComponent implements OnInit {
 
   fetch_data: GameRoom | undefined
   fetchStatus() {
-    this.socket.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
-      console.log(d);
-      // d = JSON.parse(d);
-      this.processingData(d);
+    this.query.checkRoom().subscribe((d: any) => {
+      if (d) {
+        this.player.setRoomIn(undefined, d)
+        this.socket.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
+          console.log(d);
+          // d = JSON.parse(d);
+          this.processingData(d);
+        })
+      }
+      else {
+        this.router.navigate(["/home"]);
+      }
     })
 
   }

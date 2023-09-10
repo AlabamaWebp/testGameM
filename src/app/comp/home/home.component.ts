@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HomeService } from 'src/app/services/cors/home.service';
 import { ErrorService } from 'src/app/services/data/error.service';
 import { SharedService } from 'src/app/services/data/shared.service';
-import { PlayerService } from 'src/app/services/player/player.service';
+import { RoomService } from 'src/app/services/player/player.service';
 import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-service.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private cors: HomeService,
     private shar: SharedService,
-    private player: PlayerService,
+    private player: RoomService,
     private router: Router,
     private socket: WebSocketServiceService,
     public er: ErrorService

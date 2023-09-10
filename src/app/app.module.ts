@@ -16,6 +16,7 @@ import { TestingPageComponent } from './comp/testing-page/testing-page.component
 import { GameRoomComponent } from './comp/game-room/game-room.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { WebsocketModule } from './websocket';
+import { WebsocketModuleNash } from './services/websocket/web-socket-service.module';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -32,6 +33,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    WebsocketModuleNash,
     WebsocketModule.config({
       url: 'http:localhost:8080'
     })
