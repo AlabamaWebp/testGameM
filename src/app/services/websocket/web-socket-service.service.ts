@@ -18,8 +18,8 @@ export class WebSocketServiceService {
 
   private messages$: Observable<any> = new Observable;
 
-  sendMessage(msg: string) {
-    this.messages$
+  getMessage() {
+    return this.socket
   }
   connect(url: string) {
     this.socket.ngOnDestroy()

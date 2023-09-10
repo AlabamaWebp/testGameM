@@ -51,9 +51,11 @@ export class HomeComponent implements OnInit {
     this.cors.getHttp().get(this.path + "/game/lobby_status?name=" + this.nickname).subscribe((d: any) => {
       if (d.status == "r") {
         this.player.setRoomIn(d.room, d.name);
+        this.socket.disconnect()
         this.router.navigate(["/lob"]);
       }
       else if (d.status == "g") {
+        this.socket.disconnect()
         this.router.navigate(["/game"]);
         // Дописать надо когда будет игра
       }
@@ -91,29 +93,36 @@ export class HomeComponent implements OnInit {
   rooms: string[] = [];
   fetchRooms() {
     this.socket.connect("ws://" + this.shar.getUrlWithoutHttp() + "/rooms/rooms").subscribe((d: any) => {
+      if (d.event == "roomIn") {
+        this.player.setRoomIn(d.data.room, d.data.name);
+        this.socket.disconnect();
+        this.router.navigate(["/lob"]);
+      }
       this.dataTable(d);
+      if (d.event == "create") {
+        this.roomIn(`server_${this.nickname}`);
+      }
     });
-    // this.cors.getHttp().get(this.path + "/rooms/rooms").subscribe((d: any) => {
-    //   this.dataTable(d);
-    // });
   }
   // ?room=s&nickname=1
   roomIn(room: string) {
-    this.cors.getHttp().post(this.path + `/rooms/in_room?room=${room}&nickname=${this.nickname}`, undefined).subscribe((d: any) => {
-      this.player.setRoomIn(d.room, d.name);
-      this.router.navigate(["/lob"]);
-    });
+    this.socket.getMessage().send("roomIn", {
+      name: this.nickname,
+      room: room
+    })
   }
   // create_room?room=s&max_players=3
   createRoom(max: number) {
-    this.cors.getHttp().post(this.path + `/rooms/create_room?room=server_${this.nickname}&max_players=${max}`, undefined).subscribe((d: any) => {
-      this.roomIn(`server_${this.nickname}`);
-      this.fetchRooms();
+    this.socket.getMessage().send("create", //JSON.stringfy
+    {
+      name: this.nickname,
+      max: max
     });
   }
   delRoom(room: string) {
-    this.cors.getHttp().delete(this.path + `/rooms/delete_room?room=${room}`).subscribe((d: any) => {
-      this.dataTable(d);
+    this.socket.getMessage().send("delete", //JSON.stringfy
+    {
+      room: room
     });
   }
   dataTable(d: any) {
