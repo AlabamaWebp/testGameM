@@ -49,9 +49,7 @@ export class LobbyComponent implements OnInit{
     this.checkStatus();
   }
   ngOnDestroy() {
-    setTimeout(() => {
-      this.lobbyService.disconnect()
-    }, 1);
+    this.lobbyService.disconnect()
   }
   checkStatus() {
     this.lobbyService.connect(this.nickname).subscribe((d: any) => {

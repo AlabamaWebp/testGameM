@@ -89,16 +89,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    setTimeout(() => {
-      this.socket.disconnect();
-      console.log(1);
-    }, 1);
+    this.socket.disconnect();
   }
 
   data: any;
   rooms: string[] = [];
   fetchRooms() {
-    this.socket.disconnect();
     this.socket.connect("ws://" + this.shar.getUrlWithoutHttp() + "/rooms/rooms").subscribe((d: any) => {
       this.dataTable(d);
     }, (err) => {

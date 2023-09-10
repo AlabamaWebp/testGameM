@@ -75,6 +75,7 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.websocket$?.complete();
         this.websocketSub.unsubscribe();
         this.statusSub.unsubscribe();
     }
