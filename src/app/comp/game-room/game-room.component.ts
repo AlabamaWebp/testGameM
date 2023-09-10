@@ -11,7 +11,11 @@ import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-s
   styleUrls: ['./game-room.component.scss']
 })
 export class GameRoomComponent implements OnInit {
-  constructor(private query: GameRoomService, private shared: SharedService, private player: PlayerService, private wsss: WebSocketServiceService) { }
+  constructor(
+    // private query: GameRoomService,
+    private shared: SharedService,
+    private player: PlayerService,
+    private socket: WebSocketServiceService) { }
 
 
   ngOnInit(): void {
@@ -28,18 +32,12 @@ export class GameRoomComponent implements OnInit {
   players: Player[] | undefined;
 
   ngOnDestroy() {
-    this.query.closeConnection();
+    this.socket.disconnect()
   }
 
   fetch_data: GameRoom | undefined
   fetchStatus() {
-    // this.query.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name)
-    //   .onmessage = (d: any) => {
-    //     d = JSON.parse(d.data);
-    //     this.processingData(d);
-    //     // this.query.closeConnection()
-    // }
-    this.wsss.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
+    this.socket.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
       console.log(d);
       // d = JSON.parse(d);
       this.processingData(d);

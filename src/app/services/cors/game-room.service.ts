@@ -8,6 +8,7 @@ import { PlayerService } from '../player/player.service';
 })
 export class GameRoomService {
 
+  // НЕ ИСПОЛЬЗУЕТСЯ
 
   constructor(
     private http: HttpClient,

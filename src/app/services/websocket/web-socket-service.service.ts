@@ -11,20 +11,21 @@ export class WebSocketServiceService {
 
   constructor(
     private socket: WebsocketService,
-     private shared: SharedService) {}
+    //  private shared: SharedService
+     ) {}
 
   // socket: WebsocketService;
 
-  // private messages$: Observable<any> = new Observable;
+  private messages$: Observable<any> = new Observable;
 
   sendMessage(msg: string) {
-    // this.socket.send()
+    this.messages$
   }
   connect(url: string) {
     this.socket.ngOnDestroy()
     this.socket = new WebsocketService({url: url});
-    // this.messages$ = this.socket.on<any>(WS.ON.MESSAGES);
-    return this.socket.on<any>(WS.ON.MESSAGES);
+    this.messages$ = this.socket.on<any>(WS.ON.MESSAGES);
+    return this.messages$
   }
   // getMessage() {
   //   return this.messages$ 

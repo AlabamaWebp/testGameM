@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnDestroy() {
-    // clearInterval(this.interval_fetch);
+    this.socket.disconnect()
   }
 
 
