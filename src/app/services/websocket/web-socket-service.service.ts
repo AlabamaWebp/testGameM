@@ -15,7 +15,7 @@ export class WebSocketServiceService {
 
   // socket: WebsocketService;
 
-  private messages$: Observable<any> = new Observable;
+  // private messages$: Observable<any> = new Observable;
 
   sendMessage(msg: string) {
     // this.socket.send()
@@ -23,11 +23,12 @@ export class WebSocketServiceService {
   connect(url: string) {
     this.socket.ngOnDestroy()
     this.socket = new WebsocketService({url: url});
-    this.messages$ = this.socket.on<any>(WS.ON.MESSAGES)
+    // this.messages$ = this.socket.on<any>(WS.ON.MESSAGES);
+    return this.socket.on<any>(WS.ON.MESSAGES);
   }
-  getMessage() {
-    return this.messages$ 
-  }
+  // getMessage() {
+  //   return this.messages$ 
+  // }
   disconnect() {
     this.socket.ngOnDestroy()
   }

@@ -39,8 +39,7 @@ export class GameRoomComponent implements OnInit {
     //     this.processingData(d);
     //     // this.query.closeConnection()
     // }
-    this.wsss.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name)
-    this.wsss.getMessage().subscribe((d: any) => {
+    this.wsss.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
       console.log(d);
       // d = JSON.parse(d);
       this.processingData(d);

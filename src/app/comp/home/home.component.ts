@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HomeService } from 'src/app/services/cors/home.service';
 import { SharedService } from 'src/app/services/data/shared.service';
 import { PlayerService } from 'src/app/services/player/player.service';
+import { WebSocketServiceService } from 'src/app/services/websocket/web-socket-service.service';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,10 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private cors: HomeService,
-    private err: SharedService,
+    private shar: SharedService,
     private player: PlayerService,
     private router: Router,
+    private socket: WebSocketServiceService
     ) { }
 
   path = "http://127.0.0.1:78"
@@ -28,7 +30,6 @@ export class HomeComponent implements OnInit {
 
   ngAfterViewInit() {
     this.fetchRooms();
-    // this.intervalFetch();
   }
 
 
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
       this.path = localStorage.getItem("ip") as string;
     }
     else {
-      this.err.setUrl(this.path);
+      this.shar.setUrl(this.path);
     }
     if (localStorage.getItem("name")) {
       this.nickname = localStorage.getItem("name") as string;
@@ -64,10 +65,8 @@ export class HomeComponent implements OnInit {
     if (!value.includes("http://")) {
       value = "http://" + value;
     }
-    this.err.setUrl(value);
+    this.shar.setUrl(value);
     this.path = value;
-    this.fetchRooms();
-    // this.refresh();
   }
 
   getIpWithoutHttp() {
@@ -78,38 +77,25 @@ export class HomeComponent implements OnInit {
   }
 
   setNick(value: string) {
-    this.err.setName(value)
+    this.shar.setName(value)
     this.nickname = value;
   }
 
 
-  /////data
-  // interval_fetch: any = undefined;
-  // intervalFetch() {
-  //   this.interval_fetch = setInterval(() => {
-  //     this.fetchRooms();
-  //   }, 800)
-  // }
   ngOnDestroy() {
     // clearInterval(this.interval_fetch);
   }
 
-  // toggleRefresh() {
-  //   if (this.interval_fetch == undefined) {
-  //     this.intervalFetch();
-  //   }
-  //   else {
-  //     clearInterval(this.interval_fetch);
-  //     this.interval_fetch = undefined
-  //   }
-  // }
 
   data: any;
   rooms: string[] = [];
   fetchRooms() {
-    this.cors.getHttp().get(this.path + "/rooms/rooms").subscribe((d: any) => {
+    this.socket.connect("ws://" + this.shar.getUrlWithoutHttp() + "/rooms/rooms").subscribe((d: any) => {
       this.dataTable(d);
     });
+    // this.cors.getHttp().get(this.path + "/rooms/rooms").subscribe((d: any) => {
+    //   this.dataTable(d);
+    // });
   }
   // ?room=s&nickname=1
   roomIn(room: string) {
