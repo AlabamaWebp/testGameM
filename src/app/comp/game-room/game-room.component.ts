@@ -43,8 +43,14 @@ export class GameRoomComponent implements OnInit {
       if (d) {
         this.player.setRoomIn(undefined, d)
         this.socket.connect("ws://" + this.shared.getUrlWithoutHttp() + "/game/game?game_room=" + this.player.getRoomIn().name).subscribe((d: any) => {
-          console.log(d);
-          // d = JSON.parse(d);
+          console.log("game ",d);
+          if (typeof d == "string") {
+            if (d = "home") {
+              this.socket.disconnect();
+              this.router.navigate(["/home"]);
+              return
+            }
+          }
           this.processingData(d);
         })
       }
