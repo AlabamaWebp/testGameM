@@ -55,11 +55,9 @@ export class LobbyComponent implements OnInit {
   checkStatus() {
     this.lobbyService.connect(this.nickname).subscribe((d: any) => {
       this.statusHelper(d);
-      console.log(d);
     });
   }
   statusHelper(d: any) {
-    console.log(d);
     if (d.status != "r") {
       this.lobbyService.disconnect();
     }

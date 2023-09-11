@@ -96,7 +96,6 @@ export class HomeComponent implements OnInit {
   rooms: string[] = [];
   fetchRooms() {
     this.socket.connect("ws://" + this.shar.getUrlWithoutHttp() + "/rooms/rooms").subscribe((d: any) => {
-      console.log("room");
       this.dataTable(d);
     }, (err) => {
       // Не работает

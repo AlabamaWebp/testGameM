@@ -24,7 +24,7 @@ export class InterceptorService implements HttpInterceptor {
             this.er.errorsIn$.next(this.er.getCount() + ".  " + err.error.detail)
           }
           else {
-            console.log(err);
+            console.log("Inspector " + err);
           }
         }
       )
