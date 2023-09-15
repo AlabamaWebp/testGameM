@@ -63,13 +63,21 @@ $imgTree: url('../../../assets/image/tree.jpg');
             display: flex;
             .info {
                 height: 100%;
-                width: 170px;
+                flex: 0 0 170px;
                 padding: 10px;
             }
             .cards {
                 height: 100%;
-                width: 100%;
+                flex: 1 1 auto;
                 padding: 10px;
+            }
+            .log {
+                height: 100%;
+                flex: 1 1 auto;
+                padding: 0 5px;
+                overflow: auto;
+                // background-color: #a1a1a1;
+                border-left: 1px solid black;
             }
         }
     }

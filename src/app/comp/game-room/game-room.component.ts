@@ -37,7 +37,7 @@ export class GameRoomComponent implements OnInit {
     this.socket.disconnect()
   }
 
-  fetch_data: GameRoom | undefined
+  fetch_data!: GameRoom 
   fetchStatus() {
     this.query.checkRoom().subscribe((d: any) => {
       if (d) {
@@ -48,6 +48,9 @@ export class GameRoomComponent implements OnInit {
               this.socket.disconnect();
               this.router.navigate(["/home"]);
               return
+            }
+            else if (d = "test") {
+              this.fetchStatus();
             }
           }
           this.processingData(d);
@@ -84,6 +87,7 @@ export class GameRoom {
   sbros_treasures: any = []
   queue: number = 0
   step: number = 1
+  log: string[] = []
 }
 
 export class Player {

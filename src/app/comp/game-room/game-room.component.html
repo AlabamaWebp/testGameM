@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="fetch_data">
     <div class="header">
         <div class="player" 
         *ngFor="let player of players">
@@ -8,12 +8,15 @@
             <!-- {{player}} -->
         </div>
     </div>
+
+
     <div class="body">
         <div class="left">
             <span class="name">Колода</span>
             <div class="btnl btn">Сокровища</div>
             <div class="btnl btn">Двери</div>
         </div>
+
         <div class="center">
             <div class="info">
                 инфа
@@ -21,13 +24,24 @@
             <div class="cards">
                 играемые карты
             </div>
+            <div class="log">
+                <h2>Лог</h2>
+                <ul>
+                    <li *ngFor="let item of fetch_data.log">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
         </div>
+
         <div class="right">
             <span class="name">Сброс</span>
             <div class="btnr btn">Сокровища</div>
             <div class="btnr btn">Двери</div>
         </div>
     </div>
+
+
     <div class="footer">
         <div class="fcenter">
             <div class="info">
@@ -37,6 +51,7 @@
                 <span>Раса: орк</span>
                 <span>Класс: вор</span>
             </div>
+
             <div class="cards">
                 <div class="cont">
                     <div class="card" *ngFor="let card of your_cards">
@@ -61,6 +76,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="actions">
                 <!-- <span>Доп. действия</span> -->
                 <div class="act" *ngFor="let act of actions">
