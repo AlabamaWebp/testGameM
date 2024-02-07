@@ -1,16 +1,12 @@
 <div class="wrapper">
   <div class="header">
     <div class="l f">
-      <!-- <button class="button1 refresh" (click)="toggleRefresh()" [class.ind]="!interval_fetch">обновление списка</button> -->
       <div class="input">
         Backend IPv4:
         <input type="text" #ip (change)="setIp(ip.value)" name="ip" [value]="getIpWithoutHttp()">
-        <!-- style="width: 300px;" -->
       </div>
       <div class="backdrop" *ngIf="!isConnected"></div>
     </div>
-    <!-- <div class="c f">
-    </div> -->
     <div class="r f">
       <div class="input nope">
         <input type="number" #max placeholder="Максимум игроков">
