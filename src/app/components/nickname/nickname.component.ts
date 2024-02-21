@@ -21,7 +21,7 @@ export class NicknameComponent{
   click() {
     if (!this.subscribed) {
       this.webs.on("statusName", (d: any) => {alert(d)});
-      this.subscribed = true
+      this.subscribed = true;
     }
     this.webs.emit("setName", this.nickname);
   }

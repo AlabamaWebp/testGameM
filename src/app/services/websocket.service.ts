@@ -15,14 +15,16 @@ export class WebsocketService {
     return this.socket ? true : false;
   }
   connect() {
+    // if (this.socket)
+    //   this.socket.disconnect();
     this.socket = io('http://localhost:3001');
-    this.socket.on("disconnect", (reason) => {
-      if (reason === "io server disconnect") {
-        // the disconnection was initiated by the server, you need to reconnect manually
-        this.socket?.connect();
-      }
-      // else the socket will automatically try to reconnect
-    });
+    // this.socket.on("disconnect", (reason) => {
+    //   if (reason === "io server disconnect") {
+    //     // the disconnection was initiated by the server, you need to reconnect manually
+    //     this.socket?.connect();
+    //   }
+    //   // else the socket will automatically try to reconnect
+    // });
   }
 
   on(eventName: string, callback: any) {
