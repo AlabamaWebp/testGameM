@@ -1,1 +1,14 @@
-<p>nickname works!</p>
+<div class="wrapper">
+    <mat-form-field class="formField">
+        <mat-label>Никнейм</mat-label>
+        <input matInput type="text" [(ngModel)]="nickname">
+        @if (nickname) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="nickname=''">
+            <mat-icon>close</mat-icon>
+        </button>
+        }
+    </mat-form-field>
+    <button class="formField button" mat-raised-button color="primary" (click)="0">
+        Принять
+    </button>
+</div>

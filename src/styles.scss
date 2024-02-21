@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./app/styles/sbros.scss";
+@import "./app/styles/vars.scss";
+// The "warn" palette is optional and defaults to red if not specified.
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.wrapper {
+    background-color: $bgc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
