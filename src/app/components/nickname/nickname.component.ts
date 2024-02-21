@@ -15,5 +15,12 @@ import { WebsocketService } from '../../services/websocket.service';
 })
 export class NicknameComponent {
   nickname: string = ""
-  constructor(public webs: WebsocketService) {}
+  constructor(private webs: WebsocketService) {}
+  ngOnInit() {
+  }
+
+  click() {
+    this.webs.on("statusName", (d: any) => {alert(d)})
+    this.webs.emit("setName", this.nickname);
+  }
 }
