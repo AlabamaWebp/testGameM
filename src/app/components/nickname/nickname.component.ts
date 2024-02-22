@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { WebsocketService } from '../../services/websocket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nickname',
@@ -15,8 +16,13 @@ import { WebsocketService } from '../../services/websocket.service';
 })
 export class NicknameComponent {
   control = new FormControl('', [Validators.required,]);
-  constructor(private webs: WebsocketService) { }
-
+  constructor(private webs: WebsocketService, private router: Router) { }
+  ngOnInit() {
+    const n = localStorage.getItem("nickname");
+    if (n) {
+      this.control.setValue(n);
+    }
+  }
 
   subscribed: boolean = false;
   answer: string | boolean | undefined;
@@ -29,8 +35,10 @@ export class NicknameComponent {
     this.webs.emit("setName", this.control.value);
   }
   changeAnswer(d: any) {
-    if (d === "home")
-      console.log(d, this.control.value)
+    if (d === "home"){
+      localStorage.setItem("nickname", this.control.value as string)
+      this.router.navigate(["home"])
+    }
     else if (typeof d === "string") {
       this.answer = d;
       console.log(this.answer);

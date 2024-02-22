@@ -5,7 +5,7 @@ import io, { Socket } from 'socket.io-client';
   providedIn: 'root'
 })
 // getLobbys setName createLobby deleteLobby roomIn
-// statusName refreshRooms
+// statusName refreshRooms statusCreate
 export class WebsocketService {
   private socket: Socket | undefined;
 
@@ -37,11 +37,4 @@ export class WebsocketService {
     this.socket?.emit(eventName, data);
   }
 
-}
-interface refreshRooms {
-  name: string,
-  creator: boolean,
-  players: any[],
-  maxPlayers: number,
-  canIn: boolean
 }
