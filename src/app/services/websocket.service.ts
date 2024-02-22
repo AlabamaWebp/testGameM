@@ -14,7 +14,7 @@ export class WebsocketService {
   isConnect() {
     return this.socket ? true : false;
   }
-  connect() {
+  private connect() {
     // if (this.socket)
     //   this.socket.disconnect();
     this.socket = io('http://localhost:3001');

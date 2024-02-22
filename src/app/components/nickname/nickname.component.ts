@@ -1,28 +1,40 @@
-import { AfterViewInit, Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { WebsocketService } from '../../services/websocket.service';
 
 @Component({
   selector: 'app-nickname',
   standalone: true,
-  imports:  [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './nickname.component.html',
   styleUrl: './nickname.component.scss'
 })
-export class NicknameComponent{
-  nickname: string = ""
-  constructor(private webs: WebsocketService) {}
+export class NicknameComponent {
+  control = new FormControl('', [Validators.required,]);
+  constructor(private webs: WebsocketService) { }
+
 
   subscribed: boolean = false;
+  answer: string | boolean | undefined;
+  test = true
   click() {
     if (!this.subscribed) {
-      this.webs.on("statusName", (d: any) => {alert(d)});
+      this.webs.on("statusName", (d: any) => { this.changeAnswer(d) });
       this.subscribed = true;
     }
-    this.webs.emit("setName", this.nickname);
+    this.webs.emit("setName", this.control.value);
+  }
+  changeAnswer(d: any) {
+    if (d === true)
+      console.log(d)
+    else if (typeof d === "string") {
+      this.answer = d;
+      console.log(this.answer);
+      this.control.setErrors({"incorrect": true})
+    }
   }
 }
