@@ -29,8 +29,8 @@ export class NicknameComponent {
     this.webs.emit("setName", this.control.value);
   }
   changeAnswer(d: any) {
-    if (d === true)
-      console.log(d)
+    if (d === "home")
+      console.log(d, this.control.value)
     else if (typeof d === "string") {
       this.answer = d;
       console.log(this.answer);
