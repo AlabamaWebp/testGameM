@@ -26,10 +26,13 @@ export class WebsocketService {
     //   // else the socket will automatically try to reconnect
     // });
   }
-
+  events = new Set();
   on(eventName: string, callback: any) {
     this.isConnect() ? 0 : this.connect();
-    this.socket?.on(eventName, callback);
+    if (!this.events.has(eventName)) {
+      this.events.add(eventName);
+      this.socket?.on(eventName, callback);
+    }
   }
 
   emit(eventName: string, data: any) {
