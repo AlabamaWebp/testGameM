@@ -25,11 +25,11 @@
                 <!-- @for (players of item.players; track $index) {} -->
             </mat-card-content>
             <mat-card-actions>
-                @if (item.canIn) {
+                @if (item.canIn && item.maxPlayers != item.players.length) {
                 <button mat-button>Войти</button>
                 }
-                @if (item.creator) {
-                <button mat-button>Удалить</button>
+                @if (item.creator && item.players.length == 0) {
+                <button mat-button (click)="deleteR(item.name)">Удалить</button>
                 }
             </mat-card-actions>
         </mat-card>

@@ -18,9 +18,11 @@ export class HomeComponent {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
   }
   ngOnInit() {
-    this.webs.on("refreshRooms", (e: any) => {this.rooms = e});
+    this.webs.on("refreshRooms", (e: any) => {this.rooms = e, console.log(e);
+    });
     this.webs.emit("getLobbys", undefined);
     this.webs.on("statusCreate", (e: any) => {alert(e)});
+    this.webs.on("statusDelete", (e: any) => {alert(e)});
     // statusCreate
   }
   nickname: string = localStorage.getItem("nickname") as string;
@@ -37,7 +39,11 @@ export class HomeComponent {
       name: "Комната " + this.nickname,
       max: Number(max)
     }
-    this.webs.emit("createLobby", tmp)
+    this.webs.emit("createLobby", tmp);
+    this.creating = false;
+  }
+  deleteR(name: string,) {
+    this.webs.emit("deleteLobby", name);
   }
 }
 

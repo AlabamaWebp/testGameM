@@ -5,7 +5,7 @@ import io, { Socket } from 'socket.io-client';
   providedIn: 'root'
 })
 // getLobbys setName createLobby deleteLobby roomIn
-// statusName refreshRooms statusCreate
+// statusName refreshRooms statusCreate statusDelete
 export class WebsocketService {
   private socket: Socket | undefined;
 
