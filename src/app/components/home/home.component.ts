@@ -23,6 +23,15 @@ export class HomeComponent {
     this.webs.emit("getLobbys", undefined);
     this.webs.on("statusCreate", (e: any) => {alert(e)});
     this.webs.on("statusDelete", (e: any) => {alert(e)});
+    this.webs.on("statusRoomIn", (e: any) => {
+      e === true ? this.router.navigate(["lobby"]) : alert(e);
+      // if (e === true) {
+      //   this.router.navigate(["lobby"]);
+      // }
+      // else {
+      //   alert(e);
+      // }
+    });
     // statusCreate
   }
   nickname: string = localStorage.getItem("nickname") as string;
@@ -44,6 +53,9 @@ export class HomeComponent {
   }
   deleteR(name: string,) {
     this.webs.emit("deleteLobby", name);
+  }
+  roomIn(name: string){
+    this.webs.emit("roomIn", name)
   }
 }
 
