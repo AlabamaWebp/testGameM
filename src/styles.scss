@@ -4,9 +4,11 @@
 // The "warn" palette is optional and defaults to red if not specified.
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {font: Roboto, sans-serif;}
 * {box-sizing: border-box;}
 .wrapper {
-    background-color: $bgc;
+    // background-color: $bgc;
+    background-image: url("./assets/background/tavern1.jpg");
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,4 +26,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .vertical {
     display: flex;
     flex-direction: column;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.full {
+    width: 100%;
+    height: 100%;
 }
