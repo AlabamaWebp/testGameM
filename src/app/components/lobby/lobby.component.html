@@ -1,1 +1,19 @@
-<p>lobby works!</p>
+<div class="wrapper">
+    <div class="header">
+
+    </div>
+    <div class="main">
+        @for (item of data?.players; track $index) {
+            <div class="player">
+                <h3>{{item.nickname}}</h3>
+                <span>{{item.sex}}</span>
+                <span>{{item.ready}}</span>
+            </div>
+        }
+        <!-- @empty {
+        <div class="center full">
+            <h3>Комнат нет</h3>
+        </div>
+        } -->
+    </div>
+</div>
