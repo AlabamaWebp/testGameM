@@ -22,6 +22,7 @@ export class NicknameComponent {
     if (n) {
       this.control.setValue(n);
     }
+    this.webs.disconnect()
   }
 
   answer: string | boolean | undefined = "Этот ник уже используется";
@@ -29,13 +30,13 @@ export class NicknameComponent {
     // this.webs.on("statusName", (d: any) => { this.changeAnswer(d) });
     const name = this.control.value as string;
     this.webs.checkNickname(name).subscribe(el => {
-      console.log(el);
-      if (el) {
+      if (el === true) {
         localStorage.setItem("nickname", name);
         this.webs.connect(name)
         this.router.navigate(["home"])
       }
       else {
+        console.log(el);
         this.control.setErrors({"incorrect": true})
       }
     })

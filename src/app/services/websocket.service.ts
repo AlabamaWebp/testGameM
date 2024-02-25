@@ -53,7 +53,7 @@ export class WebsocketService {
   }
 
   checkNickname(nickname: string) {
-    return this.http.post("http://localhost:3000/nickname", nickname);
+    return this.http.post("http://localhost:3000/nickname", {nickname: nickname});
   }
 
 }
