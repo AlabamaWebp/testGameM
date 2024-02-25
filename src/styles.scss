@@ -3,13 +3,14 @@
 @import "./app/styles/vars.scss";
 // The "warn" palette is optional and defaults to red if not specified.
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background: url("./assets/background/tavern1.jpg") no-repeat;
+    background-size: cover;
+}
 * {font: Roboto, sans-serif;}
 * {box-sizing: border-box;}
 .wrapper {
     // background-color: $bgc;
-    background: url("./assets/background/tavern1.jpg") no-repeat;
-    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,6 +42,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /////////////
 .wrapper {
     .header {
+        height: 60px;
         flex: 0 0 60px;
         display: flex;
         padding: 10px 20px;
@@ -50,8 +52,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         }
     }
     .main {
+        height: 0;
         flex: 1 1 auto;
-        margin: 0 0 60px;
+        margin: 0 0 20px;
     }
 }
 .flex {
@@ -62,4 +65,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-button-toggle {
     width: 100%;
+}
+.overflow {
+    overflow: auto;
 }

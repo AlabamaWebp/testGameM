@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import io, { Socket } from 'socket.io-client';
 
 @Injectable({
@@ -10,7 +11,13 @@ import io, { Socket } from 'socket.io-client';
 export class WebsocketService {
   private socket: Socket | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { 
+    router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.unsubscribe();
+      }
+    })
+  }
 
   isConnect() {
     return this.socket ? true : false;
@@ -34,7 +41,7 @@ export class WebsocketService {
     this.events.clear();
     this.socket?.close();
   }
-  events = new Set();
+  events = new Set<string>();
   on(eventName: string, callback: any) {
     this.isConnect() ? 0 : this.connect();
     if (!this.isConnect())
@@ -45,11 +52,17 @@ export class WebsocketService {
     }
   }
 
-  emit(eventName: string, data: any) {
+  emit(eventName: string, data: any = undefined) {
     this.isConnect() ? 0 : this.connect();
     if (!this.isConnect())
       return
     this.socket?.emit(eventName, data);
+  }
+  unsubscribe() {
+    this.events.forEach((el: string) => {
+      this.socket?.off(el)
+    })
+    this.events.clear();
   }
 
   checkNickname(nickname: string) {

@@ -4,9 +4,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 
 export const routes: Routes = [
-    {path: "start" , component: NicknameComponent},
-    {path: "home", component: HomeComponent},
-    {path: "lobby", component: LobbyComponent},
+    {path: "start", loadComponent: () => NicknameComponent},
+    {path: "home", loadComponent: () => HomeComponent},
+    {path: "lobby", loadComponent: () => LobbyComponent},
     {path: "**", redirectTo: "start"}
 
 ];

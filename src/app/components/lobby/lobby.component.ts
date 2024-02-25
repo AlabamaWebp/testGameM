@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-lobby',
   standalone: true,
-  imports: [MatButtonToggleModule],
+  imports: [MatButtonToggleModule, MatButtonModule],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss'
 })
@@ -18,14 +19,21 @@ export class LobbyComponent {
     this.webs.on("statusLobby", (e: any) => {
       this.data = e; console.log("s", e);
     })
-    this.webs.emit("statusLobby", undefined)
+    this.webs.emit("statusLobby", undefined);
   }
   data: data | undefined;
   clickReady(d: boolean) {
-    this.webs.emit("setReady", d)
+    this.webs.emit("setReady", d);
   }
   clickSex(d: string) {
-    this.webs.emit("setSex", d)
+    this.webs.emit("setSex", d);
+  }
+  roomOut() {
+    this.webs.emit("roomOut");
+    this.router.navigate(["home"]);
+  }
+  ngOnDestroy() {
+
   }
 }
 interface data {

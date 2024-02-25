@@ -22,6 +22,9 @@ export class HomeComponent {
       if (e === "lobby") {
         this.router.navigate(["lobby"])
       }
+      else if (e === "game") {
+        this.router.navigate(["game"])
+      }
     });
     this.webs.emit("statusPlayer", undefined)
     ///////////////

@@ -1,10 +1,10 @@
 <div class="wrapper">
     <div class="header center">
         <h3>
-            {{data?.name}}, Игроков: {{data?.maxPlayers}}
+            {{data?.name}}, Игроков: {{data?.maxPlayers}} <button mat-flat-button (click)="roomOut()">Выйти</button>
         </h3>
     </div>
-    <div class="main center full">
+    <div class="main center full overflow">
         <div class="flex wrap">
             @for (item of data?.players; track $index) {
             <div class="player">
