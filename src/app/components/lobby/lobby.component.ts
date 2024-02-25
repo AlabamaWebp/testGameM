@@ -29,5 +29,6 @@ interface data {
 interface player {
   nickname: string,
   sex: boolean,
-  ready: boolean
+  ready: boolean,
+  you: boolean
 }

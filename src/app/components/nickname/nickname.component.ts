@@ -24,25 +24,31 @@ export class NicknameComponent {
     }
   }
 
-  subscribed: boolean = false;
-  answer: string | boolean | undefined;
-  test = true
+  answer: string | boolean | undefined = "Этот ник уже используется";
   click() {
-    if (!this.subscribed) {
-      this.webs.on("statusName", (d: any) => { this.changeAnswer(d) });
-      this.subscribed = true;
-    }
-    this.webs.emit("setName", this.control.value);
+    // this.webs.on("statusName", (d: any) => { this.changeAnswer(d) });
+    const name = this.control.value as string;
+    this.webs.checkNickname(name).subscribe(el => {
+      console.log(el);
+      if (el) {
+        localStorage.setItem("nickname", name);
+        this.webs.connect(name)
+        this.router.navigate(["home"])
+      }
+      else {
+        this.control.setErrors({"incorrect": true})
+      }
+    })
+    // this.webs.emit("setName", this.control.value);
   }
-  changeAnswer(d: any) {
-    if (d === "home"){
-      localStorage.setItem("nickname", this.control.value as string)
-      this.router.navigate(["home"])
-    }
-    else if (typeof d === "string") {
-      this.answer = d;
-      console.log(this.answer);
-      this.control.setErrors({"incorrect": true})
-    }
-  }
+  // changeAnswer(d: any) {
+  //   if (d === "home"){
+  //     localStorage.setItem("nickname", this.control.value as string)
+  //     this.router.navigate(["home"])
+  //   }
+  //   else if (typeof d === "string") {
+  //     this.answer = d;
+  //     this.control.setErrors({"incorrect": true})
+  //   }
+  // }
 }
