@@ -8,7 +8,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * {box-sizing: border-box;}
 .wrapper {
     // background-color: $bgc;
-    background-image: url("./assets/background/tavern1.jpg");
+    background: url("./assets/background/tavern1.jpg") no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
