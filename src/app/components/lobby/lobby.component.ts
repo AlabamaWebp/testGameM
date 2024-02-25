@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-lobby',
   standalone: true,
-  imports: [],
+  imports: [MatButtonToggleModule],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss'
 })
@@ -14,22 +15,23 @@ export class LobbyComponent {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
   }
   ngOnInit() {
-    this.webs.on("statusLobby", (e: any) => {this.data = e; console.log("s", e);
+    this.webs.on("statusLobby", (e: any) => {
+      this.data = e; console.log("s", e);
     })
     this.webs.emit("statusLobby", undefined)
   }
+  data: data | undefined;
 
-  data: data | undefined
 }
 interface data {
   name: string,
   creator: boolean,
-  players: player[]
+  players: player[],
   maxPlayers: number,
 }
 interface player {
   nickname: string,
-  sex: boolean,
+  sex: "Мужчина" | "Женщина",
   ready: boolean,
   you: boolean
 }
