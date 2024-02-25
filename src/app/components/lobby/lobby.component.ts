@@ -14,7 +14,8 @@ export class LobbyComponent {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
   }
   ngOnInit() {
-    this.webs.on("statusLobby", (e: any) => {this.data = e})
+    this.webs.on("statusLobby", (e: any) => {this.data = e; console.log("s", e);
+    })
     this.webs.emit("statusLobby", undefined)
   }
 

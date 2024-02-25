@@ -18,20 +18,18 @@ export class HomeComponent {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
   }
   ngOnInit() {
-    this.webs.on("refreshRooms", (e: any) => {this.rooms = e, console.log(e);
+    this.webs.on("statusPlayer", (e: any) => {
+      if (e === "lobby") {
+        this.router.navigate(["lobby"])
+      }
     });
+    this.webs.emit("statusPlayer", undefined)
+    ///////////////
+    this.webs.on("refreshRooms", (e: any) => {this.rooms = e; console.log(e);});
     this.webs.emit("getLobbys", undefined);
     this.webs.on("statusCreate", (e: any) => {alert(e)});
     this.webs.on("statusDelete", (e: any) => {alert(e)});
-    this.webs.on("statusRoomIn", (e: any) => {
-      e === true ? this.router.navigate(["lobby"]) : alert(e);
-      // if (e === true) {
-      //   this.router.navigate(["lobby"]);
-      // }
-      // else {
-      //   alert(e);
-      // }
-    });
+    this.webs.on("statusRoomIn", (e: any) => {e === true ? this.router.navigate(["lobby"]) : alert(e);});
     // statusCreate
   }
   nickname: string = localStorage.getItem("nickname") as string;
