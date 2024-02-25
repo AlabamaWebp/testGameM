@@ -21,7 +21,12 @@ export class LobbyComponent {
     this.webs.emit("statusLobby", undefined)
   }
   data: data | undefined;
-
+  clickReady(d: boolean) {
+    this.webs.emit("setReady", d)
+  }
+  clickSex(d: string) {
+    this.webs.emit("setSex", d)
+  }
 }
 interface data {
   name: string,
