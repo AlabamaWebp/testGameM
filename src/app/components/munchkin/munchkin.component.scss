@@ -1,4 +1,6 @@
-.players {
-    height: 60px;
-    max-width: 50%;
+.header {
+    justify-content: space-between;
+    .players {
+        max-width: 50%;
+    }
 }
