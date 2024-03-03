@@ -15,7 +15,9 @@ export class MunchkinComponent {
   }
 
   ngOnInit() {
-    this.webs.on("refreshGame", (el: any) => { this.data = el; })
+    this.webs.on("refreshGame", (el: any) => { 
+      this.data = el; console.log(el);
+    })
     this.webs.on("allLog", (el: any) => { this.plog = el; })
     this.webs.on("plusLog", (el: any) => { this.plog.push(el); })
 

@@ -29,7 +29,7 @@ export class HomeComponent {
     });
     this.webs.emit("statusPlayer", undefined)
     ///////////////
-    this.webs.on("refreshRooms", (e: any) => {this.rooms = e; console.log(e);});
+    this.webs.on("refreshRooms", (e: any) => {this.rooms = e;});
     this.webs.emit("getLobbys", undefined);
     this.webs.on("statusCreate", (e: any) => {alert(e)});
     this.webs.on("statusDelete", (e: any) => {alert(e)});

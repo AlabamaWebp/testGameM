@@ -26,7 +26,6 @@ export class WebsocketService {
     if (name == undefined) {
       const tmp = localStorage.getItem("nickname")
       if (!tmp || tmp?.length == 0) {
-        console.log("nonick");
         return
       }
       else {
