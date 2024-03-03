@@ -19,6 +19,7 @@ export class HomeComponent {
   }
   ngOnInit() {
     this.webs.on("statusPlayer", (e: any) => {
+      console.log(e);
       if (e === "lobby") {
         this.router.navigate(["lobby"])
       }

@@ -36,6 +36,10 @@ export class WebsocketService {
     this.socket = io('http://localhost:3001', {
       extraHeaders: { "name": name }
     });
+    this.socket.on("disconnect", (e) => {
+      // console.log(e);
+      this.router.navigate(["start"])
+    })
   }
   disconnect() {
     this.events.clear();

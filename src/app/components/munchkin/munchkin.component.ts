@@ -14,4 +14,15 @@ export class MunchkinComponent {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
   }
 
+  ngOnInit() {
+    this.webs.on("refreshGame", (el: any) => {
+      this.data = el;
+      console.log(el);
+      
+    })
+    this.webs.emit("refreshGame");
+  }
+  data: any
+
+
 }

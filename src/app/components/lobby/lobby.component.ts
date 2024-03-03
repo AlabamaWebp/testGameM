@@ -19,10 +19,10 @@ export class LobbyComponent {
     this.webs.on("statusLobby", (e: any) => {
       this.data = e; console.log("s", e);
     })
-    this.webs.on("allReady", (e: any) => {
+    this.webs.on("allReady", () => {
       this.router.navigate(["game"])
     })
-    this.webs.emit("statusLobby", undefined);
+    this.webs.emit("statusLobby");
   }
   data: data | undefined;
   clickReady(d: boolean) {
