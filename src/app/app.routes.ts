@@ -11,6 +11,7 @@ export const routes: Routes = [
     {path: "home", loadComponent: () => HomeComponent},
     {path: "lobby", loadComponent: () => LobbyComponent},
     {path: "game", loadComponent: () => MunchkinComponent},
+    {path: "test", loadComponent: () => CardComponent},
     {path: "**", redirectTo: "start"}
 
 ];
