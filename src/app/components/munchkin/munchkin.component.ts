@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
+import { AbstractCard } from './card/card.component';
 
 @Component({
   selector: 'app-munchkin',
@@ -80,14 +81,6 @@ interface GameField {
   openCards?: (AbstractCard)[]
 
 }
-
-interface AbstractCard {
-  abstractData: AbstractData;
-  id: number;
-  strong?: number;
-  data?: TreasureData | MonsterData;
-}
-
 interface fieldTreasureCards {
   helmet?: AbstractCard[]
   body?: AbstractCard[]
@@ -98,24 +91,4 @@ interface fieldTreasureCards {
 interface fieldDoorCards {
   rasses?: AbstractCard[]
   classes?: AbstractCard[]
-}
-
-interface AbstractData {
-  name: string;
-  description: string;
-  cardType: "Класс" | "Раса" | "Проклятие" | "Монстр" | "Сокровище"
-  img?: string;
-}
-interface MonsterData {
-  lvl: number;
-  strongest: number;
-  gold: number;
-  undead: boolean;
-}
-interface TreasureData {
-  treasureType: "Надеваемая" | "Используемая" | "Боевая"
-  template?: "Шлем" | "Броник" | "Ноги" | "Рука"
-  | "2 Руки" | "3 Руки" | "Рядом" | undefined
-  cost?: number | undefined
-  big?: boolean | undefined
 }

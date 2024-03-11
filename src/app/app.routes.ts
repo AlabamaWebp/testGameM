@@ -3,8 +3,10 @@ import { NicknameComponent } from './components/nickname/nickname.component';
 import { HomeComponent } from './components/home/home.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { MunchkinComponent } from './components/munchkin/munchkin.component';
+import { CardComponent } from './components/munchkin/card/card.component';
 
 export const routes: Routes = [
+    {path: "test", loadComponent: () => CardComponent},
     {path: "start", loadComponent: () => NicknameComponent},
     {path: "home", loadComponent: () => HomeComponent},
     {path: "lobby", loadComponent: () => LobbyComponent},

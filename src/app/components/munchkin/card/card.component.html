@@ -1,1 +1,17 @@
-<p>card works!</p>
+
+@if (treasure) {
+    <div class="card treasure">
+        <div class="header">
+            <div class="name">
+                {{tCard.abstractData.name}}
+            </div>
+            <!-- <div class="desc">
+                {{tCard.abstractData.description}}
+            </div> -->
+        </div>
+
+        <div class="footer">
+            {{tCard.data.cost + "Сокровищ  " + tCard.data.big ? "Большая  " : "" + tCard.data.template}}
+        </div>
+    </div>
+}

@@ -10,5 +10,5 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(router: Router) {router.navigate(["start"])}
+  // constructor(router: Router) {router.navigate(["start"])} // Для теста
 }
