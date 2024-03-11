@@ -69,3 +69,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 .overflow {
     overflow: auto;
 }
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
