@@ -11,7 +11,7 @@ import io, { Socket } from 'socket.io-client';
 export class WebsocketService {
   private socket: Socket | undefined;
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private http: HttpClient, private router: Router) {
     router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.unsubscribe();
@@ -39,6 +39,10 @@ export class WebsocketService {
       // console.log(e);
       this.router.navigate(["start"])
     })
+    this.socket.on('goTo', (str: "home" | "game" | "lobby") => {
+      console.log(str);
+      this.router.navigate([str])
+    })
   }
   disconnect() {
     this.events.clear();
@@ -65,11 +69,11 @@ export class WebsocketService {
     this.events.forEach((el: string) => {
       this.socket?.off(el)
     })
-    this.events.clear();
+    // this.events.clear();
   }
 
   checkNickname(nickname: string) {
-    return this.http.post("http://localhost:3000/nickname", {nickname: nickname});
+    return this.http.post("http://localhost:3000/nickname", { nickname: nickname });
   }
 
 }
