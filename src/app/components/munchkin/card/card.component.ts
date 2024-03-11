@@ -19,6 +19,8 @@ export class CardComponent {
     data: {
       treasureType: "Надеваемая",
       template: "Рядом",
+      cost: 1200,
+      // big: true
     },
     strongest: 2
   }
@@ -33,6 +35,14 @@ export class CardComponent {
 
   }
   treasure: boolean = true;
+  podrobnee = false;
+
+  closeBackdrop(ev: MouseEvent) {
+    const el = ev.target as HTMLElement;
+    if (el.className.includes('backdrop')) {
+      this.podrobnee = false
+    }
+  }
 
 }
 

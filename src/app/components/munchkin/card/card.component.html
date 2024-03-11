@@ -1,18 +1,50 @@
-
 @if (treasure) {
-    <div class="card treasure">
+<div [class.backdrop]="podrobnee" (click)="closeBackdrop($event)">
+    <div class="card treasure" [class.bigcard]="podrobnee" (click)="podrobnee = true">
         <div class="header">
             <div class="name">
                 {{tCard.abstractData.name}}
             </div>
-            <div class="desc center">
+            @if (podrobnee) {
+            <div class="desc center mt">
                 {{tCard.abstractData.description}}
             </div>
+            }
         </div>
-
-
         <div class="footer">
-            {{tCard.data.cost + "Сокровищ  " + tCard.data.big ? "Большая  " : "" + tCard.data.template}}
+            @if (tCard.data.big) {
+            <span>
+                Большая
+            </span>
+            }
+            @if (tCard.data.cost) {
+            <span>
+                {{tCard.data.cost + " голды"}}
+            </span>
+            }
+            <span>
+                {{tCard.data.template}}
+            </span>
+        </div>
+    </div>
+</div>
+}
+@else {
+    <div [class.backdrop]="podrobnee" (click)="closeBackdrop($event)">
+        <div class="card treasure" [class.bigcard]="podrobnee" (click)="podrobnee = true">
+            <div class="header">
+                <div class="name">
+                    {{dCard.abstractData.name}}
+                </div>
+                @if (podrobnee) {
+                <div class="desc center mt">
+                    {{dCard.abstractData.description}}
+                </div>
+                }
+            </div>
+            <div class="footer">
+                
+            </div>
         </div>
     </div>
 }

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./app/styles/sbros.scss";
 @import "./app/styles/vars.scss";
+@import "./app/styles/animation.scss";
 // The "warn" palette is optional and defaults to red if not specified.
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
@@ -74,4 +75,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+.backdrop {
+    position: fixed;
+    top: 0;bottom: 0;right: 0;left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;justify-content: center;align-items: center;
+    z-index: 1;
+    cursor: crosshair;
+    animation: show .4s;
 }
