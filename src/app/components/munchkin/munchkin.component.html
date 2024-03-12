@@ -11,6 +11,10 @@
         
     </main>
     <footer class="footer">
-        
+        <div class="cards">
+            @for (item of data?.you?.cards; track $index) {
+                <app-card class="card" [data]="item"></app-card>
+            }
+        </div>
     </footer>
 </div>

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
-import { AbstractCard } from './card/card.component';
+import { AbstractCard, CardComponent } from './card/card.component';
 
 @Component({
   selector: 'app-munchkin',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './munchkin.component.html',
   styleUrl: './munchkin.component.scss'
 })
@@ -50,6 +50,7 @@ interface playerData {
   name: string,
   lvl: number,
   sex: "Мужчина" | "Женщина",
+  cards: AbstractCard[],
   t_field: {
     helmet: AbstractCard,
     body: AbstractCard,

@@ -8,44 +8,50 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-  @Input() data!: AbstractCard
 
-  tCard: TreasureCard = {
-    abstractData: {
-      name: "Коротышные латы",
-      description: "Только для дварфов",
-      cardType: "Сокровище"
-    },
-    data: {
-      treasureType: "Надеваемая",
-      template: "Рядом",
-      cost: 1200,
-      // big: true
-    },
-    strongest: 2
+  constructor() {
   }
-
-  dCard: DoorCard = {
-    abstractData: {
-      name: "3872 орка",
-      description: "+6 против дварфов (старые счёты)",
-      cardType: "Монстр"
-    },
-    data: {
-      lvl: 10,
-      gold: 3,
-      strongest: 10,
-      undead: false,
-    },
-  }
+  @Input() data!: AbstractCard | any
 
   ngOnInit() {
     if (this.data.abstractData.cardType == "Сокровище") {
       this.treasure = true;
-      // this.tCard = this.data;
+      this.tCard = this.data;
     }
-
+    else {
+      this.dCard = this.data;
+    }
   }
+  tCard: TreasureCard | undefined;
+  dCard: DoorCard | undefined;
+  // tCard: TreasureCard = {
+  //   abstractData: {
+  //     name: "Коротышные латы",
+  //     description: "Только для дварфов",
+  //     cardType: "Сокровище"
+  //   },
+  //   data: {
+  //     treasureType: "Надеваемая",
+  //     template: "Рядом",
+  //     cost: 1200,
+  //     // big: true
+  //   },
+  //   strongest: 2
+  // }
+
+  // dCard: DoorCard = {
+  //   abstractData: {
+  //     name: "3872 орка",
+  //     description: "+6 против дварфов (старые счёты)",
+  //     cardType: "Монстр"
+  //   },
+  //   data: {
+  //     lvl: 10,
+  //     gold: 3,
+  //     strongest: 10,
+  //     undead: false,
+  //   },
+  // }
   treasure: boolean = false;
   podrobnee = false;
 

@@ -4,3 +4,14 @@
         max-width: 50%;
     }
 }
+.footer {
+    display: flex;
+    justify-content: start;
+    .cards {
+        display: flex;
+        overflow: auto;
+        .card {
+            margin: 0 10px 0 0 ;
+        }
+    }
+}
