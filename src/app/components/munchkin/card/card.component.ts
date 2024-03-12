@@ -11,10 +11,10 @@ export class CardComponent {
 
   constructor() {
   }
-  @Input() data!: AbstractCard | any
-
+  @Input() data: AbstractCard | any = undefined
+  @Input() treasure: boolean = false;
   ngOnInit() {
-    if (this.data.abstractData.cardType == "Сокровище") {
+    if (this.data?.abstractData.cardType == "Сокровище") {
       this.treasure = true;
       this.tCard = this.data;
     }
@@ -52,7 +52,6 @@ export class CardComponent {
   //     undead: false,
   //   },
   // }
-  treasure: boolean = false;
   podrobnee = false;
 
   closeBackdrop(ev: MouseEvent) {

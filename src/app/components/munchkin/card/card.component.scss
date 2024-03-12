@@ -53,3 +53,11 @@
 .mt {
     margin-top: 10px;
 }
+.blank {
+    &.treasure {
+        background-color: #facd95;
+    }
+    &.door {
+        background-color: #fff1e3;
+    }
+}
