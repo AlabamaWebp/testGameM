@@ -1,0 +1,31 @@
+<div class="player" (click)="podrobnee = true">
+    <span>{{data.name}}</span>
+    <span>lvl: {{data.lvl}}</span>
+    <span>{{data.sex}}</span>
+    <span>Очередь: {{data.queue}}</span>
+</div>
+@if (podrobnee) {
+    <div class="backdrop" (click)="closeBackdrop($event)">
+        <div class="podrobnee">
+            <div class="flex">
+                <app-card></app-card>
+                <app-card></app-card>
+                <div class="stats player">
+                    <span>{{data.name}}</span>
+                    <span>lvl: {{data.lvl}}</span>
+                    <span>{{data.sex}}</span>
+                    <span>Очередь: {{data.queue}}</span>
+                </div>
+                <app-card></app-card>
+                <app-card></app-card>
+            </div>
+            <div class="flex">
+                <app-card [treasure]="true"></app-card>
+                <app-card [treasure]="true"></app-card>
+                <app-card [treasure]="true"></app-card>
+                <app-card [treasure]="true"></app-card>
+                <app-card [treasure]="true"></app-card>
+            </div>
+        </div>
+    </div>
+}

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
 import { AbstractCard, CardComponent } from './card/card.component';
+import { PlayerComponent } from './player/player.component';
 
 @Component({
   selector: 'app-munchkin',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, PlayerComponent],
   templateUrl: './munchkin.component.html',
   styleUrl: './munchkin.component.scss'
 })
@@ -25,7 +26,7 @@ export class MunchkinComponent {
     this.webs.emit("refreshGame");
     this.webs.emit("allLog");
   }
-  data: refreshGame | undefined
+  data!: refreshGame
   plog: string[] = []
 
 
@@ -46,7 +47,7 @@ interface refreshGame {
   you: playerData
 }
 
-interface playerData {
+export interface playerData {
   name: string,
   lvl: number,
   sex: "Мужчина" | "Женщина",

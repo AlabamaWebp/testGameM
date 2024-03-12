@@ -1,29 +1,38 @@
-<div class="wrapper">
-    <header class="header">
-        <div class="players">
-    
-        </div>
-        <div class="stats">
-
-        </div>
-    </header>
-    <main class="main">
-        <div class="left pereferia">
-            <app-card></app-card>
-            <app-card [treasure]="true"></app-card>
-        </div>
-        <div class="center">
-        </div>
-        <div class="right pereferia">
-            <app-card></app-card>
-            <app-card [treasure]="true"></app-card>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="cards">
-            @for (item of data?.you?.cards; track $index) {
-                <app-card class="card" [data]="item"></app-card>
-            }
-        </div>
-    </footer>
-</div>
+@if (data) {
+    <div class="wrapper">
+        <header class="header">
+            <div class="players">
+                @for (item of data.players; track $index) {
+                    <app-player [data]="item"></app-player>
+                }
+            </div>
+            <div class="stats">
+                <app-player [data]="data.you"></app-player>
+            </div>
+        </header>
+        <main class="main">
+            <div class="left pereferia">
+                <app-card></app-card>
+                <app-card [treasure]="true"></app-card>
+            </div>
+            <div class="center">
+            </div>
+            <div class="right pereferia">
+                <app-card></app-card>
+                <app-card [treasure]="true"></app-card>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="cards">
+                @for (item of data.you.cards; track $index) {
+                    <app-card class="card" [data]="item"></app-card>
+                }
+            </div>
+        </footer>
+    </div>
+}
+@else {
+    <div class="backdrop">
+        <span style="color: white;">Загрузка...</span>
+    </div>
+}

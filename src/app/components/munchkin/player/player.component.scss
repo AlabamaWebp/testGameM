@@ -1,0 +1,35 @@
+.player {
+    border-radius: 10px;
+    background-color: #dfc0a4;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 90px;
+    cursor: pointer;
+
+    span {
+        text-align: center;
+    }
+}
+
+.podrobnee {
+    display: flex;
+    flex-direction: column;
+    background-color: #dfc0a4;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: default;
+
+    app-card,
+    .stats {
+        margin: 10px;
+    }
+
+    .stats {
+        width: 140px;
+        height: 190px;
+        cursor: default;
+        font-size: 20px;
+        line-height: 32px;
+    }
+}
