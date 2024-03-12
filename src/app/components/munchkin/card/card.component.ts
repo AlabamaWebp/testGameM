@@ -25,16 +25,28 @@ export class CardComponent {
     strongest: 2
   }
 
-  dCard!: DoorCard
+  dCard: DoorCard = {
+    abstractData: {
+      name: "3872 орка",
+      description: "+6 против дварфов (старые счёты)",
+      cardType: "Монстр"
+    },
+    data: {
+      lvl: 10,
+      gold: 3,
+      strongest: 10,
+      undead: false,
+    },
+  }
 
   ngOnInit() {
-    if (this.data.abstractData.cardType == "Сокровище"){
+    if (this.data.abstractData.cardType == "Сокровище") {
       this.treasure = true;
       // this.tCard = this.data;
     }
 
   }
-  treasure: boolean = true;
+  treasure: boolean = false;
   podrobnee = false;
 
   closeBackdrop(ev: MouseEvent) {
