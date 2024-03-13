@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .card {
     height: 190px;
     width: 140px;
@@ -45,19 +47,21 @@
 }
 
 .treasure {
-    background-color: #facd95;
+    background-color: $treasure;
+    // background-color: #facd95;
 }
 .door {
-    background-color: #fff1e3;
+    background-color: $door;
+    // background-color: #fff1e3;
 }
 .mt {
     margin-top: 10px;
 }
-.blank {
-    &.treasure {
-        background-color: #facd95;
-    }
-    &.door {
-        background-color: #fff1e3;
-    }
-}
+// .blank {
+//     &.treasure {
+//         background-color: $treasure;
+//     }
+//     &.door {
+//         background-color: $door;
+//     }
+// }

@@ -13,12 +13,54 @@
         <main class="main">
             <div class="left pereferia">
                 <app-card></app-card>
+                <span>Колода</span>
                 <app-card [treasure]="true"></app-card>
             </div>
             <div class="center">
+                <div class="field">
+                    @if (data.field.fight && data.field.is_fight) {
+                        <div class="monsters">
+                            <span>
+                                Сила стороны: {{data.field.fight.monsterStrongest}}
+                                На кону: {{data.field.fight.gold}} Сокровищ, {{data.field.fight.lvls}} Уровней
+                            </span>
+                            <div class="osn">
+                                @for (item of data.field.fight.monsters; track $index) {
+                                    <app-card [data]="item"></app-card>
+                                }
+                            </div>
+                        </div>
+                        <div class="players">
+                            <span>
+                                Сила стороны: {{data.field.fight.players.strongest}}
+                            </span>
+                            <div class="osn">
+                                <app-player [data]="data.field.fight.players.main"></app-player>
+                                @if (data.field.fight.players.secondary) 
+                                {<app-player [data]="data.field.fight.players.secondary"></app-player>}
+                            </div>
+                            
+                        </div>
+                    }
+                    @else {
+                        <div class="cards">
+                            @for (item of data.field.openCards; track $index) {
+                                <app-card [data]="item"></app-card>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="log">
+                    @for (item of plog; track $index) {
+                        <span>
+                            {{plog}}
+                        </span>
+                    }
+                </div>
             </div>
             <div class="right pereferia">
                 <app-card></app-card>
+                <span>Сброс</span>
                 <app-card [treasure]="true"></app-card>
             </div>
         </main>

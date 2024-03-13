@@ -67,18 +67,23 @@ export interface playerData {
 }
 
 interface GameField {
+  is_fight: boolean
   fight?: {
       players: {
           main: playerData,
-          secondary?: playerData
+          secondary?: playerData,
+          strongest: number ///
       }
       cards?: {
           players?: AbstractCard[],
           monsters?: AbstractCard[],
       }
       monsters: AbstractCard[]
-      monstersProto: AbstractCard[]
+      monsterStrongest: number ///
+      // monstersProto: AbstractCard[]
       gold: number
+      lvls: number ///
+
   }
   openCards?: (AbstractCard)[]
 

@@ -46,9 +46,13 @@
                     <p>Андед</p>
                     }
                     @if (dCard?.data) {
-                    {{dCard?.data?.strongest}} Силы
+                        <p>
+                            {{dCard?.data?.lvl}} Уровень
+                        </p>
                     }
-                    {{dCard?.abstractData?.name}}
+                    <p>
+                        {{dCard?.abstractData?.name}}
+                    </p>
                 </div>
                 @if (podrobnee) {
                 <div class="desc center mt">

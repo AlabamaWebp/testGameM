@@ -1,3 +1,4 @@
+@import "../../../styles/vars.scss";
 .player {
     border-radius: 10px;
     background-color: #dfc0a4;
@@ -19,7 +20,7 @@
     border-radius: 10px;
     padding: 10px;
     cursor: default;
-
+    border: 5px solid $cardBorder;
     app-card,
     .stats {
         margin: 10px;

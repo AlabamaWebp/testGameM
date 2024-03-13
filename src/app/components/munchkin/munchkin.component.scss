@@ -1,3 +1,4 @@
+@import "../../styles/vars.scss";
 .header {
     justify-content: space-between;
     .players {
@@ -17,6 +18,8 @@
     width: 100%;
     .cards {
         display: flex;
+        justify-content: center;
+        width: 100%;
         overflow: auto;
         .card {
             margin: 0 10px 0 0 ;
@@ -28,9 +31,46 @@
     width: 100%;
     .center {
         flex: 1 1 auto;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        .field {
+            flex: 1 1 auto;
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            // background-color: $door;
+            .monsters {
+                width: 100%;
+            }
+            .players {
+                width: 100%;
+            }
+        }
+        .log {
+            flex: 0 0 300px;
+            // width: 300px;
+            height: 100%;
+            padding: 10px;
+            border-left: 3px white solid;
+            overflow: auto;
+            span {
+                background-color: $treasure;
+                // color: white;
+                border-radius: 10px;
+                padding: 6px 10px;
+                margin: 0 0 5px;
+            }
+        }
     }
     .pereferia {
         flex: 0 0 150px;
         padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        justify-content: space-around;
     }
 }
