@@ -80,7 +80,7 @@ interface AbstractData {
   img?: string;
 }
 interface MonsterData {
-  lvl: number;
+  get_lvls: number;
   strongest: number;
   gold: number;
   undead: boolean;

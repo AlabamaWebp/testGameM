@@ -47,7 +47,7 @@
                     }
                     @if (dCard?.data) {
                         <p>
-                            {{dCard?.data?.lvl}} Уровень
+                            {{dCard?.data?.get_lvls}} Уровень
                         </p>
                     }
                     <p>
@@ -66,7 +66,7 @@
                     {{dCard?.data?.gold}} клад
                 </span>
                 <span>
-                    {{dCard?.data?.lvl}} lvl
+                    {{dCard?.data?.get_lvls}} lvl
                 </span>
                 }
                 @else {

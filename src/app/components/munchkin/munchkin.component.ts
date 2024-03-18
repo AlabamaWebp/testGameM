@@ -63,7 +63,8 @@ export interface playerData {
     rasses: AbstractCard,
     classes: AbstractCard,
   },
-  queue: number
+  queue: number,
+  max_cards: number
 }
 
 interface GameField {
