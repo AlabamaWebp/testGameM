@@ -1,87 +1,99 @@
 @if (data) {
-    @if (treasure) {
-    <div [class.backdrop]="podrobnee" (click)="closeBackdrop($event)">
-        <div class="card treasure" [class.bigcard]="podrobnee" (click)="podrobnee = true">
-            <div class="header">
-                <div class="name">
-                    {{tCard?.abstractData?.name}}
-                </div>
-                @if (podrobnee) {
-                <div class="desc center mt">
-                    {{tCard?.abstractData?.description}}
-                </div>
-                }
+@if (treasure && tCard) {
+<div [class.backdrop]="podrobnee" (click)="closeBackdrop($event)">
+    <div class="card treasure" [class.bigcard]="podrobnee" (click)="podrobnee = true">
+        <div class="header">
+            <div class="name">
+                {{tCard.abstractData.name}}
             </div>
-            <div class="footer">
-                @if (tCard?.data?.big) {
-                <span>
-                    Большая
-                </span>
-                }
-                @if (tCard?.data?.cost) {
-                <span>
-                    {{tCard?.data?.cost + " голды"}}
-                </span>
-                }
-                @if (tCard?.data?.template) {
-                <span>
-                    {{tCard?.data?.template}}
-                </span>
-                }
-                @if (tCard?.data?.treasureType != "Надеваемая") {
-                <span>
-                    {{tCard?.data?.treasureType}}
-                </span>
-                }
+            @if (podrobnee) {
+            <div class="desc center mt">
+                {{tCard.abstractData.description}}
             </div>
+            }
+        </div>
+        @if (podrobnee) {
+            <div class="center">
+                <button mat-button (click)="useCard(tCard.id)">
+                    Использовать
+                </button>
+            </div>
+        }
+        <div class="footer">
+            @if (tCard.data.big) {
+            <span>
+                Большая
+            </span>
+            }
+            @if (tCard.data.cost) {
+            <span>
+                {{tCard.data.cost + " голды"}}
+            </span>
+            }
+            @if (tCard.data.template) {
+            <span>
+                {{tCard.data.template}}
+            </span>
+            }
+            @if (tCard.data.treasureType != "Надеваемая") {
+            <span>
+                {{tCard.data.treasureType}}
+            </span>
+            }
         </div>
     </div>
-    }
-    @else {
-    <div [class.backdrop]="podrobnee" (click)="closeBackdrop($event)">
-        <div class="card door" [class.bigcard]="podrobnee" (click)="podrobnee = true">
-            <div class="header">
-                <div class="name">
-                    @if (dCard?.data?.undead) {
-                    <p>Андед</p>
-                    }
-                    @if (dCard?.data) {
-                        <p>
-                            {{dCard?.data?.get_lvls}} Уровень
-                        </p>
-                    }
-                    <p>
-                        {{dCard?.abstractData?.name}}
-                    </p>
-                </div>
-                @if (podrobnee) {
-                <div class="desc center mt">
-                    {{dCard?.abstractData?.description}}
-                </div>
+</div>
+}
+@else if (dCard){
+<div [class.backdrop]="podrobnee" (click)="closeBackdrop($event)">
+    <div class="card door" [class.bigcard]="podrobnee" (click)="podrobnee = true">
+        <div class="header">
+            <div class="name">
+                @if (dCard.data?.undead) {
+                <p>Андед</p>
                 }
+                @if (dCard.data) {
+                <p>
+                    {{dCard.data.get_lvls}} Уровень
+                </p>
+                }
+                <p>
+                    {{dCard.abstractData.name}}
+                </p>
             </div>
-            <div class="footer">
-                @if (dCard?.abstractData?.cardType == "Монстр") {
-                <span>
-                    {{dCard?.data?.gold}} клад
-                </span>
-                <span>
-                    {{dCard?.data?.get_lvls}} lvl
-                </span>
-                }
-                @else {
-                <span>{{dCard?.abstractData?.cardType}}</span>
-                }
+            @if (podrobnee) {
+            <div class="desc center mt">
+                {{dCard.abstractData.description}}
+            </div>
+            }
+        </div>
+        <div class="center">
+            <div class="button" (click)="useCard(dCard.id)">
+                Использовать
             </div>
         </div>
+        <div class="footer">
+            @if (dCard.abstractData.cardType == "Монстр" && dCard.data) {
+            <span>
+                {{dCard.data.gold}} клад
+            </span>
+            <span>
+                {{dCard.data.get_lvls}} lvl
+            </span>
+            }
+            @else {
+            <span>{{dCard.abstractData.cardType}}</span>
+            }
+        </div>
     </div>
-    }
+</div>
+}
 }
 @else {
-    @if (treasure) {
-        <div class="card treasure blank"></div>
-    }
-    @else {
-        <div class="card door blank"></div>
-    }
+@if (treasure) {
+<div class="card treasure blank"></div>
+}
+@else {
+<div class="card door blank"></div>
+}
 }

@@ -29,6 +29,9 @@ export class MunchkinComponent {
   data!: refreshGame
   plog: string[] = []
 
+  useCard(id: number) {
+    this.webs.emit("useCard", id);
+  }
 
 }
 

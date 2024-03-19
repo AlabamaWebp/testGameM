@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [],
+  imports: [MatButton],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
@@ -13,6 +14,12 @@ export class CardComponent {
   }
   @Input() data: AbstractCard | any = undefined
   @Input() treasure: boolean = false;
+
+  @Output() use_card = new EventEmitter();
+
+  useCard(id: number) {
+    this.use_card.emit(id)
+  }
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
       this.treasure = true;
@@ -67,10 +74,12 @@ interface TreasureCard {
   abstractData: AbstractData,
   strongest: number,
   data: TreasureData,
+  id: number
 }
 interface DoorCard {
   abstractData: AbstractData,
-  data: MonsterData,
+  data?: MonsterData,
+  id: number
 }
 
 interface AbstractData {
@@ -83,7 +92,7 @@ interface MonsterData {
   get_lvls: number;
   strongest: number;
   gold: number;
-  undead: boolean;
+  undead?: boolean;
 }
 interface TreasureData {
   treasureType: "Надеваемая" | "Используемая" | "Боевая"
