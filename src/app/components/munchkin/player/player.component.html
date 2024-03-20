@@ -9,8 +9,8 @@
         <div class="backdrop" (click)="closeBackdrop($event)">
             <div class="podrobnee">
                 <div class="flex">
-                    <app-card></app-card>
-                    <app-card></app-card>
+                    <app-card [data]="data.d_field.rasses[0]"></app-card>
+                    <app-card [data]="data.d_field.rasses[1]"></app-card>
                     <div class="stats player">
                         <span>{{data.name}}</span>
                         <span>lvl: {{data.lvl}}</span>
@@ -18,15 +18,15 @@
                         <span>{{data.sex}}</span>
                         <span>Очередь: {{data.queue}}</span>
                     </div>
-                    <app-card></app-card>
-                    <app-card></app-card>
+                    <app-card [data]="data.d_field.classes[0]"></app-card>
+                    <app-card [data]="data.d_field.classes[1]"></app-card>
                 </div>
                 <div class="flex">
-                    <app-card [treasure]="true"></app-card>
-                    <app-card [treasure]="true"></app-card>
-                    <app-card [treasure]="true"></app-card>
-                    <app-card [treasure]="true"></app-card>
-                    <app-card [treasure]="true"></app-card>
+                    <app-card [data]="data.t_field.helmet[0]" [treasure]="true"></app-card>
+                    <app-card [data]="data.t_field.body[0]" [treasure]="true"></app-card>
+                    <app-card [data]="data.t_field.legs[0]" [treasure]="true"></app-card>
+                    <app-card [data]="data.t_field.arm[0]" [treasure]="true"></app-card>
+                    <app-card [data]="data.t_field.other[0]" [treasure]="true"></app-card>
                 </div>
             </div>
         </div>
