@@ -39,6 +39,8 @@ export class NicknameComponent {
         console.log(el);
         this.control.setErrors({"incorrect": true})
       }
+    },
+    (err) => {console.log(err);
     })
     // this.webs.emit("setName", this.control.value);
   }

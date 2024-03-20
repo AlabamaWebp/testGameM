@@ -14,6 +14,7 @@ export class CardComponent {
   }
   @Input() data: AbstractCard | any = undefined
   @Input() treasure: boolean = false;
+  @Input() can_use: boolean = false;
 
   @Output() use_card = new EventEmitter();
 

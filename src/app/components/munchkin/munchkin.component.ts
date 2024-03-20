@@ -18,15 +18,22 @@ export class MunchkinComponent {
 
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => { 
-      this.data = el; console.log(el);
+      this.data = undefined;
+      setTimeout(() => {
+        this.data = el; 
+      }, 1);
+      console.log(el);
     })
+
+    this.webs.on("error", (el: any) => { console.log("Ошибка", el); })
+
     this.webs.on("allLog", (el: any) => { this.plog = el; })
     this.webs.on("plusLog", (el: any) => { this.plog.push(el); })
 
     this.webs.emit("refreshGame");
     this.webs.emit("allLog");
   }
-  data!: refreshGame
+  data: refreshGame | undefined
   plog: string[] = []
 
   useCard(id: number) {

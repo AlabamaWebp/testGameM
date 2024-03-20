@@ -40,7 +40,6 @@ export class WebsocketService {
       this.router.navigate(["start"])
     })
     this.socket.on('goTo', (str: "home" | "game" | "lobby") => {
-      console.log(str);
       this.router.navigate([str])
     })
   }

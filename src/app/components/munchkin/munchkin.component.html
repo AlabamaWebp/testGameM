@@ -67,7 +67,7 @@
         <footer class="footer">
             <div class="cards">
                 @for (item of data.you.cards; track $index) {
-                    <app-card class="card" [data]="item" (use_card)="useCard($event)"></app-card>
+                    <app-card class="card" [data]="item" (use_card)="useCard($event)" [can_use]="true"></app-card>
                 }
             </div>
         </footer>

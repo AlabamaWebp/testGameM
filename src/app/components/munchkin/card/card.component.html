@@ -12,7 +12,7 @@
             </div>
             }
         </div>
-        @if (podrobnee) {
+        @if (can_use && podrobnee) {
             <div class="center">
                 <button mat-button (click)="useCard(tCard.id)">
                     Использовать
@@ -67,11 +67,13 @@
             </div>
             }
         </div>
-        <div class="center">
-            <div class="button" (click)="useCard(dCard.id)">
-                Использовать
+        @if (can_use && podrobnee) {
+            <div class="center">
+                <button mat-button (click)="useCard(dCard.id)">
+                    Использовать
+                </button>
             </div>
-        </div>
+        }
         <div class="footer">
             @if (dCard.abstractData.cardType == "Монстр" && dCard.data) {
             <span>

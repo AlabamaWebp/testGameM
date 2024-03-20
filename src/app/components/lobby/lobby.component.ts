@@ -17,7 +17,7 @@ export class LobbyComponent {
   }
   ngOnInit() {
     this.webs.on("statusLobby", (e: any) => {
-      this.data = e; console.log("s", e);
+      this.data = e;
     })
     this.webs.on("allReady", () => {
       this.router.navigate(["game"])
