@@ -67,7 +67,8 @@ export interface playerData {
     classes: AbstractCard,
   },
   queue: number,
-  max_cards: number
+  max_cards: number,
+  power: number
 }
 
 interface GameField {
