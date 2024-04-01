@@ -85,3 +85,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     cursor: crosshair;
     animation: show .4s;
 }
+.r {
+    position: relative;
+}
+.z2 {
+    z-index: 2;
+}
