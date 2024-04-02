@@ -27,7 +27,7 @@
                         <app-card [data]="data.d_field.rasses[2]" class="pozadi"></app-card>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex treasures">
                     <div class="r m15">
                         <span>Шлем</span>
                         @for (item of data.t_field.helmet; track $index) {
@@ -61,7 +61,9 @@
                         @for (item of data.t_field.other; track $index) {
                             <app-card [data]="item" [treasure]="true"></app-card>
                         }
-                        @empty {<app-card [treasure]="true"></app-card>}
+                        @empty {
+                            <app-card [treasure]="true"></app-card>
+                        }
                     </div>
                 </div>
             </div>

@@ -22,7 +22,9 @@
     padding: 10px;
     cursor: default;
     border: 5px solid $cardBorder;
-
+    max-width: 95%;
+    max-height: 95%;
+    overflow: auto;
     app-card,
     .stats {
         margin: 10px 15px;
@@ -56,5 +58,14 @@
     }
     app-card {
         margin: 0;
+    }
+}
+.treasures {
+    .r {
+        display: flex;
+        flex-direction: column;
+    }
+    app-card {
+        margin-bottom: 5px;
     }
 }
