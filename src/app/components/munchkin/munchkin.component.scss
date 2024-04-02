@@ -55,12 +55,17 @@
             padding: 10px;
             border-left: 3px white solid;
             overflow: auto;
-            span {
+            div {
                 background-color: $treasure;
                 // color: white;
                 border-radius: 10px;
                 padding: 6px 10px;
                 margin: 0 0 5px;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                text-align: center;
+                justify-content: center;
             }
         }
     }
