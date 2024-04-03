@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
+import { WebsocketService } from './services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,12 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   // constructor(router: Router) {router.navigate(["start"])} // Для теста
+  constructor(
+    // router: Router,
+    // private webs: WebsocketService
+  ) {
+
+    // router.navigate(["start"])
+  }
+
 }

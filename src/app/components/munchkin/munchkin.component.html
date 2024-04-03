@@ -1,5 +1,11 @@
 @if (data) {
     <div class="wrapper">
+        @if (condition) {
+            <div class="condition" (click)="condition = undefined">
+                {{condition}}
+                <!-- <mat-icon (click)="condition = undefined">clear</mat-icon> -->
+            </div>
+        }
         <header class="header">
             <div class="players">
                 @for (item of data.players; track $index) {

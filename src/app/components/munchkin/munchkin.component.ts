@@ -3,6 +3,7 @@ import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
 import { AbstractCard, CardComponent } from './card/card.component';
 import { PlayerComponent } from './player/player.component';
+// import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-munchkin',
@@ -17,15 +18,21 @@ export class MunchkinComponent {
   }
 
   ngOnInit() {
-    this.webs.on("refreshGame", (el: any) => { 
+    this.webs.on("refreshGame", (el: any) => {
       this.data = undefined;
       setTimeout(() => {
-        this.data = el; 
+        this.data = el;
       }, 1);
       console.log(el);
     })
 
-    this.webs.on("error", (el: any) => { console.log("Ошибка", el); })
+    this.webs.on("condition", (el: any) => {
+      clearTimeout(this.cond_timer);
+      this.condition = el;
+      this.cond_timer = setTimeout(() => {
+        this.condition = undefined
+      }, 5000);
+    })
 
     this.webs.on("allLog", (el: any) => { this.plog = el; })
     this.webs.on("plusLog", (el: any) => { this.plog.push(el); })
@@ -33,8 +40,10 @@ export class MunchkinComponent {
     this.webs.emit("refreshGame");
     this.webs.emit("allLog");
   }
-  data: refreshGame | undefined
-  plog: string[] = []
+  cond_timer: any;
+  condition: string | undefined;
+  data: refreshGame | undefined;
+  plog: string[] = [];
 
   useCard(id: number) {
     this.webs.emit("useCard", id);
@@ -44,13 +53,13 @@ export class MunchkinComponent {
 
 interface refreshGame {
   queue: string,
-  step:  0 | 1 | 2 | 3,
+  step: 0 | 1 | 2 | 3,
   // is_fight: this.is_fight,
   field: GameField,
   sbros:
   {
-      doors: AbstractCard,
-      treasures: AbstractCard
+    doors: AbstractCard,
+    treasures: AbstractCard
   },
   // log: this.log,
   players: playerData[],
@@ -68,7 +77,7 @@ export interface playerData {
     legs: AbstractCard[],
     arm: AbstractCard[],
     other: AbstractCard[],
-  }, 
+  },
   d_field: {
     rasses: AbstractCard[],
     classes: AbstractCard[],
@@ -81,20 +90,20 @@ export interface playerData {
 interface GameField {
   is_fight: boolean
   fight?: {
-      players: {
-          main: playerData,
-          secondary?: playerData,
-          strongest: number ///
-      }
-      cards?: {
-          players?: AbstractCard[],
-          monsters?: AbstractCard[],
-      }
-      monsters: AbstractCard[]
-      monsterStrongest: number ///
-      // monstersProto: AbstractCard[]
-      gold: number
-      lvls: number ///
+    players: {
+      main: playerData,
+      secondary?: playerData,
+      strongest: number ///
+    }
+    cards?: {
+      players?: AbstractCard[],
+      monsters?: AbstractCard[],
+    }
+    monsters: AbstractCard[]
+    monsterStrongest: number ///
+    // monstersProto: AbstractCard[]
+    gold: number
+    lvls: number ///
 
   }
   openCards?: (AbstractCard)[]
