@@ -13,32 +13,34 @@
             }
         </div>
         @if (can_use && podrobnee) {
-            <div class="center">
-                <button mat-button (click)="useCard(tCard.id)">
-                    Использовать
-                </button>
-            </div>
+        <div class="center">
+            <button mat-button (click)="useCard(tCard.id)">
+                Использовать
+            </button>
+        </div>
         }
         <div class="footer">
-            @if (tCard.data.big) {
-            <span>
-                Большая
-            </span>
-            }
-            @if (tCard.data.cost) {
-            <span>
-                {{tCard.data.cost + " голды"}}
-            </span>
-            }
-            @if (tCard.data.template) {
-            <span>
-                {{tCard.data.template}}
-            </span>
-            }
-            @if (tCard.data.treasureType != "Надеваемая") {
-            <span>
-                {{tCard.data.treasureType}}
-            </span>
+            @if (tCard.data) {
+                @if (tCard.data.big) {
+                <span>
+                    Большая
+                </span>
+                }
+                @if (tCard.data.cost) {
+                <span>
+                    {{tCard.data.cost + " голды"}}
+                </span>
+                }
+                @if (tCard.data.template) {
+                <span>
+                    {{tCard.data.template}}
+                </span>
+                }
+                @if (tCard.data.treasureType != "Надеваемая") {
+                <span>
+                    {{tCard.data.treasureType}}
+                </span>
+                }
             }
         </div>
     </div>
@@ -68,11 +70,11 @@
             }
         </div>
         @if (can_use && podrobnee) {
-            <div class="center">
-                <button mat-button (click)="useCard(dCard.id)">
-                    Использовать
-                </button>
-            </div>
+        <div class="center">
+            <button mat-button (click)="useCard(dCard.id)">
+                Использовать
+            </button>
+        </div>
         }
         <div class="footer">
             @if (dCard.abstractData.cardType == "Монстр" && dCard.data) {

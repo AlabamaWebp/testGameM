@@ -45,9 +45,16 @@ export class MunchkinComponent {
   data: refreshGame | undefined;
   plog: string[] = [];
 
+  is_mesto_card = false;
+
   useCard(id: number) {
     this.webs.emit("useCard", id);
   }
+  useCardMesto(body: number) {
+    this.dataMesto = body;
+  }
+  dataMesto: number | undefined;
+
 
 }
 
@@ -75,12 +82,20 @@ export interface playerData {
     helmet: AbstractCard[],
     body: AbstractCard[],
     legs: AbstractCard[],
-    arm: AbstractCard[],
+    arm: [],
     other: AbstractCard[],
   },
   d_field: {
-    rasses: AbstractCard[],
-    classes: AbstractCard[],
+    rasses: {
+      first: AbstractCard,
+      second: AbstractCard,
+      bonus: AbstractCard,
+    }
+    classes: {
+      first: AbstractCard,
+      second: AbstractCard,
+      bonus: AbstractCard,
+    }
   },
   queue: number,
   max_cards: number,

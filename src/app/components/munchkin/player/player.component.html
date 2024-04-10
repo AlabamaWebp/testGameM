@@ -10,9 +10,9 @@
             <div class="podrobnee">
                 <div class="flex">
                     <div class="flex r">
-                        <app-card [data]="data.d_field.rasses[0]" class="z2"></app-card>
-                        <app-card [data]="data.d_field.rasses[1]" class="z2"></app-card>
-                        <app-card [data]="data.d_field.rasses[2]" class="pozadi"></app-card>
+                        <app-card [data]="data.d_field.rasses.first" (click)="useCardMesto('first')" class="z2"></app-card>
+                        <app-card [data]="data.d_field.rasses.second" (click)="useCardMesto('second')" class="z2"></app-card>
+                        <app-card [data]="data.d_field.rasses.bonus" (click)="useCardMesto('bonus')" class="pozadi"></app-card>
                     </div>
                     <div class="stats player">
                         <span>{{data.name}}</span>
@@ -22,9 +22,9 @@
                         <span>Очередь: {{data.queue}}</span>
                     </div>
                     <div class="flex r">
-                        <app-card [data]="data.d_field.classes[0]" class="z2"></app-card>
-                        <app-card [data]="data.d_field.classes[1]" class="z2"></app-card>
-                        <app-card [data]="data.d_field.rasses[2]" class="pozadi"></app-card>
+                        <app-card (click)="useCardMesto('first')" [data]="data.d_field.classes.first" class="z2"></app-card>
+                        <app-card (click)="useCardMesto('second')" [data]="data.d_field.classes.second" class="z2"></app-card>
+                        <app-card (click)="useCardMesto('bonus')" [data]="data.d_field.rasses.bonus" class="pozadi"></app-card>
                     </div>
                 </div>
                 <div class="flex treasures">

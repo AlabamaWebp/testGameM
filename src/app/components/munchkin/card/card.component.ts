@@ -16,10 +16,17 @@ export class CardComponent {
   @Input() treasure: boolean = false;
   @Input() can_use: boolean = false;
 
-  @Output() use_card = new EventEmitter();
+  @Output() use_mesto = new EventEmitter<number>();
+  @Output() use_card = new EventEmitter<number>();
 
   useCard(id: number) {
-    this.use_card.emit(id)
+    if (this.is_mesto && !this.treasure) {
+      this.use_mesto.emit(id);
+      this.podrobnee = false;
+    }
+    else {
+      this.use_card.emit(id)
+    }
   }
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
@@ -27,39 +34,20 @@ export class CardComponent {
       this.tCard = this.data;
     }
     else {
+      if (
+        this.data?.abstractData.cardType == "Класс"
+        || this.data?.abstractData.cardType == "Раса"
+      )
+        this.is_mesto = true;
       this.dCard = this.data;
     }
   }
+
+  is_mesto = false;
+
   tCard: TreasureCard | undefined;
   dCard: DoorCard | undefined;
-  // tCard: TreasureCard = {
-  //   abstractData: {
-  //     name: "Коротышные латы",
-  //     description: "Только для дварфов",
-  //     cardType: "Сокровище"
-  //   },
-  //   data: {
-  //     treasureType: "Надеваемая",
-  //     template: "Рядом",
-  //     cost: 1200,
-  //     // big: true
-  //   },
-  //   strongest: 2
-  // }
 
-  // dCard: DoorCard = {
-  //   abstractData: {
-  //     name: "3872 орка",
-  //     description: "+6 против дварфов (старые счёты)",
-  //     cardType: "Монстр"
-  //   },
-  //   data: {
-  //     lvl: 10,
-  //     gold: 3,
-  //     strongest: 10,
-  //     undead: false,
-  //   },
-  // }
   podrobnee = false;
 
   closeBackdrop(ev: MouseEvent) {
@@ -70,6 +58,7 @@ export class CardComponent {
   }
 
 }
+
 
 interface TreasureCard {
   abstractData: AbstractData,
@@ -111,3 +100,33 @@ export interface AbstractCard {
   strong?: number;
   data?: TreasureData | MonsterData;
 }
+
+
+// tCard: TreasureCard = {
+//   abstractData: {
+//     name: "Коротышные латы",
+//     description: "Только для дварфов",
+//     cardType: "Сокровище"
+//   },
+//   data: {
+//     treasureType: "Надеваемая",
+//     template: "Рядом",
+//     cost: 1200,
+//     // big: true
+//   },
+//   strongest: 2
+// }
+
+// dCard: DoorCard = {
+//   abstractData: {
+//     name: "3872 орка",
+//     description: "+6 против дварфов (старые счёты)",
+//     cardType: "Монстр"
+//   },
+//   data: {
+//     lvl: 10,
+//     gold: 3,
+//     strongest: 10,
+//     undead: false,
+//   },
+// }

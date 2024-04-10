@@ -13,11 +13,11 @@ import { WebsocketService } from './services/websocket.service';
 export class AppComponent {
   // constructor(router: Router) {router.navigate(["start"])} // Для теста
   constructor(
-    // router: Router,
+    router: Router,
     // private webs: WebsocketService
   ) {
 
-    // router.navigate(["start"])
+    router.navigate(["start"])
   }
 
 }
