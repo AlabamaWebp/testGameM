@@ -22,7 +22,9 @@ export class CardComponent {
   useCard(id: number) {
     if (this.is_mesto && !this.treasure) {
       this.use_mesto.emit(id);
-      this.podrobnee = false;
+      setTimeout(() => {
+        this.podrobnee = false;
+      }, 1);
     }
     else {
       this.use_card.emit(id)

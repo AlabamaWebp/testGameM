@@ -13,7 +13,7 @@
             }
         </div>
         <div class="stats">
-            <app-player [data]="data.you" [dataMesto]="dataMesto"></app-player>
+            <app-player [data]="data.you" [dataMesto]="dataMesto" (close)="closeYou()"></app-player>
         </div>
     </header>
     <main class="main">

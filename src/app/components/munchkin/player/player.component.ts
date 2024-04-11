@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { playerData } from '../munchkin.component';
 import { CardComponent } from '../card/card.component';
- import { WebsocketService } from '../../../services/websocket.service';
+import { WebsocketService } from '../../../services/websocket.service';
 
 @Component({
   selector: 'app-player',
@@ -15,14 +15,20 @@ export class PlayerComponent implements OnChanges {
   @Input() podrobnee = false;
   @Input() dataMesto: number | undefined;
   @Output() template = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   constructor(private webs: WebsocketService,) { }
 
   closeBackdrop(ev: MouseEvent) {
     const el = ev.target as HTMLElement;
     if (el.className.includes('backdrop')) {
-      this.podrobnee = false
+      this.closePodrobnee();
     }
+  }
+
+  closePodrobnee() {
+    this.podrobnee = false;
+    this.close.emit();
   }
 
   clickTemplate(s: string) {
@@ -34,14 +40,12 @@ export class PlayerComponent implements OnChanges {
       mesto: mesto,
     }
     this.webs.emit("useCardMesto", body);
-    console.log(mesto);
-    this.podrobnee = false;
-    this.dataMesto = undefined;
+    this.closePodrobnee();
   }
   ngOnChanges(d: SimpleChanges) {
+    console.log(d);
     if (d['dataMesto']?.currentValue) {
       this.podrobnee = true;
-      console.log(d['dataMesto']);
     }
   }
 }

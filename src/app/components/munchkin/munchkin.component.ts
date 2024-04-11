@@ -54,7 +54,9 @@ export class MunchkinComponent {
     this.dataMesto = body;
   }
   dataMesto: number | undefined;
-
+  closeYou() {
+    this.dataMesto = undefined;
+  }
 
 }
 
