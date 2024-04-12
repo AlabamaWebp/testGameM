@@ -16,12 +16,16 @@ export class CardComponent {
   @Input() treasure: boolean = false;
   @Input() can_use: boolean = false;
 
-  @Output() use_mesto = new EventEmitter<number>();
+  @Output() use_mesto = new EventEmitter<toPlayer>();
   @Output() use_card = new EventEmitter<number>();
 
   useCard(id: number) {
     if (this.is_mesto && !this.treasure) {
-      this.use_mesto.emit(id);
+      const tmp: toPlayer = {
+        id: id,
+        type: this.data.abstractData.cardType
+      }
+      this.use_mesto.emit(tmp);
       setTimeout(() => {
         this.podrobnee = false;
       }, 1);
@@ -61,7 +65,10 @@ export class CardComponent {
 
 }
 
-
+export interface toPlayer {
+  id: number,
+  type: "Класс" | "Раса"
+}
 interface TreasureCard {
   abstractData: AbstractData,
   strongest: number,

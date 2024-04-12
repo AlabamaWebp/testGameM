@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { playerData } from '../munchkin.component';
-import { CardComponent } from '../card/card.component';
+import { CardComponent, toPlayer } from '../card/card.component';
 import { WebsocketService } from '../../../services/websocket.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { WebsocketService } from '../../../services/websocket.service';
 export class PlayerComponent implements OnChanges {
   @Input() data!: playerData
   @Input() podrobnee = false;
-  @Input() dataMesto: number | undefined;
+  @Input() dataMesto: toPlayer | undefined;
   @Output() template = new EventEmitter();
   @Output() close = new EventEmitter();
 
@@ -35,8 +35,9 @@ export class PlayerComponent implements OnChanges {
     this.template.emit(s);
   }
   useCardMesto(mesto: string) {
+    if (!this.dataMesto) return;
     const body = {
-      id_card: this.dataMesto,
+      id_card: this.dataMesto?.id,
       mesto: mesto,
     }
     this.webs.emit("useCardMesto", body);

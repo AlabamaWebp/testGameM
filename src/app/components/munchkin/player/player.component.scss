@@ -69,3 +69,10 @@
         margin-bottom: 5px;
     }
 }
+.zatmenie {
+    z-index: 3;
+    background-color: hsla(0, 0%, 0%, 0.5);
+}
+.anti_zatmenie {
+    z-index: 4;
+}

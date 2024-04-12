@@ -8,8 +8,11 @@
     @if (podrobnee) {
         <div class="backdrop" (click)="closeBackdrop($event)">
             <div class="podrobnee">
+                @if (dataMesto) {
+                    <div class="backdrop zatmenie"></div>
+                }
                 <div class="flex">
-                    <div class="flex r">
+                    <div class="flex r" [class.anti_zatmenie]="dataMesto?.type == 'Раса'">
                         <app-card [data]="data.d_field.rasses.first" (click)="useCardMesto('first')" class="z2"></app-card>
                         <app-card [data]="data.d_field.rasses.second" (click)="useCardMesto('second')" class="z2"></app-card>
                         <app-card [data]="data.d_field.rasses.bonus" (click)="useCardMesto('bonus')" class="pozadi"></app-card>
@@ -21,7 +24,7 @@
                         <span>{{data.sex}}</span>
                         <span>Очередь: {{data.queue}}</span>
                     </div>
-                    <div class="flex r">
+                    <div class="flex r" [class.anti_zatmenie]="dataMesto?.type == 'Класс'">
                         <app-card (click)="useCardMesto('first')" [data]="data.d_field.classes.first" class="z2"></app-card>
                         <app-card (click)="useCardMesto('second')" [data]="data.d_field.classes.second" class="z2"></app-card>
                         <app-card (click)="useCardMesto('bonus')" [data]="data.d_field.rasses.bonus" class="pozadi"></app-card>

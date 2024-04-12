@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
-import { AbstractCard, CardComponent } from './card/card.component';
+import { AbstractCard, CardComponent, toPlayer } from './card/card.component';
 import { PlayerComponent } from './player/player.component';
 // import { MatIconModule } from '@angular/material/icon';
 
@@ -50,10 +50,10 @@ export class MunchkinComponent {
   useCard(id: number) {
     this.webs.emit("useCard", id);
   }
-  useCardMesto(body: number) {
+  useCardMesto(body: toPlayer) {
     this.dataMesto = body;
   }
-  dataMesto: number | undefined;
+  dataMesto: toPlayer | undefined;
   closeYou() {
     this.dataMesto = undefined;
   }
