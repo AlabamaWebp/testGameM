@@ -24,7 +24,6 @@ export class NicknameComponent {
     }
     this.webs.disconnect()
   }
-
   answer: string | boolean | undefined = "Этот ник уже используется";
   click() {
     // this.webs.on("statusName", (d: any) => { this.changeAnswer(d) });

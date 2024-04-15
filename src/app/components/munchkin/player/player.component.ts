@@ -24,6 +24,8 @@ export class PlayerComponent implements OnChanges {
     if (el.className.includes('backdrop')) {
       this.closePodrobnee();
     }
+    else if (el.className.includes('anti_zatmenie'))
+      this.dataMesto = undefined;
   }
 
   closePodrobnee() {

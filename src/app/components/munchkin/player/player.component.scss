@@ -25,10 +25,27 @@
     max-width: 95%;
     max-height: 95%;
     overflow: auto;
-    app-card,
+
     .stats {
         margin: 10px 15px;
+        height: 100%;
+
+        span {
+            line-height: 22px;
+            margin-bottom: 7px;
+            background: #ffffff52;
+            border-radius: 10px;
+            padding: 1px 5px;
+        }
     }
+
+    .card1 {
+        margin: 10px 5px;
+    }
+
+    // app-card {
+    //     margin: 0px 10px;
+    // }
 
     .stats {
         width: 140px;
@@ -40,15 +57,17 @@
 }
 
 .pozadi {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0 !important;
-    bottom: 25px;
+    // bottom: 10px;
+    // position: absolute;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // margin: 0 !important;
+    // bottom: 25px;
 }
+
 .m15 {
     margin: 0 15px;
+
     span {
         width: 100%;
         text-align: center;
@@ -56,23 +75,63 @@
         justify-content: center;
         // font-weight: bold;
     }
+
     app-card {
         margin: 0;
     }
 }
+
 .treasures {
     .r {
         display: flex;
         flex-direction: column;
     }
+
     app-card {
         margin-bottom: 5px;
     }
 }
+
 .zatmenie {
     z-index: 3;
     background-color: hsla(0, 0%, 0%, 0.5);
 }
+
 .anti_zatmenie {
     z-index: 4;
+}
+
+.head_title {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 5px;
+    // font-weight: bold;
+}
+
+.title {
+    // text-align: center;
+    width: 100%;
+    display: none;
+    justify-content: center;
+}
+
+.anti_zatmenie {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    top: 0;bottom: 0;right: 0;left: 0;
+    .title {
+        display: flex;
+    }
+    .pozadi {
+        position: static;
+        margin: 10px 15px !important;
+        transform: unset;
+    }
 }
