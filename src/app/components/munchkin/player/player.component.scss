@@ -40,7 +40,11 @@
     }
 
     .card1 {
-        margin: 10px 5px;
+        // margin: 10px 5px;
+        margin: 10px -25px 10px 0;
+        &:last-of-type {
+            margin-right: 0;
+        }
     }
 
     // app-card {
