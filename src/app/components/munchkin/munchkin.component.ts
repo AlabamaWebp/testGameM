@@ -39,6 +39,10 @@ export class MunchkinComponent {
 
     this.webs.emit("refreshGame");
     this.webs.emit("allLog");
+    // firstStepHod
+  }
+  firstStepHod() {
+    this.webs.emit("firstStepHod")
   }
   cond_timer: any;
   condition: string | undefined;
@@ -72,7 +76,8 @@ interface refreshGame {
   },
   // log: this.log,
   players: playerData[],
-  you: playerData
+  you: playerData,
+  you_hodish: boolean
 }
 
 export interface playerData {
