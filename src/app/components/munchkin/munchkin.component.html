@@ -18,7 +18,7 @@
     </header>
     <main class="main">
         <div class="left pereferia">
-            <app-card [class.podsvet]="data.you_hodish && data.step == 0" (click)="firstStepHod()"></app-card>
+            <app-card [class.podsvet]="data.you_hodish && (data.step == 0 || data.step == 1)" (click)="firstStepHod()"></app-card>
             <span>Колода</span>
             <app-card [treasure]="true"></app-card>
         </div>
