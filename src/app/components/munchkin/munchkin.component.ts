@@ -61,7 +61,6 @@ export class MunchkinComponent {
   closeYou() {
     this.dataMesto = undefined;
   }
-
 }
 
 interface refreshGame {

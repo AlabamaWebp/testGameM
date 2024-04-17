@@ -1,53 +1,66 @@
 @import "../../styles/vars.scss";
+
 .header {
     justify-content: space-between;
+
     .players {
         flex: 1 1 auto;
     }
+
     .stats {
         // color: white;
         flex: 0 0 100px;
     }
+
     display: flex;
     width: 100%;
     height: 100px;
 }
+
 .footer {
     display: flex;
     justify-content: start;
     width: 100%;
+
     .cards {
         display: flex;
         // justify-content: center;
         width: 100%;
         overflow: auto;
+
         .card {
-            margin: 0 10px 0 0 ;
+            margin: 0 10px 0 0;
         }
     }
 }
+
 .main {
     display: flex;
     width: 100%;
+
     .center {
         flex: 1 1 auto;
         height: 100%;
         width: 100%;
         display: flex;
+
         .field {
             flex: 1 1 auto;
             height: 100%;
             padding: 10px;
             display: flex;
             flex-direction: column;
+
             // background-color: $door;
             .monsters {
                 width: 100%;
             }
+
             .players {
                 width: 100%;
             }
         }
+
         .log {
             flex: 0 0 300px;
             // width: 300px;
@@ -55,6 +68,7 @@
             padding: 10px;
             border-left: 3px white solid;
             overflow: auto;
+
             div {
                 background-color: $treasure;
                 // color: white;
@@ -69,6 +83,7 @@
             }
         }
     }
+
     .pereferia {
         flex: 0 0 150px;
         padding: 5px;
@@ -79,12 +94,13 @@
         justify-content: space-around;
     }
 }
+
 .condition {
     position: fixed;
     left: 50%;
     top: 5px;
     transform: translateX(-50%);
-    background-color: rgb(170, 18, 18); 
+    background-color: rgb(170, 18, 18);
     color: white;
     display: flex;
     padding: 10px;
@@ -94,7 +110,18 @@
     z-index: 10;
     font-size: 20px;
 }
+
 @keyframes op {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.podsvet {
+    box-shadow: 0px 0px 3px 3px yellow;
+    border-radius: 10px;
 }
