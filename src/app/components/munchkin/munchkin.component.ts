@@ -41,8 +41,8 @@ export class MunchkinComponent {
     this.webs.emit("allLog");
     // firstStepHod
   }
-  firstStepHod() {
-    this.webs.emit("firstStepHod")
+  getDoorCard() {
+    this.webs.emit("getDoorCardByPlayer")
   }
   cond_timer: any;
   condition: string | undefined;
