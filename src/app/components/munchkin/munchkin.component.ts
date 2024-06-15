@@ -44,12 +44,16 @@ export class MunchkinComponent {
   getDoorCard() {
     this.webs.emit("getDoorCardByPlayer")
   }
+  endHod() {
+    this.webs.emit("endHod")
+  }
   cond_timer: any;
   condition: string | undefined;
   data: refreshGame | undefined;
   plog: string[] = [];
 
   is_mesto_card = false;
+  dataMesto: toPlayer | undefined;
 
   useCard(id: number) {
     this.webs.emit("useCard", id);
@@ -57,7 +61,6 @@ export class MunchkinComponent {
   useCardMesto(body: toPlayer) {
     this.dataMesto = body;
   }
-  dataMesto: toPlayer | undefined;
   closeYou() {
     this.dataMesto = undefined;
   }

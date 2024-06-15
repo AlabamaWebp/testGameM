@@ -71,6 +71,9 @@
         </div>
     </main>
     <footer class="footer">
+        <div class="menu">
+            <button class="square" [disabled]="data.step != 3">end</button>
+        </div>
         <div class="cards">
             @for (item of data.you.cards; track $index) {
             <app-card class="card" [data]="item" (use_mesto)="useCardMesto($event)" (use_card)="useCard($event)"
