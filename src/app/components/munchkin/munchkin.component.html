@@ -18,7 +18,8 @@
     </header>
     <main class="main">
         <div class="left pereferia">
-            <app-card [class.podsvet]="data.you_hodish && (data.step == 0 || data.step == 1)" (click)="getDoorCard()"></app-card>
+            <app-card [class.podsvet]="data.you_hodish && (data.step == 0 || data.step == 1)"
+                (click)="getDoorCard()"></app-card>
             <span>Колода</span>
             <app-card [treasure]="true"></app-card>
         </div>
@@ -26,9 +27,9 @@
             <div class="field">
                 @if (data.field.fight && data.field.is_fight) {
                 <div class="monsters">
-                    <span>
+                    <span class="bgcont">
                         Сила стороны: {{data.field.fight.monsterStrongest}}
-                        На кону: {{data.field.fight.gold}} Сокровищ, {{data.field.fight.lvls}} Уровней
+                        На кону: {{data.field.fight.gold ?? 1}} Сокровищ, {{data.field.fight.lvls}} Уровней
                     </span>
                     <div class="osn">
                         @for (item of data.field.fight.monsters; track $index) {
@@ -37,13 +38,11 @@
                     </div>
                 </div>
                 <div class="players">
-                    <span>
-                        Сила стороны: {{data.field.fight.players.strongest}}
-                    </span>
                     <div class="osn">
                         <app-player [data]="data.field.fight.players.main"></app-player>
                         @if (data.field.fight.players.secondary)
                         {<app-player [data]="data.field.fight.players.secondary"></app-player>}
+                        <span class="bgcont"> Сила стороны: {{data.field.fight.players.strongest}} </span>
                     </div>
 
                 </div>
@@ -58,7 +57,7 @@
             </div>
             <div class="log">
                 @for (item of plog; track $index) {
-                <div>
+                <div class="bgcont">
                     {{item}}
                 </div>
                 }

@@ -126,7 +126,7 @@ interface GameField {
     monsters: AbstractCard[]
     monsterStrongest: number ///
     // monstersProto: AbstractCard[]
-    gold: number
+    gold?: number
     lvls: number ///
 
   }

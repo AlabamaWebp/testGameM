@@ -47,10 +47,10 @@
         .field {
             flex: 1 1 auto;
             height: 100%;
-            padding: 10px;
+            padding: 5px 10px;
             display: flex;
             flex-direction: column;
-
+            justify-content: space-between;
             background: #fff1e340;
             border: 3px solid #5923237d;
             margin: 10px;
@@ -76,15 +76,6 @@
             
             div, li {
                 background-color: $treasure;
-                // color: white;
-                border-radius: 10px;
-                padding: 6px 10px;
-                margin: 0 0 5px;
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                text-align: center;
-                justify-content: center;
             }
         }
     }
@@ -130,7 +121,17 @@
     box-shadow: 0px 0px 3px 3px yellow;
     border-radius: 10px;
 }
-
+.bgcont {
+    background-color: $door;
+    border-radius: 10px;
+    padding: 6px 10px;
+    margin: 5px 0 ;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
 .square {
     
 }
