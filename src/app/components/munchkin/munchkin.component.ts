@@ -19,12 +19,13 @@ export class MunchkinComponent {
 
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
-      this.data = el; // undefined
-      this.step = el.you_hodish ? el.step : -1;
-      // setTimeout(() => {
-      //   this.data = el;
-      // }, 1);
+      this.data = undefined; // undefined
+      setTimeout(() => {
+        this.data = el;
+      }, 1);
       console.log(el);
+      this.step = el.you_hodish ? el.step : -1;
+      this.pas = el.pas;
     })
 
     this.webs.on("condition", (el: any) => {
@@ -42,17 +43,15 @@ export class MunchkinComponent {
     this.webs.emit("allLog");
     // firstStepHod
   }
-  getDoorCard() {
-    this.webs.emit("getDoorCardByPlayer")
-  }
-  endHod() {
-    this.webs.emit("endHod")
-  }
+  getDoorCard() { this.webs.emit("getDoorCardByPlayer") }
+  endHod() { this.webs.emit("endHod") }
+  setPas() { this.webs.emit("pas") }
   cond_timer: any;
   condition: string | undefined;
   data: refreshGame | undefined;
   plog: string[] = [];
   step: number = -1;
+  pas: boolean = false;
 
   is_mesto_card = false;
   dataMesto: toPlayer | undefined;
