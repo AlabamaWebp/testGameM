@@ -35,7 +35,7 @@ export class MunchkinComponent {
     })
 
     this.webs.on("allLog", (el: any) => { this.plog = el; })
-    this.webs.on("plusLog", (el: any) => { this.plog.push(el); })
+    this.webs.on("plusLog", (el: any) => { this.plog.unshift(el); })
 
     this.webs.emit("refreshGame");
     this.webs.emit("allLog");

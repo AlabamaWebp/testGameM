@@ -72,7 +72,7 @@
     </main>
     <footer class="footer">
         <div class="menu">
-            <button class="square" [disabled]="data.step != 3">end</button>
+            <button class="square" [disabled]="data.step != 3" (click)="endHod()">end</button>
         </div>
         <div class="cards">
             @for (item of data.you.cards; track $index) {
