@@ -18,7 +18,7 @@
     </header>
     <main class="main">
         <div class="left pereferia">
-            <app-card [class.podsvet]="data.you_hodish && (data.step == 0 || data.step == 1)"
+            <app-card [class.podsvet]="data.you_hodish && (step == 0 || step == 1)"
                 (click)="getDoorCard()"></app-card>
             <span>Колода</span>
             <app-card [treasure]="true"></app-card>
@@ -50,7 +50,7 @@
                 @else {
                 <div class="cards">
                     @for (item of data.field.openCards; track $index) {
-                    <app-card [data]="item"></app-card>
+                    <app-card class="card" [data]="item"></app-card>
                     }
                 </div>
                 }
@@ -71,7 +71,7 @@
     </main>
     <footer class="footer">
         <div class="menu">
-            <button class="square" [disabled]="data.step != 3" (click)="endHod()">end</button>
+            <button class="square" [disabled]="step != 3" (click)="endHod()">end</button>
         </div>
         <div class="cards">
             @for (item of data.you.cards; track $index) {

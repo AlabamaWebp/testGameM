@@ -46,7 +46,7 @@ export class PlayerComponent implements OnChanges {
     this.closePodrobnee();
   }
   ngOnChanges(d: SimpleChanges) {
-    console.log(d);
+    // console.log(d);
     if (d['dataMesto']?.currentValue) {
       this.podrobnee = true;
     }

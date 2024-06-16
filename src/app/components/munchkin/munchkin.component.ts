@@ -19,10 +19,11 @@ export class MunchkinComponent {
 
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
-      this.data = undefined;
-      setTimeout(() => {
-        this.data = el;
-      }, 1);
+      this.data = el; // undefined
+      this.step = el.you_hodish ? el.step : -1;
+      // setTimeout(() => {
+      //   this.data = el;
+      // }, 1);
       console.log(el);
     })
 
@@ -51,6 +52,7 @@ export class MunchkinComponent {
   condition: string | undefined;
   data: refreshGame | undefined;
   plog: string[] = [];
+  step: number = -1;
 
   is_mesto_card = false;
   dataMesto: toPlayer | undefined;
