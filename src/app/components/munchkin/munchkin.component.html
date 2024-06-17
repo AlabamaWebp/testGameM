@@ -39,12 +39,11 @@
                 </div>
                 <div class="players">
                     <div class="osn">
-                        <app-player [data]="data.field.fight.players.main"></app-player>
+                        <app-player [data]="data.field.fight.players.main.player"></app-player>
                         @if (data.field.fight.players.secondary)
-                        {<app-player [data]="data.field.fight.players.secondary"></app-player>}
+                        {<app-player [data]="data.field.fight.players.secondary.player"></app-player>}
                         <span class="bgcont"> Сила стороны: {{data.field.fight.players.strongest}} </span>
                     </div>
-
                 </div>
                 }
                 @else {
@@ -73,6 +72,7 @@
         <div class="menu">
             <button class="square" [disabled]="step != 3" (click)="endHod()">end</button>
             <button class="square" [disabled]="!pas" (click)="setPas()">pas</button>
+            <button class="square" [disabled]="!smivka_" (click)="smivka()">smivka</button>
             
         </div>
         <div class="cards">

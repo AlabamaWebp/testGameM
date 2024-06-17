@@ -26,6 +26,7 @@ export class MunchkinComponent {
       console.log(el);
       this.step = el.you_hodish ? el.step : -1;
       this.pas = el.pas;
+      this.smivka_ = el.smivka_;
     })
 
     this.webs.on("condition", (el: any) => {
@@ -46,12 +47,14 @@ export class MunchkinComponent {
   getDoorCard() { this.webs.emit("getDoorCardByPlayer") }
   endHod() { this.webs.emit("endHod") }
   setPas() { this.webs.emit("pas") }
+  smivka() { this.webs.emit('smivka') }
   cond_timer: any;
   condition: string | undefined;
   data: refreshGame | undefined;
   plog: string[] = [];
   step: number = -1;
   pas: boolean = false;
+  smivka_ = false;
 
   is_mesto_card = false;
   dataMesto: toPlayer | undefined;
@@ -111,13 +114,17 @@ export interface playerData {
   max_cards: number,
   power: number
 }
-
+interface PlayerFight {
+  player: playerData
+  gold: number
+  smivka: boolean
+}
 interface GameField {
   is_fight: boolean
   fight?: {
     players: {
-      main: playerData,
-      secondary?: playerData,
+      main: PlayerFight,
+      secondary?: PlayerFight,
       strongest: number ///
     }
     cards?: {
