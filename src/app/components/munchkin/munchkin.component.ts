@@ -83,7 +83,13 @@ interface refreshGame {
   // log: this.log,
   players: playerData[],
   you: playerData,
-  you_hodish: boolean
+  you_hodish: boolean,
+  pas: boolean,
+  smivka: boolean,
+  cards: {
+    doors: number
+    treasures: number
+  }
 }
 
 export interface playerData {
