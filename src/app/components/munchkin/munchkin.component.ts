@@ -19,11 +19,13 @@ export class MunchkinComponent {
 
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
+      console.log(el);
+      
       this.data = undefined; // undefined
       setTimeout(() => {
         this.data = el;
       }, 1);
-      console.log(el);
+
       this.step = el.you_hodish ? el.step : -1;
       this.pas = el.pas;
       this.smivka_ = el.smivka_;
