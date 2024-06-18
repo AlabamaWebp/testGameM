@@ -73,7 +73,6 @@
             <button class="square" [disabled]="step != 3" (click)="endHod()">end</button>
             <button class="square" [disabled]="!pas" (click)="setPas()">pas</button>
             <button class="square" [disabled]="!smivka_" (click)="smivka()">smivka</button>
-            
         </div>
         <div class="cards">
             @for (item of data.you.cards; track $index) {

@@ -19,13 +19,13 @@ export class PlayerComponent implements OnChanges {
 
   constructor(private webs: WebsocketService,) { }
 
-  closeBackdrop(ev: MouseEvent) {
-    const el = ev.target as HTMLElement;
-    if (el.className.includes('backdrop')) {
-      this.closePodrobnee();
+  closeBackdrop(ev: MouseEvent, el: HTMLElement, dataMesto = false) {
+    if (el == ev.target) {
+      if (dataMesto)
+        this.dataMesto = undefined;
+      else
+        this.closePodrobnee();
     }
-    else if (el.className.includes('anti_zatmenie'))
-      this.dataMesto = undefined;
   }
 
   closePodrobnee() {
