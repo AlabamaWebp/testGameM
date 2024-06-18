@@ -3,12 +3,13 @@ import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
 import { AbstractCard, CardComponent, toPlayer } from './card/card.component';
 import { PlayerComponent } from './player/player.component';
+import { MatButtonModule } from '@angular/material/button';
 // import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-munchkin',
   standalone: true,
-  imports: [CardComponent, PlayerComponent],
+  imports: [CardComponent, PlayerComponent, ],
   templateUrl: './munchkin.component.html',
   styleUrl: './munchkin.component.scss'
 })
