@@ -9,7 +9,7 @@
 <div class="backdrop" (click)="closeBackdrop($event, b1)" #b1>
     <div class="podrobnee">
         <div class="flex">
-            <div class="r" [class.zatmenie]="dataMesto?.type == 'Раса'" (click)="closeBackdrop($event, b2, true)" #b2>
+            <div class="r" [class.zatmenie]="dataMesto?.type == 'Раса'" (click)="closeBackdrop($event, b21, true)" #b21>
                 <span class="head_title">Раса</span>
                 <div class="flex">
                     <div class="card1 z2" >
@@ -34,7 +34,7 @@
                 <span>Очередь: {{data.queue}}</span>
                 <span>Максимум карт: {{data.max_cards}}</span>
             </div>
-            <div class="r" [class.zatmenie]="dataMesto?.type == 'Класс'" (click)="closeBackdrop($event, b2, true)" #b2>
+            <div class="r" [class.zatmenie]="dataMesto?.type == 'Класс'" (click)="closeBackdrop($event, b22, true)" #b22>
                 <span class="head_title">Класс</span>
                 <div class="flex">
                     <div class="card1 z2" >

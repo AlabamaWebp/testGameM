@@ -20,6 +20,7 @@ export class PlayerComponent implements OnChanges {
   constructor(private webs: WebsocketService,) { }
 
   closeBackdrop(ev: MouseEvent, el: HTMLElement, dataMesto = false) {
+    console.log(el == ev.target, dataMesto);
     if (el == ev.target) {
       if (dataMesto)
         this.dataMesto = undefined;
