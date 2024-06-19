@@ -41,8 +41,9 @@ export class CardComponent {
     }
     else {
       if (
-        this.data?.abstractData.cardType == "Класс"
-        || this.data?.abstractData.cardType == "Раса"
+        !this.data?.is_super
+        && (this.data?.abstractData.cardType == "Класс"
+        || this.data?.abstractData.cardType == "Раса")
       )
         this.is_mesto = true;
       this.dCard = this.data;
@@ -108,6 +109,7 @@ export interface AbstractCard {
   id: number;
   strong?: number;
   data?: TreasureData | MonsterData;
+  is_super?: boolean
 }
 
 

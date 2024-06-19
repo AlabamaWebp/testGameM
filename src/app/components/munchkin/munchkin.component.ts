@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-munchkin',
   standalone: true,
-  imports: [CardComponent, PlayerComponent, ],
+  imports: [CardComponent, PlayerComponent,],
   templateUrl: './munchkin.component.html',
   styleUrl: './munchkin.component.scss'
 })
@@ -21,7 +21,7 @@ export class MunchkinComponent {
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
       console.log(el);
-      
+
       this.data = undefined; // undefined
       setTimeout(() => {
         this.data = el;
@@ -66,7 +66,11 @@ export class MunchkinComponent {
     this.webs.emit("useCard", id);
   }
   useCardMesto(body: toPlayer) {
-    this.dataMesto = body;
+    const card = this.data?.you.cards.find(e => e.id == body.id)
+    if ((card?.abstractData.cardType == "Класс" && this.data?.classes_mesto)
+      || (card?.abstractData.cardType == "Раса" && this.data?.rasses_mesto)
+    ) this.dataMesto = body;
+    else this.useCard(body.id)
   }
   closeYou() {
     this.dataMesto = undefined;
@@ -93,6 +97,8 @@ interface refreshGame {
     doors: number
     treasures: number
   }
+  rasses_mesto: boolean
+  classes_mesto: boolean
 }
 
 export interface playerData {
