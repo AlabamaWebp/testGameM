@@ -55,7 +55,7 @@
                 }
             </div>
             <div class="log">
-                @for (item of plog; track $index) {
+                @for (item of log_; track $index) {
                 <div class="bgcont">
                     {{item}}
                 </div>
@@ -71,8 +71,9 @@
     <footer class="footer">
         <div class="menu">
             <button class="square" [disabled]="step != 3" (click)="endHod()">end</button>
-            <button class="square" [disabled]="!pas" (click)="setPas()">pas</button>
-            <button class="square" [disabled]="!smivka_" (click)="smivka()">smivka</button>
+            <button class="square" [disabled]="!data.pas" (click)="setPas()">pas</button>
+            <button class="square" [disabled]="!data.smivka" (click)="smivka()">smivka</button>
+            <button class="square" [disabled]="!data.help_ask" (click)="openHelpDialog()">help</button>
         </div>
         <div class="cards">
             @for (item of data.you.cards; track $index) {

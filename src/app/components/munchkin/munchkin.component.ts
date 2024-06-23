@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
 import { AbstractCard, CardComponent, toPlayer } from './card/card.component';
 import { PlayerComponent } from './player/player.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { HelpFightComponent } from './dialogs/help-fight/help-fight.component';
 // import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-munchkin',
   standalone: true,
-  imports: [CardComponent, PlayerComponent,],
+  imports: [CardComponent, PlayerComponent, MatFormFieldModule, FormsModule, MatButtonModule],
   templateUrl: './munchkin.component.html',
   styleUrl: './munchkin.component.scss'
 })
@@ -24,20 +28,16 @@ export class MunchkinComponent {
       this.data = undefined;
       setTimeout(() => this.data = el, 1);
       this.step = el.you_hodish ? el.step : -1;
-      this.pas = el.pas;
-      this.smivka_ = el.smivka_;
     })
 
     this.webs.on("condition", (el: any) => {
       clearTimeout(this.cond_timer);
       this.condition = el;
-      this.cond_timer = setTimeout(() => {
-        this.condition = undefined
-      }, 5000);
+      this.cond_timer = setTimeout(() => { this.condition = undefined }, 5000);
     })
 
-    this.webs.on("allLog", (el: any) => { this.plog = el; })
-    this.webs.on("plusLog", (el: any) => { this.plog.unshift(el); })
+    this.webs.on("allLog", (el: any) => { this.log_ = el; })
+    this.webs.on("plusLog", (el: any) => { this.log_.unshift(el); })
 
     this.webs.emit("refreshGame");
     this.webs.emit("allLog");
@@ -50,10 +50,8 @@ export class MunchkinComponent {
   cond_timer: any;
   condition: string | undefined;
   data: refreshGame | undefined;
-  plog: string[] = [];
+  log_: string[] = [];
   step: number = -1;
-  pas: boolean = false;
-  smivka_ = false;
 
   dataMesto: toPlayer | undefined;
 
@@ -67,22 +65,25 @@ export class MunchkinComponent {
     ) this.dataMesto = body;
     else this.useCard(body.id)
   }
-  closeYou() {
-    this.dataMesto = undefined;
+  closeYou() { this.dataMesto = undefined; }
+
+
+  readonly dialog = inject(MatDialog);
+  openHelpDialog(): void {
+    const dialogRef = this.dialog.open(HelpFightComponent, { data: this.data?.help_ask?.gold, });
+    dialogRef.afterClosed().subscribe(result => { if (result !== undefined && this.data?.help_ask) this.webs.emit('helpAnswer', result) });
   }
 }
 
 interface refreshGame {
   queue: string,
   step: 0 | 1 | 2 | 3,
-  // is_fight: this.is_fight,
   field: GameField,
   sbros:
   {
     doors: AbstractCard,
     treasures: AbstractCard
   },
-  // log: this.log,
   players: playerData[],
   you: playerData,
   you_hodish: boolean,
@@ -94,7 +95,7 @@ interface refreshGame {
   }
   rasses_mesto: boolean
   classes_mesto: boolean
-  help_asks: boolean
+  help_ask: { pl: playerData, gold: number } | undefined
 }
 
 export interface playerData {
