@@ -61,7 +61,11 @@ export class MunchkinComponent {
     this.webs.emit("useCard", id);
   }
   useCardMesto(body: toPlayer) {
-    this.dataMesto = body;
+    const card = this.data?.you.cards.find(e => e.id == body.id)
+    if ((card?.abstractData.cardType == "Класс" && this.data?.classes_mesto)
+      || (card?.abstractData.cardType == "Раса" && this.data?.rasses_mesto)
+    ) this.dataMesto = body;
+    else this.useCard(body.id)
   }
   closeYou() {
     this.dataMesto = undefined;
