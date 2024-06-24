@@ -27,14 +27,16 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 export class AskHelpGoldComponent {
   readonly dialogRef = inject(MatDialogRef<AskHelpGoldComponent>);
   readonly data = inject<number>(MAT_DIALOG_DATA);
-  mass: number[] = []
+  mass: number[] = [];
+  num = 0;
   ngOnInit() {
-    for (let i = 0; i < this.data; i++) 
-      this.mass[i] = i;
+    for (let i = 0; i < this.data + 1; i++) this.mass[i] = i;
+  }
+  select(n: number) {
+    this.num = n;
   }
 
   close1(ans?: any): void {
-    console.log(ans);
-    this.dialogRef.close(ans);
+    this.dialogRef.close(ans ? this.num : undefined);
   }
 }

@@ -35,7 +35,7 @@ export class PlayerComponent implements OnChanges {
 
   closePodrobnee() {
     this.podrobnee = false;
-    this.close.emit(); 
+    this.close.emit();
   }
 
 
@@ -61,11 +61,12 @@ export class PlayerComponent implements OnChanges {
   readonly dialog = inject(MatDialog);
   openHelpDialog(): void {
     const dialogRef = this.dialog.open(AskHelpGoldComponent, { data: this.is_help, });
-    dialogRef.afterClosed().subscribe(result => { if (result !== undefined && this.is_help) this.webs.emit('helpAsk', {to: this.data.name, gold: result}) });
-  }
-  eventHelp(ev: string) {
-    // const tmp: closeEvent | undefined = ev ? { action: ev, player: this.data } : undefined;
-    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined && this.is_help) {
+        this.webs.emit('helpAsk', { to: this.data.name, gold: result })
+        console.log(result);
+      }
+    });
   }
 }
 export interface cardMestoEvent {

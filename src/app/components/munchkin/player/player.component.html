@@ -35,7 +35,7 @@
                 <span>Очередь: {{data.queue}}</span>
                 <span>Макс карт: {{data.max_cards}}</span>
                 @if (is_help) {
-                <button mat-raised-button class="btnpomoch" (click)="eventHelp('help')">ПОМОГИ МНЕ!!!</button>
+                <button mat-raised-button class="btnpomoch" (click)="openHelpDialog()">ПОМОГИ МНЕ!!!</button>
                 }
             </div>
             <div class="r" [class.zatmenie]="dataMesto?.type == 'Класс'" (click)="closeBackdrop($event, b22, true)"

@@ -28,6 +28,8 @@ export class MunchkinComponent {
       this.data = undefined;
       setTimeout(() => this.data = el, 1);
       this.step = el.you_hodish ? el.step : -1;
+
+      if (el.help_ask) this.openHelpDialog();
     })
 
     this.webs.on("condition", (el: any) => {
