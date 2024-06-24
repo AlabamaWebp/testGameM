@@ -9,7 +9,7 @@
     <header class="header">
         <div class="players">
             @for (item of data.players; track $index) {
-            <app-player [data]="item"></app-player>
+            <app-player [data]="item" [is_help]="data.is_help ? (data.field.fight?.gold ?? false) : false"></app-player>
             }
         </div>
         <div class="stats">
@@ -70,10 +70,10 @@
     </main>
     <footer class="footer">
         <div class="menu">
-            <button class="square" [disabled]="step != 3" (click)="endHod()">end</button>
-            <button class="square" [disabled]="!data.pas" (click)="setPas()">pas</button>
-            <button class="square" [disabled]="!data.smivka" (click)="smivka()">smivka</button>
-            <button class="square" [disabled]="!data.help_ask" (click)="openHelpDialog()">help</button>
+            <button mat-raised-button [disabled]="step != 3" (click)="endHod()">end</button>
+            <button mat-raised-button [disabled]="!data.pas" (click)="setPas()">pas</button>
+            <button mat-raised-button [disabled]="!data.smivka" (click)="smivka()">smivka</button>
+            <button mat-raised-button [disabled]="!data.help_ask" (click)="openHelpDialog()">help</button>
         </div>
         <div class="cards">
             @for (item of data.you.cards; track $index) {

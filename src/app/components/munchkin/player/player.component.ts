@@ -1,12 +1,15 @@
-import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter, inject } from '@angular/core';
 import { playerData } from '../munchkin.component';
 import { CardComponent, toPlayer } from '../card/card.component';
 import { WebsocketService } from '../../../services/websocket.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { AskHelpGoldComponent } from '../dialogs/ask-help-gold/ask-help-gold.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, MatButtonModule],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
@@ -14,6 +17,7 @@ export class PlayerComponent implements OnChanges {
   @Input() data!: playerData
   @Input() podrobnee = false;
   @Input() dataMesto: toPlayer | undefined;
+  @Input() is_help: false | number = false;
   @Output() template = new EventEmitter();
   @Output() close = new EventEmitter();
 
@@ -31,8 +35,9 @@ export class PlayerComponent implements OnChanges {
 
   closePodrobnee() {
     this.podrobnee = false;
-    this.close.emit();
+    this.close.emit(); 
   }
+
 
   clickTemplate(s: string) {
     this.template.emit(s);
@@ -52,7 +57,21 @@ export class PlayerComponent implements OnChanges {
       this.podrobnee = true;
     }
   }
+
+  readonly dialog = inject(MatDialog);
+  openHelpDialog(): void {
+    const dialogRef = this.dialog.open(AskHelpGoldComponent, { data: this.is_help, });
+    dialogRef.afterClosed().subscribe(result => { if (result !== undefined && this.is_help) this.webs.emit('helpAsk', {to: this.data.name, gold: result}) });
+  }
+  eventHelp(ev: string) {
+    // const tmp: closeEvent | undefined = ev ? { action: ev, player: this.data } : undefined;
+    
+  }
 }
 export interface cardMestoEvent {
   mesto: "first" | "second" | "bonus"
+}
+export interface closeEvent {
+  action: string
+  player: playerData
 }

@@ -96,6 +96,7 @@ interface refreshGame {
   rasses_mesto: boolean
   classes_mesto: boolean
   help_ask: { pl: playerData, gold: number } | undefined
+  is_help: boolean
 }
 
 export interface playerData {

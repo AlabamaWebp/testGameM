@@ -27,10 +27,10 @@
     overflow: auto;
 
     .stats {
-        margin: 10px 15px;
+        margin: 0px 15px;
         height: 100%;
-
         span {
+            &:not(.name) { font-size: 17px;}
             line-height: 22px;
             margin-bottom: 7px;
             background: #ffffff52;
@@ -139,4 +139,8 @@
 .pozadi {
     position: relative;
     top: -10px;
+}
+.btnpomoch {
+    padding: 0 2px;
+    margin: 0 !important;
 }
