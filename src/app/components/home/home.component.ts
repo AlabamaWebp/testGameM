@@ -19,12 +19,12 @@ export class HomeComponent {
   }
   ngOnInit() {
     this.webs.on("statusPlayer", (e: any) => {
-      if (e === "lobby") {
+      if (e === "lobby") 
         this.router.navigate(["lobby"])
-      }
-      else if (e === "game") {
+      
+      else if (e === "game") 
         this.router.navigate(["game"])
-      }
+      
     });
     this.webs.emit("statusPlayer", undefined)
     ///////////////

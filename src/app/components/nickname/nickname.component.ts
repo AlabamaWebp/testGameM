@@ -19,9 +19,8 @@ export class NicknameComponent {
   constructor(private webs: WebsocketService, private router: Router) { }
   ngOnInit() {
     const n = localStorage.getItem("nickname");
-    if (n) {
-      this.control.setValue(n);
-    }
+    if (n) this.control.setValue(n);
+    
     this.webs.disconnect()
   }
   answer: string | boolean | undefined = "Этот ник уже используется";
@@ -30,6 +29,7 @@ export class NicknameComponent {
     const name = this.control.value as string;
     this.webs.checkNickname(name).subscribe(el => {
       if (el === true) {
+        
         localStorage.setItem("nickname", name);
         this.webs.connect(name)
         this.router.navigate(["home"])

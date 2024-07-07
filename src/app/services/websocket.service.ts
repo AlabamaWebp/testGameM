@@ -25,15 +25,12 @@ export class WebsocketService {
   connect(name: string | undefined = undefined) {
     if (name == undefined) {
       const tmp = localStorage.getItem("nickname")
-      if (!tmp || tmp?.length == 0) {
+      if (!tmp || tmp?.length == 0) 
         return
-      }
-      else {
-        name = tmp;
-      }
+      else name = tmp;
     }
     this.socket = io('http://localhost:3001', {
-      extraHeaders: { "name": name }
+      extraHeaders: { "name": new TextEncoder().encode(name).toString() }
     });
     this.socket.on("disconnect", (e) => {
       // console.log(e);
