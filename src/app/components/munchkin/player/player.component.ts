@@ -17,14 +17,14 @@ export class PlayerComponent implements OnChanges {
   @Input() data!: playerData
   @Input() podrobnee = false;
   @Input() dataMesto: toPlayer | undefined;
+  @Input() can_sbros: boolean = false;
   @Input() is_help: false | number = false;
   @Output() template = new EventEmitter();
   @Output() close = new EventEmitter();
 
   constructor(private webs: WebsocketService,) { }
-
+  sbrosEquip(id: number) { this.webs.emit("sbrosEquip", id) }
   closeBackdrop(ev: MouseEvent, el: HTMLElement, dataMesto = false) {
-    console.log(el == ev.target, dataMesto);
     if (el == ev.target) {
       if (dataMesto)
         this.dataMesto = undefined;

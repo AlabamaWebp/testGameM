@@ -49,6 +49,7 @@ export class MunchkinComponent {
   endHod() { this.webs.emit("endHod") }
   setPas() { this.webs.emit("pas") }
   smivka() { this.webs.emit('smivka') }
+  sbros(id: number) { this.webs.emit("sbrosCard", id) }
   cond_timer: any;
   condition: string | undefined;
   data: refreshGame | undefined;
@@ -81,6 +82,7 @@ interface refreshGame {
   queue: string,
   step: 0 | 1 | 2 | 3,
   field: GameField,
+  is_fight: boolean,
   sbros:
   {
     doors: AbstractCard,

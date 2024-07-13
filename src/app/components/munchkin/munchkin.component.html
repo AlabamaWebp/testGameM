@@ -13,7 +13,7 @@
             }
         </div>
         <div class="stats">
-            <app-player [data]="data.you" [dataMesto]="dataMesto" (close)="closeYou()"></app-player>
+            <app-player [data]="data.you" [dataMesto]="dataMesto" (close)="closeYou()" [can_sbros]="!data.is_fight"></app-player>
         </div>
     </header>
     <main class="main">
@@ -78,7 +78,7 @@
         <div class="cards">
             @for (item of data.you.cards; track $index) {
             <app-card class="card" [data]="item" (use_mesto)="useCardMesto($event)" (use_card)="useCard($event)"
-                [can_use]="true"></app-card>
+                [can_use]="true" [can_sbros]="data.step == 3" (sbros)="sbros($event)"></app-card>
             }
         </div>
     </footer>

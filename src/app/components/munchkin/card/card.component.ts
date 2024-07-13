@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { WebsocketService } from '../../../services/websocket.service';
 
 @Component({
   selector: 'app-card',
@@ -15,9 +16,11 @@ export class CardComponent {
   @Input() data: AbstractCard | any = undefined
   @Input() treasure: boolean = false;
   @Input() can_use: boolean = false;
+  @Input() can_sbros: boolean = false;
 
   @Output() use_mesto = new EventEmitter<toPlayer>();
   @Output() use_card = new EventEmitter<number>();
+  @Output() sbros = new EventEmitter<number>();
 
   useCard(id: number) {
     if (this.is_mesto && !this.treasure) {
@@ -30,9 +33,10 @@ export class CardComponent {
         this.podrobnee = false;
       }, 1);
     }
-    else {
-      this.use_card.emit(id)
-    }
+    else this.use_card.emit(id)
+  }
+  sbrosCard(id: number) {
+    this.sbros.emit(id);
   }
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
@@ -43,7 +47,7 @@ export class CardComponent {
       if (
         !this.data?.is_super
         && (this.data?.abstractData.cardType == "Класс"
-        || this.data?.abstractData.cardType == "Раса")
+          || this.data?.abstractData.cardType == "Раса")
       )
         this.is_mesto = true;
       this.dCard = this.data;
