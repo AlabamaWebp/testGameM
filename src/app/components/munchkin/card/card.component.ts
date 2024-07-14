@@ -67,8 +67,10 @@ export class CardComponent {
       this.podrobnee = false
     }
   }
-  test(v: any) { console.log(v);
-   return v}
+  test(v: any) {
+    console.log(v);
+    return v
+  }
 }
 
 export interface toPlayer {

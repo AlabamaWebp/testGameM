@@ -69,6 +69,7 @@ export class MunchkinComponent {
     else this.useCard(body.id)
   }
   closeYou() { this.dataMesto = undefined; }
+  canEnd() { return !((this.step == 3) && ((this.data?.you.max_cards ?? 0) >= (this.data?.you.cards.length ?? 0))) }
 
 
   readonly dialog = inject(MatDialog);

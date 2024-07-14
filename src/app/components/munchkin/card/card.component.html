@@ -3,7 +3,10 @@
 <ng-template #tcard let-ctx="podrobnee">
     <div class="header">
         <div class="name">
-            {{tCard.abstractData.name}}
+            <p>{{tCard.abstractData.name}}</p>
+            @if (tCard.strongest) {
+                <p>Бонус: {{tCard.strongest}}</p>
+            }
         </div>
         @if (ctx) {
         <div class="desc center mt">
