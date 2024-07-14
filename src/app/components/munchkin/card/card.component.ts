@@ -1,11 +1,11 @@
-import { booleanAttribute, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { WebsocketService } from '../../../services/websocket.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButton, CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
@@ -67,7 +67,8 @@ export class CardComponent {
       this.podrobnee = false
     }
   }
-
+  test(v: any) { console.log(v);
+   return v}
 }
 
 export interface toPlayer {
