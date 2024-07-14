@@ -8,7 +8,7 @@
     }
     <header class="header">
         <div class="players">
-            @for (item of data.players; track $index) {
+            @for (item of data.players; track item) {
             <app-player [data]="item" [is_help]="data.is_help ? (data.field.fight?.gold ?? false) : false"></app-player>
             }
         </div>
@@ -32,7 +32,7 @@
                         На кону: {{data.field.fight.gold ?? 1}} Сокровищ, {{data.field.fight.lvls}} Уровней
                     </span>
                     <div class="osn">
-                        @for (item of data.field.fight.monsters; track $index) {
+                        @for (item of data.field.fight.monsters; track item) {
                         <app-card [data]="item"></app-card>
                         }
                     </div>
@@ -48,15 +48,15 @@
                 }
                 @else {
                 <div class="cards gap">
-                    @for (item of data.field.openCards; track $index) {
+                    @for (item of data.field.openCards; track item) {
                     <app-card class="card" [data]="item"></app-card>
                     }
                 </div>
                 }
             </div>
             <div class="log">
-                @for (item of log_; track $index) {
-                <div class="bgcont">
+                @for (item of log_; track item) {
+                <div class="bgcont" @height>
                     {{item}}
                 </div>
                 }
@@ -76,7 +76,7 @@
             <button mat-raised-button [disabled]="!data.help_ask" (click)="openHelpDialog()">help</button>
         </div>
         <div class="cards">
-            @for (item of data.you.cards; track $index) {
+            @for (item of data.you.cards; track item) {
             <app-card class="card" [data]="item" (use_mesto)="useCardMesto($event)" (use_card)="useCard($event)"
                 [can_use]="true" [can_sbros]="data.step == 3" (sbros)="sbros($event)"></app-card>
             }

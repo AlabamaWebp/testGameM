@@ -8,6 +8,7 @@ import { MatDialog, } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HelpFightComponent } from './dialogs/help-fight/help-fight.component';
+import { animate, style, transition, trigger } from '@angular/animations';
 // import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -15,7 +16,12 @@ import { HelpFightComponent } from './dialogs/help-fight/help-fight.component';
   standalone: true,
   imports: [CardComponent, PlayerComponent, MatFormFieldModule, FormsModule, MatButtonModule],
   templateUrl: './munchkin.component.html',
-  styleUrl: './munchkin.component.scss'
+  styleUrl: './munchkin.component.scss',
+  animations: [
+    trigger("height", [
+      transition(":enter", [style({ height: 0, opacity: 0 }), animate(500, style({ height: '*', opacity: 1 }))])
+    ])
+  ]
 })
 export class MunchkinComponent {
   constructor(private webs: WebsocketService, private router: Router) {
@@ -24,9 +30,7 @@ export class MunchkinComponent {
 
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
-      console.log(el);
-      this.data = undefined;
-      setTimeout(() => this.data = el, 1);
+      this.data = el;
       this.step = el.you_hodish ? el.step : -1;
 
       if (el.help_ask) this.openHelpDialog();
