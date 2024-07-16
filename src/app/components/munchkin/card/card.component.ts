@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { WebsocketService } from '../../../services/websocket.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,12 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CardComponent {
 
-  constructor() {
-  }
+  constructor(private webs: WebsocketService) { }
   @Input() data: AbstractCard | any = undefined
   @Input() treasure: boolean = false;
   @Input() can_use: boolean = false;
   @Input() can_sbros: boolean = false;
+  @Input() can_sell: boolean = false;
 
   @Output() use_mesto = new EventEmitter<toPlayer>();
   @Output() use_card = new EventEmitter<number>();
@@ -35,9 +36,8 @@ export class CardComponent {
     }
     else this.use_card.emit(id)
   }
-  sbrosCard(id: number) {
-    this.sbros.emit(id);
-  }
+  sbrosCard(id: number) { this.sbros.emit(id); }
+  sellCard(id: number) { this.webs.emit("sellCard", id); }
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
       this.treasure = true;

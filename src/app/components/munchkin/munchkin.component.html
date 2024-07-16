@@ -13,13 +13,13 @@
             }
         </div>
         <div class="stats">
-            <app-player [data]="data.you" [dataMesto]="dataMesto" (close)="closeYou()" [can_sbros]="!data.is_fight"></app-player>
+            <app-player [data]="data.you" [dataMesto]="dataMesto" (close)="closeYou()"
+                [can_sbros]="!data.is_fight"></app-player>
         </div>
     </header>
     <main class="main">
         <div class="left pereferia">
-            <app-card [class.podsvet]="data.you_hodish && (step == 0 || step == 1)"
-                (click)="getDoorCard()"></app-card>
+            <app-card [class.podsvet]="data.you_hodish && (step == 0 || step == 1)" (click)="getDoorCard()"></app-card>
             <span>Колода</span>
             <app-card [treasure]="true"></app-card>
         </div>

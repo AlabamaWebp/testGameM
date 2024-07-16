@@ -1,129 +1,70 @@
-@if (data) {
-@if (treasure && tCard) {
-<ng-template #tcard let-ctx="podrobnee">
+<ng-template #top let-p="p">
     <div class="header">
+        @if (tCard) {
         <div class="name">
             <p>{{tCard.abstractData.name}}</p>
-            @if (tCard.strongest) {
-                <p>Бонус: {{tCard.strongest}}</p>
-            }
+            @if (tCard.strongest) {<p>Бонус: {{tCard.strongest}}</p>}
         </div>
-        @if (ctx) {
-        <div class="desc center mt">
-            {{tCard.abstractData.description}}
-        </div>
+        @if (p) {<div class="desc center mt"> {{tCard.abstractData.description}}</div>}
         }
-    </div>
-    @if (ctx) {
-    <div class="center fdc">
-        @if (can_use) {
-        <button mat-button (click)="useCard(tCard.id)">
-            Использовать
-        </button>
-        }
-        @if (can_sbros) {
-        <button mat-button (click)="sbrosCard(tCard.id)">
-            Сбросить
-        </button>
-        }
-    </div>
-    }
-    <div class="footer">
-        @if (tCard.data) {
-        @if (tCard.data.big) {
-        <span>
-            Большая
-        </span>
-        }
-        @if (tCard.abstractData.cost) {
-        <span>
-            {{tCard.abstractData.cost + " голды"}}
-        </span>
-        }
-        @if (tCard.data.template) {
-        <span>
-            {{tCard.data.template}}
-        </span>
-        }
-        @if (tCard.data.treasureType != "Надеваемая") {
-        <span>
-            {{tCard.data.treasureType}}
-        </span>
-        }
-        }
-    </div>
-</ng-template>
-<div class="card treasure" (click)="podrobnee = true">
-    <ng-container *ngTemplateOutlet="tcard; context: {podrobnee: false}"></ng-container>
-</div>
-@if (podrobnee) {
-<div class='backdrop' (click)="closeBackdrop($event)">
-    <div class="card treasure bigcard">
-        <ng-container *ngTemplateOutlet="tcard; context: {podrobnee: true}"></ng-container>
-    </div>
-</div>
-}
-}
-@else if (dCard){
-<ng-template #dcard let-podrobnee="podrobnee">
-    <div class="header">
+
+        @else if (dCard) {
         <div class="name">
-            @if (dCard.data?.undead) {
-            <p>Андед</p>
-            }
-            @if (dCard.data) {
-            <p>
-                {{dCard.data.strongest}} Уровень
-            </p>
-            }
-            <p>
-                {{dCard.abstractData.name}}
-            </p>
+            @if (dCard.data?.undead) {<p>Андед</p>}
+            @if (dCard.data) {<p> {{dCard.data.strongest}} Уровень</p>}
+            <p> {{dCard.abstractData.name}}</p>
         </div>
-        @if (podrobnee) {
+        @if (p) {
         <div class="desc center mt">
             {{dCard.abstractData.description}}
         </div>
         }
-    </div>
-    @if (podrobnee) {
-    <div class="center fdc">
-        @if (can_use) {
-        <button mat-button (click)="useCard(dCard.id)">
-            Использовать
-        </button>
-        }
-        @if (can_sbros) {
-        <button mat-button (click)="sbrosCard(dCard.id)">
-            Сбросить
-        </button>
-        }
-    </div>
-    }
-    <div class="footer">
-        @if (dCard.abstractData.cardType == "Монстр" && dCard.data) {
-        <span>
-            {{dCard.data.gold}} клад
-        </span>
-        <span>
-            {{dCard.data.get_lvls}} lvl
-        </span>
-        }
-        @else {
-        <span>{{dCard.abstractData.cardType}}</span>
         }
     </div>
 </ng-template>
-<div class="card door" (click)="podrobnee = true">
-    <ng-container [ngTemplateOutlet]="dcard" [ngTemplateOutletContext]="{podrobnee: false}"></ng-container>
-</div>
-@if (podrobnee){
-<div class="backdrop" (click)="closeBackdrop($event)">
-    <div class="card door bigcard">
-        <ng-container [ngTemplateOutlet]="dcard" [ngTemplateOutletContext]="{podrobnee: true}"></ng-container>
+<ng-template #bottom>
+    <div class="footer">
+        @if (tCard) {
+        @if (tCard.data) {
+        @if (tCard.data.big) {<span> Большая</span>}
+        @if (tCard.abstractData.cost) {<span> {{tCard.abstractData.cost + " голды"}} </span>}
+        @if (tCard.data.template) {<span> {{tCard.data.template}}</span>}
+        @if (tCard.data.treasureType != "Надеваемая") {<span> {{tCard.data.treasureType}}</span>}
+        }}
+
+        @else if (dCard) {
+        @if (dCard.abstractData.cardType == "Монстр" && dCard.data) {<span> {{dCard.data.gold}} клад</span>
+        <span>{{dCard.data.get_lvls}} lvl</span>
+        }
+        @else {
+        <span>{{dCard.abstractData.cardType}}</span>
+        }}
     </div>
+</ng-template>
+
+
+
+<ng-template #c let-p="p">
+    <div class="card {{treasure ? 'treasure' : 'door'}}" [class.bigcard]="p">
+        <ng-container [ngTemplateOutlet]="top" [ngTemplateOutletContext]="{p: p}"></ng-container>
+        @if (p) {
+        <div class="center fdc">
+            @if (can_use) {<button mat-button (click)="useCard(data.id)">Использовать</button>}
+            @if (can_sbros) {<button mat-button (click)="sbrosCard(data.id)">Сбросить</button>}
+            @if (data.abstractData.cost && can_sbros) {<button mat-button (click)="sellCard(data.id)">Продать</button>}
+        </div>
+        }
+        <ng-container [ngTemplateOutlet]="bottom"></ng-container>
+    </div>
+</ng-template>
+@if (data) {
+<div (click)="podrobnee = true">
+    <ng-container [ngTemplateOutlet]="c"></ng-container>
 </div>
-}
+@if (podrobnee) {
+<div class="backdrop" (click)="closeBackdrop($event)">
+    <ng-container [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{p: true}"></ng-container>
+</div>
 }
 }
 @else {

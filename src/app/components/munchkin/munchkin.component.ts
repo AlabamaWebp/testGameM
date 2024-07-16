@@ -134,7 +134,8 @@ export interface playerData {
   },
   queue: number,
   max_cards: number,
-  power: number
+  power: number,
+  coins: number
 }
 interface PlayerFight {
   player: playerData

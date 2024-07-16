@@ -18,14 +18,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     align-items: center;
     height: 100%;
 }
-.backdrop {
-    position: fixed;
-    top: 0;bottom: 0;right: 0;left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+// .backdrop {
+//     position: fixed;
+//     top: 0;bottom: 0;right: 0;left: 0;
+//     background-color: rgba(0, 0, 0, 0.5);
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
 .vertical {
     display: flex;
     flex-direction: column;
@@ -79,7 +79,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 .backdrop {
     position: fixed;
     top: 0;bottom: 0;right: 0;left: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;justify-content: center;align-items: center;
     z-index: 1;
     cursor: crosshair;
