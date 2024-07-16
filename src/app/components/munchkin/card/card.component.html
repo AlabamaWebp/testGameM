@@ -45,7 +45,7 @@
 
 
 <ng-template #c let-p="p">
-    <div class="card {{treasure ? 'treasure' : 'door'}}" [class.bigcard]="p">
+    <div class="card {{treasure ? 'treasure' : 'door'}}" [class.bigcard]="p" @width>
         <ng-container [ngTemplateOutlet]="top" [ngTemplateOutletContext]="{p: p}"></ng-container>
         @if (p) {
         <div class="center fdc">

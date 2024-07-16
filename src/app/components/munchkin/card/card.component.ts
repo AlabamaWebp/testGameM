@@ -2,13 +2,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { WebsocketService } from '../../../services/websocket.service';
 import { CommonModule } from '@angular/common';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-card',
   standalone: true,
   imports: [MatButton, CommonModule],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  styleUrl: './card.component.scss',
+  // animations: [
+  //   trigger("width", [
+  //     transition(":enter", [style({ width: 0, opacity: 0 }), animate(300, style({ width: '*', opacity: 1 }))])
+  //   ])
+  // ]
 })
 export class CardComponent {
 

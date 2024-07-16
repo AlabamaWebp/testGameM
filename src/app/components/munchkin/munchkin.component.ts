@@ -19,8 +19,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
   styleUrl: './munchkin.component.scss',
   animations: [
     trigger("height", [
-      transition(":enter", [style({ height: 0, opacity: 0 }), animate(500, style({ height: '*', opacity: 1 }))])
-    ])
+      transition(":enter", [style({ height: 0, opacity: 0 }), animate(300, style({ height: '*', opacity: 1 }))])
+    ]),
   ]
 })
 export class MunchkinComponent {
