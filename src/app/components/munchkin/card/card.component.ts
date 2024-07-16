@@ -94,6 +94,7 @@ interface AbstractData {
   description: string;
   cardType: "Класс" | "Раса" | "Проклятие" | "Монстр" | "Сокровище"
   img?: string;
+  cost: number
 }
 interface MonsterData {
   get_lvls: number;
@@ -105,7 +106,6 @@ interface TreasureData {
   treasureType: "Надеваемая" | "Используемая" | "Боевая"
   template?: "Шлем" | "Броник" | "Ноги" | "Рука"
   | "2 Руки" | "3 Руки" | "Рядом" | undefined
-  cost?: number | undefined
   big?: boolean | undefined
 }
 

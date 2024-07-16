@@ -32,7 +32,7 @@ export class MunchkinComponent {
     this.webs.on("refreshGame", (el: any) => {
       this.data = el;
       this.step = el.you_hodish ? el.step : -1;
-
+      console.log(el);
       if (el.help_ask) this.openHelpDialog();
     })
 
