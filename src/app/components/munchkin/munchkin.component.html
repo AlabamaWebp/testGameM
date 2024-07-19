@@ -70,10 +70,15 @@
     </main>
     <footer class="footer">
         <div class="menu">
-            <button mat-raised-button [disabled]="canEnd()" (click)="endHod()">end</button>
-            <button mat-raised-button [disabled]="!data.pas" (click)="setPas()">pas</button>
-            <button mat-raised-button [disabled]="!data.smivka" (click)="smivka()">smivka</button>
-            <button mat-raised-button [disabled]="!data.help_ask" (click)="openHelpDialog()">help</button>
+            @if (!data.end) {
+            <button mat-raised-button [disabled]="canEnd()" (click)="endHod()">Конец хода</button>
+            <button mat-raised-button [disabled]="!data.pas" (click)="setPas()">Я пас</button>
+            <button mat-raised-button [disabled]="!data.smivka" (click)="smivka()">Бросок смывки</button>
+            <button mat-raised-button [disabled]="!data.help_ask" (click)="openHelpDialog()">Мольба</button>
+            }
+            @else {
+                <button mat-raised-button (click)="end()">В меню</button>
+            }
         </div>
         <div class="cards">
             @for (item of data.you.cards; track item) {

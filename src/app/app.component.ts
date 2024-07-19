@@ -10,12 +10,10 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  // constructor(router: Router) {router.navigate(["start"])} // Для теста
   constructor(
     router: Router,
     // private webs: WebsocketService
   ) {
-
     router.navigate(["start"])
   }
 

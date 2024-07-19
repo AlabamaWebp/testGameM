@@ -51,6 +51,7 @@ export class MunchkinComponent {
   }
   getDoorCard() { this.webs.emit("getDoorCardByPlayer") }
   endHod() { this.webs.emit("endHod") }
+  end() { this.webs.emit("toHome") }
   setPas() { this.webs.emit("pas") }
   smivka() { this.webs.emit('smivka') }
   sbros(id: number) { this.webs.emit("sbrosCard", id) }
@@ -106,6 +107,7 @@ interface refreshGame {
   classes_mesto: boolean
   help_ask: { pl: playerData, gold: number } | undefined
   is_help: boolean
+  end: boolean
 }
 
 export interface playerData {
