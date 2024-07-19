@@ -5,11 +5,12 @@ import { WebsocketService } from '../../../services/websocket.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { AskHelpGoldComponent } from '../dialogs/ask-help-gold/ask-help-gold.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CardComponent, MatButtonModule],
+  imports: [CardComponent, MatButtonModule, CommonModule],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
