@@ -49,16 +49,16 @@
         <ng-container [ngTemplateOutlet]="top" [ngTemplateOutletContext]="{p: p}"></ng-container>
         @if (p) {
         <div class="center fdc">
-            @if (can_use) {<button mat-button (click)="useCard(data.id)">Использовать</button>}
-            @if (can_sbros) {<button mat-button (click)="sbrosCard(data.id)">Сбросить</button>}
-            @if (data.abstractData.cost && can_sbros) {<button mat-button (click)="sellCard(data.id)">Продать</button>}
+            @if (can_use) {<button mat-button (click)="useCard()">Использовать</button>}
+            @if (can_sbros) {<button mat-button (click)="sbrosCard()">Сбросить</button>}
+            @if (data.abstractData.cost && can_sbros) {<button mat-button (click)="sellCard()">Продать</button>}
         </div>
         }
         <ng-container [ngTemplateOutlet]="bottom"></ng-container>
     </div>
 </ng-template>
 @if (data) {
-<div (click)="podrobnee = true">
+<div (auxclick)="podrobnee = true" (dblclick)="useCard()" (contextmenu)="false">
     <ng-container [ngTemplateOutlet]="c"></ng-container>
 </div>
 @if (podrobnee) {

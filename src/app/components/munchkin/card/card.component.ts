@@ -29,7 +29,8 @@ export class CardComponent {
   @Output() use_card = new EventEmitter<number>();
   @Output() sbros = new EventEmitter<number>();
 
-  useCard(id: number) {
+  useCard() {
+    const id = this.data.id
     if (this.is_mesto && !this.treasure) {
       const tmp: toPlayer = {
         id: id,
@@ -42,8 +43,8 @@ export class CardComponent {
     }
     else this.use_card.emit(id)
   }
-  sbrosCard(id: number) { this.sbros.emit(id); }
-  sellCard(id: number) { this.webs.emit("sellCard", id); }
+  sbrosCard() { this.sbros.emit(this.data.id); }
+  sellCard() { this.webs.emit("sellCard", this.data.id); }
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
       this.treasure = true;
