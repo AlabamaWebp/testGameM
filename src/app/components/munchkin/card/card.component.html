@@ -47,9 +47,9 @@
 <ng-template #c let-p="p">
     <div class="card {{treasure ? 'treasure' : 'door'}}" [class.bigcard]="p">
         <ng-container [ngTemplateOutlet]="top" [ngTemplateOutletContext]="{p: p}"></ng-container>
-        @if (p) {
+        @if (p && main) {
         <div class="center fdc">
-            @if (can_use) {<button mat-button (click)="useCard()">Использовать</button>}
+            @if (data.use) {<button mat-button (click)="useCard()">Использовать</button>}
             @if (can_sbros) {<button mat-button (click)="sbrosCard()">Сбросить</button>}
             @if (data.abstractData.cost && can_sbros) {<button mat-button (click)="sellCard()">Продать</button>}
         </div>

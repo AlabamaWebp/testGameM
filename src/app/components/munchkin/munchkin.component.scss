@@ -7,6 +7,9 @@
     .stats {
         // color: white;
         flex: 0 0 100px;
+        background-color: #fff1e3;
+        border-radius: 10px;
+        padding: 0 10px 0 0;
     }
     display: flex;
     width: 100%;
@@ -33,7 +36,7 @@
 .main {
     display: flex;
     width: 100%;
-    .center {
+    .game_center {
         flex: 1 1 auto;
         height: 100%;
         width: 100%;
@@ -127,4 +130,11 @@
     button {
         margin: 0 0 5px;
     }
+}
+.card_height {
+    height: $cardHeight;
+}
+.only_info {
+    width: 100%;
+    display: block;
 }

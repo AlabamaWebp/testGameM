@@ -1,44 +1,21 @@
 @if (data) {
-<div class="player" (click)="podrobnee = true">
+@if (only_info) {
+<ng-container [ngTemplateOutlet]="podrobno"></ng-container>
+}
+@else {
+<div class="player" (click)="info = true">
   <span>{{ data.name }}</span>
   <span>lvl: {{ data.lvl }}</span>
   <span>{{ data.sex }}</span>
   <span>Очередь: {{ data.queue }}</span>
 </div>
-@if (podrobnee) {
-<div class="backdrop" (click)="closeBackdrop($event, b1)" #b1>
-  <div class="podrobnee">
-    <div class="flex">
-
-      <ng-container [ngTemplateOutlet]="rases"></ng-container>
-      @if (dataMesto?.type == 'Раса') {
-      <ng-container [ngTemplateOutlet]="rases" [ngTemplateOutletContext]="{ z: true }"></ng-container>}
-
-      <div class="stats player">
-        <span class="name">{{ data.name }}</span>
-        <span>lvl: {{ data.lvl }}</span>
-        <span>Сила: {{ data.power }}</span>
-        <span>{{ data.sex }}</span>
-        <span>Очередь: {{ data.queue }}</span>
-        @if (data.max_cards != 5){ <span>Макс карт: {{ data.max_cards }}</span>} @if (data.coins) {<span>Монетки: {{
-          data.coins }}</span>} @if (is_help) {
-        <button mat-raised-button class="btnpomoch" (click)="openHelpDialog()">
-          ПОМОГИ МНЕ!!!
-        </button>
-        }
-      </div>
-
-      <ng-container [ngTemplateOutlet]="classes"></ng-container>
-      @if (dataMesto?.type == 'Класс') {
-      <ng-container [ngTemplateOutlet]="classes" [ngTemplateOutletContext]="{ z: true }"></ng-container>}
-
-    </div>
-    <div class="flex treasures jcsb">
-      <ng-container [ngTemplateOutlet]="cards"></ng-container>
-    </div>
-  </div>
+@if (info) {
+<div class="backdrop" (click)="closeBackdrop($event, b1)" #b1 [class.vhidden]="hide_parent">
+  <ng-container [ngTemplateOutlet]="podrobno"></ng-container>
 </div>
-} }
+}}}
+
+
 
 <ng-template #rases let-z="z">
   <div class="r" [class.zatmenie]="z" (click)="closeBackdrop($event, b21, true)" #b21>
@@ -118,5 +95,39 @@
     } @empty {
     <app-card [treasure]="true"></app-card>
     }
+  </div>
+</ng-template>
+
+
+<ng-template #podrobno>
+  <div class="podrobnee">
+    <div class="flex">
+      <ng-container [ngTemplateOutlet]="rases"></ng-container>
+      @if (dataMesto?.type == 'Раса') {
+      <ng-container [ngTemplateOutlet]="rases" [ngTemplateOutletContext]="{ z: true }"></ng-container>}
+      <div class="stats player">
+        <span class="name">{{ data.name }}</span>
+        <span>lvl: {{ data.lvl }}</span>
+        <span>Сила: {{ data.power }}</span>
+        <span>{{ data.sex }}</span>
+        <span>Очередь: {{ data.queue }}</span>
+        @if (data.max_cards != 5){
+        <span>Макс карт: {{ data.max_cards }}</span>
+        } @if (data.coins) {
+        <span>Монетки: {{ data.coins }}</span>
+        } @if (is_help) {
+        <button mat-raised-button class="btnpomoch" (click)="openHelpDialog()">
+          ПОМОГИ МНЕ!!!
+        </button>
+        }
+      </div>
+
+      <ng-container [ngTemplateOutlet]="classes"></ng-container>
+      @if (dataMesto?.type == 'Класс') {
+      <ng-container [ngTemplateOutlet]="classes" [ngTemplateOutletContext]="{ z: true }"></ng-container>}
+    </div>
+    <div class="flex treasures jcsb">
+      <ng-container [ngTemplateOutlet]="cards"></ng-container>
+    </div>
   </div>
 </ng-template>

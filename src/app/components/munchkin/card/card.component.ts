@@ -10,20 +10,20 @@ import { animate, style, transition, trigger } from '@angular/animations';
   imports: [MatButton, CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  // animations: [
-  //   trigger("width", [
-  //     transition(":enter", [style({ width: 0, opacity: 0 }), animate(300, style({ width: '*', opacity: 1 }))])
-  //   ])
-  // ]
+  animations: [
+    // trigger("width", [
+    //   transition(":leave", [animate(300, style({ width: 0, opacity: 0 }))])
+    // ])
+  ]
 })
 export class CardComponent {
 
   constructor(private webs: WebsocketService) { }
   @Input() data: AbstractCard | any = undefined
   @Input() treasure: boolean = false;
-  @Input() can_use: boolean = false;
   @Input() can_sbros: boolean = false;
   @Input() can_sell: boolean = false;
+  @Input() main: boolean = false;
 
   @Output() use_mesto = new EventEmitter<toPlayer>();
   @Output() use_card = new EventEmitter<number>();
@@ -124,6 +124,7 @@ export interface AbstractCard {
   strong?: number;
   data?: TreasureData | MonsterData;
   is_super?: boolean
+  use: boolean
 }
 
 

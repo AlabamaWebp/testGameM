@@ -36,7 +36,11 @@ export class LobbyComponent {
     this.router.navigate(["home"]);
   }
   ngOnDestroy() {
-
+    const events = [
+      "statusLobby",
+      "allReady"
+    ]
+    this.webs.off(events)
   }
 }
 interface data {

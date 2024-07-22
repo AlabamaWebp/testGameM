@@ -14,9 +14,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
-export class PlayerComponent implements OnChanges {
+export class PlayerComponent {
   @Input() data!: playerData
-  @Input() podrobnee = false;
+  @Input() only_info = false;
+  @Input() info = this.only_info;
   @Input() dataMesto: toPlayer | undefined;
   @Input() can_sbros: boolean = false;
   @Input() is_help: false | number = false;
@@ -27,19 +28,15 @@ export class PlayerComponent implements OnChanges {
   sbrosEquip(id: number) { this.webs.emit("sbrosEquip", id) }
   closeBackdrop(ev: MouseEvent, el: HTMLElement, dataMesto = false) {
     if (el == ev.target) {
-      if (dataMesto)
-        this.dataMesto = undefined;
-      else
-        this.closePodrobnee();
+      if (dataMesto) this.dataMesto = undefined;
+      else this.closePodrobnee();
     }
   }
-
   closePodrobnee() {
-    this.podrobnee = false;
+    this.info = false;
+    this.hide_parent = false;
     this.close.emit();
   }
-
-
   clickTemplate(s: string) {
     this.template.emit(s);
   }
@@ -52,13 +49,13 @@ export class PlayerComponent implements OnChanges {
     this.webs.emit("useCardMesto", body);
     this.closePodrobnee();
   }
+  hide_parent = false
   ngOnChanges(d: SimpleChanges) {
-    // console.log(d);
     if (d['dataMesto']?.currentValue) {
-      this.podrobnee = true;
+      this.info = true;
+      this.hide_parent = true;
     }
   }
-
   readonly dialog = inject(MatDialog);
   openHelpDialog(): void {
     const dialogRef = this.dialog.open(AskHelpGoldComponent, { data: this.is_help, });

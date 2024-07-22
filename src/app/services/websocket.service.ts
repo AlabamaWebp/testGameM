@@ -54,7 +54,9 @@ export class WebsocketService {
       this.socket?.on(eventName, callback);
     }
   }
-
+  off(ev: string[]) {
+    ev.forEach(e => this.events.delete(e))
+  }
   emit(eventName: string, data: any = undefined) {
     this.isConnect() ? 0 : this.connect();
     if (!this.isConnect())
