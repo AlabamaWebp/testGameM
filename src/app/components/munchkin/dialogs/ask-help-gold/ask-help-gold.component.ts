@@ -35,7 +35,6 @@ export class AskHelpGoldComponent {
   select(n: number) {
     this.num = n;
   }
-
   close1(ans?: any): void {
     this.dialogRef.close(ans ? this.num : undefined);
   }

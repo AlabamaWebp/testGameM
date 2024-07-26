@@ -62,7 +62,6 @@ export class PlayerComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined && this.is_help) {
         this.webs.emit('helpAsk', { to: this.data.name, gold: result })
-        console.log(result);
       }
     });
   }

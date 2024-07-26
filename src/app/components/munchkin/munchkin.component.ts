@@ -98,7 +98,9 @@ export class MunchkinComponent {
   readonly dialog = inject(MatDialog);
   openHelpDialog(): void {
     const dialogRef = this.dialog.open(HelpFightComponent, { data: this.data?.help_ask?.gold, });
-    dialogRef.afterClosed().subscribe(result => { if (result !== undefined && this.data?.help_ask) this.webs.emit('helpAnswer', result) });
+    dialogRef.afterClosed().subscribe(result => { 
+      if (result !== undefined && this.data?.help_ask)
+       this.webs.emit('helpAnswer', result) });
   }
 }
 
