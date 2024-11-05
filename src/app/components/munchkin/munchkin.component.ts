@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { HelpFightComponent } from './dialogs/help-fight/help-fight.component';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AskSideComponent } from './dialogs/ask-side/ask-side.component';
 // import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -102,6 +103,25 @@ export class MunchkinComponent {
       if (result !== undefined && this.data?.help_ask)
        this.webs.emit('helpAnswer', result) });
   }
+
+  useSide(id: number) {
+    const dialog = this.dialog.open(AskSideComponent);
+    dialog.afterClosed().subscribe(result => {
+      if (result == undefined) return;
+      const tmp: toSide = {
+        id_card: id,
+        side: result
+      }
+      this.webs.emit("useCardSide", tmp);
+    })
+  }
+}
+
+
+
+export interface toSide {
+  id_card: number,
+  side: boolean // true - Человек, false - Монстр
 }
 
 interface refreshGame {

@@ -19,49 +19,54 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class CardComponent {
 
   constructor(private webs: WebsocketService) { }
-  @Input() data: AbstractCard | any = undefined
+  @Input() data?: AbstractCard
   @Input() treasure: boolean = false;
   @Input() can_sbros: boolean = false;
   @Input() can_sell: boolean = false;
   @Input() main: boolean = false;
 
   @Output() use_mesto = new EventEmitter<toPlayer>();
+  @Output() use_side = new EventEmitter<number>();
   @Output() use_card = new EventEmitter<number>();
   @Output() sbros = new EventEmitter<number>();
 
   useCard() {
-    const id = this.data.id
+    const id = this.data?.id;
+    if (!id) return
     if (this.is_mesto && !this.treasure) {
       const tmp: toPlayer = {
         id: id,
-        type: this.data.abstractData.cardType
+        type: this.data?.abstractData.cardType ?? ''
       }
       this.use_mesto.emit(tmp);
       setTimeout(() => {
         this.podrobnee = false;
-      }, 1);
+      }, 1); // --todo переделать
     }
+    else if (this.is_side) this.use_side.emit(id);
     else this.use_card.emit(id)
   }
-  sbrosCard() { this.sbros.emit(this.data.id); }
-  sellCard() { this.webs.emit("sellCard", this.data.id); }
+  sbrosCard() { this.sbros.emit(this.data?.id); }
+  sellCard() { this.webs.emit("sellCard", this.data?.id); }
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
       this.treasure = true;
-      this.tCard = this.data;
+      this.tCard = this.data as any;
+      if ((this.data.data as TreasureData).treasureType == "Боевая")
+        this.is_side = true;
     }
     else {
       if (
         !this.data?.is_super
         && (this.data?.abstractData.cardType == "Класс"
           || this.data?.abstractData.cardType == "Раса")
-      )
-        this.is_mesto = true;
-      this.dCard = this.data;
+      ) this.is_mesto = true;
+      this.dCard = this.data as any;
     }
   }
 
   is_mesto = false;
+  is_side = false;
 
   tCard: TreasureCard | undefined;
   dCard: DoorCard | undefined;
@@ -80,9 +85,15 @@ export class CardComponent {
   }
 }
 
+
+
+
+
+
+
 export interface toPlayer {
   id: number,
-  type: "Класс" | "Раса"
+  type: string // "Класс" | "Раса"
 }
 interface TreasureCard {
   abstractData: AbstractData,
