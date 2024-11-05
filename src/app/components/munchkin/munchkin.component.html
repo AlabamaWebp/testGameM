@@ -27,13 +27,13 @@
         <div class="game_center">
             <div class="log">
                 @for (item of log_; track item) {
-                <div class="bgcont" @height>
-                    {{item}}
-                </div>
+                    <div class="bgcont" @height>
+                        {{item}}
+                    </div>
                 }
             </div>
             @if (show_stats && !data.field.is_fight) {
-            <app-player [data]="you" [only_info]="true"></app-player>
+                <app-player [data]="you" [only_info]="true"></app-player>
             }
             @else {
             <div class="field">
@@ -45,17 +45,24 @@
                     </span>
                     <div class="osn">
                         @for (item of data.field.fight.monsters; track item) {
-                        <app-card [data]="item"></app-card>
+                            <app-card [data]="item"></app-card>
+                        }
+                        @for (item of data.field.fight.cards?.monsters ?? []; track item) {
+                            <app-card [data]="item"></app-card>
                         }
                     </div>
                 </div>
                 <div class="players">
                     <div class="osn">
                         <app-player [data]="data.field.fight.players.main.player"></app-player>
-                        @if (data.field.fight.players.secondary)
-                        {<app-player [data]="data.field.fight.players.secondary.player"></app-player>}
+                            @if (data.field.fight.players.secondary) {
+                                <app-player [data]="data.field.fight.players.secondary.player"></app-player>
+                            }
+                            @for (item of data.field.fight.cards?.players ?? []; track item) {
+                                <app-card [data]="item"></app-card>
+                            }
+                        </div>
                         <span class="bgcont">Сила стороны: {{data.field.fight.players.strongest}} </span>
-                    </div>
                 </div>
                 }
                 @else {
