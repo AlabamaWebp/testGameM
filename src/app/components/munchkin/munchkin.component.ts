@@ -137,7 +137,6 @@ interface refreshGame {
   queue: string,
   step: 0 | 1 | 2 | 3,
   field: GameField,
-  is_fight: boolean,
   sbros:
   {
     doors: AbstractCard,

@@ -9,12 +9,12 @@
     <header class="header">
         <div class="players">
             @for (item of data.players; track item) {
-            <app-player [data]="item" [is_help]="data.is_help ? (data.field.fight?.gold ?? false) : false"></app-player>
+                <app-player [data]="item" [is_help]="data.is_help ? (data.field.fight?.gold ?? false) : false"></app-player>
             }
         </div>
         <div class="stats flex center">
             <app-player [data]="you" [dataMesto]="dataMesto" (close)="closeYou()"
-                [can_sbros]="!data.is_fight"></app-player>
+                [can_sbros]="!data.field.is_fight"></app-player>
             <mat-checkbox [checked]="show_stats" (change)="statsToggle($event.checked)">Показывать экипировку</mat-checkbox>
         </div>
     </header>
