@@ -26,7 +26,11 @@ import { AskSideComponent } from './dialogs/ask-side/ask-side.component';
   ]
 })
 export class MunchkinComponent {
-  constructor(private webs: WebsocketService, private router: Router, private detector: ChangeDetectorRef) {
+  constructor(
+    private webs: WebsocketService, 
+    // private detector: ChangeDetectorRef
+    router: Router, 
+  ) {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
   }
   ngOnDestroy() {
@@ -38,16 +42,20 @@ export class MunchkinComponent {
     ]
     this.webs.off(ev)
   }
+  // cards: AbstractCard[] = []
+  // setCards(new_cards: AbstractCard[]) {
+  //   this.cards
+  //   this.cards = new_cards;
+  // }
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
       this.data = el;
       this.step = el.you_hodish ? el.step : -1;
       console.log(el);
       if (el.help_ask) this.openHelpDialog();
-      this.you = undefined;
-      setTimeout(() => {
-        this.you = this.data?.you;
-      }, 1);
+      // this.you = undefined;
+      // setTimeout(() => this.you = this.data?.you, 1);
+      this.you = this.data?.you;
     })
 
     this.webs.on("condition", (el: any) => {
@@ -99,9 +107,10 @@ export class MunchkinComponent {
   readonly dialog = inject(MatDialog);
   openHelpDialog(): void {
     const dialogRef = this.dialog.open(HelpFightComponent, { data: this.data?.help_ask?.gold, });
-    dialogRef.afterClosed().subscribe(result => { 
+    dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined && this.data?.help_ask)
-       this.webs.emit('helpAnswer', result) });
+        this.webs.emit('helpAnswer', result)
+    });
   }
 
   useSide(id: number) {

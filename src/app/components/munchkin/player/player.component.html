@@ -6,8 +6,9 @@
 <div class="player" (click)="info = true">
   <span>{{ data.name }}</span>
   <span>lvl: {{ data.lvl }}</span>
+  <span>Сила: {{ data.power }}</span>
   <span>{{ data.sex }}</span>
-  <span>Очередь: {{ data.queue }}</span>
+  <!-- <span>Очередь: {{ data.queue }}</span> -->
 </div>
 @if (info) {
 <div class="backdrop" (click)="closeBackdrop($event, b1)" #b1 [class.vhidden]="hide_parent">
