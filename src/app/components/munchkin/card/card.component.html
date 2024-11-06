@@ -50,8 +50,10 @@
         @if (p && main) {
         <div class="center fdc">
             @if (data?.use) {<button mat-button (click)="useCard()">Использовать</button>}
-            @if (can_sbros) {<button mat-button (click)="sbrosCard()">Сбросить</button>}
-            @if (data?.abstractData?.cost && can_sbros) {<button mat-button (click)="sellCard()">Продать</button>}
+            @if (can_sbros) {
+                <button mat-button (click)="sbrosCard()">Сбросить</button>
+                @if (data?.abstractData?.cost) {<button mat-button (click)="sellCard()">Продать</button>}
+            }
         </div>
         }
         <ng-container [ngTemplateOutlet]="bottom"></ng-container>
