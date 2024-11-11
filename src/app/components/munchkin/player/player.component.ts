@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter, inject } from '@angular/core';
+import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter, inject, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { playerData } from '../munchkin.component';
 import { CardComponent, toPlayer } from '../card/card.component';
 import { WebsocketService } from '../../../services/websocket.service';
@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CardComponent, MatButtonModule, CommonModule],
   templateUrl: './player.component.html',
-  styleUrl: './player.component.scss'
+  styleUrl: './player.component.scss',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayerComponent {
   @Input() data!: playerData
@@ -24,7 +25,11 @@ export class PlayerComponent {
   @Output() template = new EventEmitter();
   @Output() close = new EventEmitter();
 
-  constructor(private webs: WebsocketService,) { }
+
+  constructor(private webs: WebsocketService, 
+    // private detector: ChangeDetectorRef,
+  ) { }
+  // get refresh() { return this.detector.detectChanges(); }
   sbrosEquip(id: number) { this.webs.emit("sbrosEquip", id) }
   closeBackdrop(ev: MouseEvent, el: HTMLElement, dataMesto = false) {
     if (el == ev.target) {
@@ -54,7 +59,11 @@ export class PlayerComponent {
     if (d['dataMesto']?.currentValue) {
       this.info = true;
       this.hide_parent = true;
+      // this.refresh;
     }
+    // if (d["data"]) {
+    //   // this.refresh;
+    // }
   }
   readonly dialog = inject(MatDialog);
   openHelpDialog(): void {
@@ -65,6 +74,7 @@ export class PlayerComponent {
       }
     });
   }
+  
 }
 export interface cardMestoEvent {
   mesto: "first" | "second" | "bonus"

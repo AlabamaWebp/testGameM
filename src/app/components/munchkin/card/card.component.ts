@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, signal, SimpleChanges, WritableSignal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { WebsocketService } from '../../../services/websocket.service';
 import { CommonModule } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
+// import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-card',
@@ -14,11 +14,13 @@ import { animate, style, transition, trigger } from '@angular/animations';
     // trigger("width", [
     //   transition(":leave", [animate(300, style({ width: 0, opacity: 0 }))])
     // ])
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
 
-  constructor(private webs: WebsocketService) { }
+  constructor(private webs: WebsocketService, private detector: ChangeDetectorRef) { }
+  get refresh() { return this.detector.detectChanges(); }
   @Input() data?: AbstractCard
   @Input() treasure: boolean = false;
   @Input() can_sbros: boolean = false;
@@ -32,7 +34,7 @@ export class CardComponent {
 
   useCard() {
     const id = this.data?.id;
-    if (!id) return
+    if (!id && id != 0) return
     if (this.is_mesto && !this.treasure) {
       const tmp: toPlayer = {
         id: id,
@@ -48,6 +50,12 @@ export class CardComponent {
   }
   sbrosCard() { this.sbros.emit(this.data?.id); }
   sellCard() { this.webs.emit("sellCard", this.data?.id); }
+  ngOnChanges(d: SimpleChanges) {
+    if (d["data"]?.currentValue) {
+      this.ngOnInit();
+    }
+  }
+  data_: WritableSignal<AbstractCard | undefined> = signal(undefined)
   ngOnInit() {
     if (this.data?.abstractData.cardType == "Сокровище") {
       this.treasure = true;
@@ -63,6 +71,7 @@ export class CardComponent {
       ) this.is_mesto = true;
       this.dCard = this.data as any;
     }
+    this.refresh;
   }
 
   is_mesto = false;
