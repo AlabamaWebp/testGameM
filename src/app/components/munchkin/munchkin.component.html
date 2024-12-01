@@ -14,7 +14,7 @@
         </div>
         <div class="stats flex center">
             <app-player [data]="you" [dataMesto]="dataMesto" (close)="closeYou()"
-                [can_sbros]="!data.field.is_fight"></app-player>
+                [can_sbros]="can_sbros"></app-player>
             <mat-checkbox [checked]="show_stats" (change)="statsToggle($event.checked)">Показывать экипировку</mat-checkbox>
         </div>
     </header>
@@ -32,8 +32,8 @@
                     </div>
                 }
             </div>
-            @if (show_stats && !data.field.is_fight) {
-                <app-player [data]="you" [only_info]="true"></app-player>
+            @if (show_stats && can_sbros) {
+                <app-player [data]="you" [only_info]="true" [can_sbros]="can_sbros"></app-player>
             }
             @else {
             <div class="field">

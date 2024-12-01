@@ -30,6 +30,30 @@ export class PlayerComponent {
     // private detector: ChangeDetectorRef,
   ) { }
   // get refresh() { return this.detector.detectChanges(); }
+  ngOnInit() {
+    this.cards_bottom = [
+      {
+        name: "Шлем",
+        cards: this.data.t_field.helmet,
+      },
+      {
+        name: "Броня",
+        cards: this.data.t_field.body,
+      },
+      {
+        name: "Обувь",
+        cards: this.data.t_field.legs,
+      },
+      {
+        name: "Руки",
+        cards: this.data.t_field.arm,
+      },
+      {
+        name: "Рядом",
+        cards: this.data.t_field.other,
+      },
+    ]
+  }
   sbrosEquip(id: number) { this.webs.emit("sbrosEquip", id) }
   closeBackdrop(ev: MouseEvent, el: HTMLElement, dataMesto = false) {
     if (el == ev.target) {
@@ -74,7 +98,13 @@ export class PlayerComponent {
       }
     });
   }
-  
+
+
+  cards_bottom: card[] = []
+}
+interface card {
+  name: string
+  cards: any 
 }
 export interface cardMestoEvent {
   mesto: "first" | "second" | "bonus"

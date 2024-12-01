@@ -1,20 +1,22 @@
 @if (data) {
-@if (only_info) {
-<ng-container [ngTemplateOutlet]="podrobno"></ng-container>
+  @if (only_info) {
+    <ng-container [ngTemplateOutlet]="podrobno"></ng-container>
+  }
+  @else {
+    <div class="player" (click)="info = true">
+      <span>{{ data.name }}</span>
+      <span>lvl: {{ data.lvl }}</span>
+      <span>Сила: {{ data.power }}</span>
+      <span>{{ data.sex }}</span>
+      <!-- <span>Очередь: {{ data.queue }}</span> -->
+    </div>
+    @if (info) {
+      <div class="backdrop" (click)="closeBackdrop($event, b1)" #b1 [class.vhidden]="hide_parent">
+        <ng-container [ngTemplateOutlet]="podrobno"></ng-container>
+      </div>
+    }
+  }
 }
-@else {
-<div class="player" (click)="info = true">
-  <span>{{ data.name }}</span>
-  <span>lvl: {{ data.lvl }}</span>
-  <span>Сила: {{ data.power }}</span>
-  <span>{{ data.sex }}</span>
-  <!-- <span>Очередь: {{ data.queue }}</span> -->
-</div>
-@if (info) {
-<div class="backdrop" (click)="closeBackdrop($event, b1)" #b1 [class.vhidden]="hide_parent">
-  <ng-container [ngTemplateOutlet]="podrobno"></ng-container>
-</div>
-}}}
 
 
 
@@ -65,38 +67,14 @@
 </ng-template>
 
 <ng-template #cards>
-  <div class="r m15">
-    <span>Шлем</span>
-    @for (item of data.t_field.helmet; track $index) {
-    <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
+  @for (item1 of cards_bottom; track $index) {
+    <div class="r m15">
+    <span>{{item1.name}}</span>
+    @for (item of item1.cards; track $index) {
+      <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
     } @empty {<app-card [treasure]="true"></app-card>}
-  </div>
-  <div class="r m15">
-    <span>Броня</span>
-    @for (item of data.t_field.body; track $index) {
-    <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
-    } @empty {<app-card [treasure]="true"></app-card>}
-  </div>
-  <div class="r m15">
-    <span>Обувь</span>
-    @for (item of data.t_field.legs; track $index) {
-    <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
-    } @empty {<app-card [treasure]="true"></app-card>}
-  </div>
-  <div class="r m15">
-    <span>Руки</span>
-    @for (item of data.t_field.arm; track $index) {
-    <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
-    } @empty {<app-card [treasure]="true"></app-card>}
-  </div>
-  <div class="r m15">
-    <span>Рядом</span>
-    @for (item of data.t_field.other; track $index) {
-    <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
-    } @empty {
-    <app-card [treasure]="true"></app-card>
-    }
-  </div>
+    </div>
+  }
 </ng-template>
 
 
@@ -128,7 +106,9 @@
       <ng-container [ngTemplateOutlet]="classes" [ngTemplateOutletContext]="{ z: true }"></ng-container>}
     </div>
     <div class="flex treasures jcsb">
-      <ng-container [ngTemplateOutlet]="cards"></ng-container>
+      @if (data) {
+        <ng-container [ngTemplateOutlet]="cards"></ng-container>
+      }
     </div>
   </div>
 </ng-template>

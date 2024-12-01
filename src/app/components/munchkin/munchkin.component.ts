@@ -48,7 +48,7 @@ export class MunchkinComponent {
   //   this.cards
   //   this.cards = new_cards;
   // }
-  get refresh() { return this.detector.detectChanges(); }
+  get refresh() { return this.detector.detectChanges(); } //this.detector.detectChanges();
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
       this.you = el.you;
@@ -58,6 +58,7 @@ export class MunchkinComponent {
       if (el.help_ask) this.openHelpDialog();
       // this.you = undefined;
       // setTimeout(() => this.you = this.data?.you, 1);
+      this.can_sbros = !this.data!.field.is_fight;
       this.refresh;
     })
 
@@ -75,6 +76,7 @@ export class MunchkinComponent {
     this.webs.emit("allLog");
     // firstStepHod
   }
+  can_sbros = false;
   getDoorCard() { this.webs.emit("getDoorCardByPlayer") }
   endHod() { this.webs.emit("endHod") }
   end() { this.webs.emit("toHome") }
