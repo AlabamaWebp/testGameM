@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WebsocketService } from '../../services/websocket.service';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WebsocketService } from '../../services/websocket.service';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 import { NavigationStart, Router } from '@angular/router';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';

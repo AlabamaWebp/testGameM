@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, signal, SimpleChanges, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, Output, signal, SimpleChanges, WritableSignal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { WebsocketService } from '../../../services/websocket.service';
+import { WebsocketService } from '../../../services/websocket/websocket.service';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { AskSideComponent } from '../dialogs/ask-side/ask-side.component';
+import { DataShareService } from '../../../services/data-share/data-share.service';
 // import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -19,7 +22,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CardComponent {
 
-  constructor(private webs: WebsocketService, private detector: ChangeDetectorRef) { }
+  constructor(private webs: WebsocketService, private detector: ChangeDetectorRef, private share: DataShareService) { }
   get refresh() { return this.detector.detectChanges(); }
   @Input() data?: AbstractCard
   @Input() treasure: boolean = false;
@@ -28,8 +31,8 @@ export class CardComponent {
   @Input() main: boolean = false;
 
   @Output() use_mesto = new EventEmitter<toPlayer>();
-  @Output() use_side = new EventEmitter<number>();
-  @Output() use_card = new EventEmitter<number>();
+  // @Output() use_side = new EventEmitter<number>();
+  // @Output() use_card = new EventEmitter<number>();
   @Output() sbros = new EventEmitter<number>();
 
   useCard() {
@@ -45,8 +48,8 @@ export class CardComponent {
         this.podrobnee = false;
       }, 1); // --todo переделать
     }
-    else if (this.is_side) this.use_side.emit(id);
-    else this.use_card.emit(id)
+    else if (this.is_side) this.useSide(id);
+    else this.useCard2(id)
   }
   sbrosCard() { this.sbros.emit(this.data?.id); }
   sellCard() { this.webs.emit("sellCard", this.data?.id); }
@@ -92,6 +95,23 @@ export class CardComponent {
     console.log(v);
     return v
   }
+
+  useCard2(id: number) {
+    this.webs.emit("useCard", id);
+  }
+  readonly dialog = inject(MatDialog);
+  useSide(id: number) {
+    const dialog = this.dialog.open(AskSideComponent);
+    dialog.afterClosed().subscribe(result => {
+      if (result == undefined) return;
+      const tmp: toSide = {
+        id_card: id,
+        side: result
+      }
+      this.webs.emit("useCardSide", tmp);
+    })
+  }
+
 }
 
 
@@ -99,7 +119,10 @@ export class CardComponent {
 
 
 
-
+export interface toSide {
+  id_card: number,
+  side: boolean // true - Человек, false - Монстр
+}
 export interface toPlayer {
   id: number,
   type: string // "Класс" | "Раса"

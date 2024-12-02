@@ -70,8 +70,8 @@
   @for (item1 of cards_bottom; track $index) {
     <div class="r m15">
     <span>{{item1.name}}</span>
-    @for (item of item1.cards; track $index) {
-      <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" (sbros)="sbrosEquip($event)"></app-card>
+    @for (item of item1.cards ?? []; track $index) {
+      <app-card [data]="item" [treasure]="true" [can_sbros]="can_sbros" [main]="true" (sbros)="sbrosEquip($event)"></app-card>
     } @empty {<app-card [treasure]="true"></app-card>}
     </div>
   }

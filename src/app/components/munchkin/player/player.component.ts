@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter, inject, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { playerData } from '../munchkin.component';
 import { CardComponent, toPlayer } from '../card/card.component';
-import { WebsocketService } from '../../../services/websocket.service';
+import { WebsocketService } from '../../../services/websocket/websocket.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { AskHelpGoldComponent } from '../dialogs/ask-help-gold/ask-help-gold.component';
@@ -26,31 +26,34 @@ export class PlayerComponent {
   @Output() close = new EventEmitter();
 
 
-  constructor(private webs: WebsocketService, 
+  constructor(private webs: WebsocketService,
     // private detector: ChangeDetectorRef,
   ) { }
   // get refresh() { return this.detector.detectChanges(); }
   ngOnInit() {
+    this.refreshBottomCards();
+  }
+  refreshBottomCards() {
     this.cards_bottom = [
       {
         name: "Шлем",
-        cards: this.data.t_field.helmet,
+        cards: this.data?.t_field.helmet,
       },
       {
         name: "Броня",
-        cards: this.data.t_field.body,
+        cards: this.data?.t_field.body,
       },
       {
         name: "Обувь",
-        cards: this.data.t_field.legs,
+        cards: this.data?.t_field.legs,
       },
       {
         name: "Руки",
-        cards: this.data.t_field.arm,
+        cards: this.data?.t_field.arm,
       },
       {
         name: "Рядом",
-        cards: this.data.t_field.other,
+        cards: this.data?.t_field.other,
       },
     ]
   }
@@ -85,9 +88,10 @@ export class PlayerComponent {
       this.hide_parent = true;
       // this.refresh;
     }
-    // if (d["data"]) {
-    //   // this.refresh;
-    // }
+    if (d["data"]) {
+      // this.refresh;
+      this.refreshBottomCards();
+    }
   }
   readonly dialog = inject(MatDialog);
   openHelpDialog(): void {
@@ -104,7 +108,7 @@ export class PlayerComponent {
 }
 interface card {
   name: string
-  cards: any 
+  cards: any
 }
 export interface cardMestoEvent {
   mesto: "first" | "second" | "bonus"

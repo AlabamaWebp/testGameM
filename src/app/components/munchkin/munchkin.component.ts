@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal } from '@angular/core';
-import { WebsocketService } from '../../services/websocket.service';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 import { Router } from '@angular/router';
 import { AbstractCard, CardComponent, toPlayer } from './card/card.component';
 import { PlayerComponent } from './player/player.component';
@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { HelpFightComponent } from './dialogs/help-fight/help-fight.component';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { AskSideComponent } from './dialogs/ask-side/ask-side.component';
+import { DataShareService } from '../../services/data-share/data-share.service';
 // import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -24,12 +24,13 @@ import { AskSideComponent } from './dialogs/ask-side/ask-side.component';
       transition(":enter", [style({ height: 0, opacity: 0 }), animate(300, style({ height: '*', opacity: 1 }))])
     ]),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MunchkinComponent {
   constructor(
     private webs: WebsocketService,
-    private detector: ChangeDetectorRef,
+    // private detector: ChangeDetectorRef,
+    private share: DataShareService,
     router: Router,
   ) {
     !webs.isConnect() ? router.navigate(["start"]) : 0;
@@ -48,17 +49,17 @@ export class MunchkinComponent {
   //   this.cards
   //   this.cards = new_cards;
   // }
-  get refresh() { return this.detector.detectChanges(); } //this.detector.detectChanges();
+  get refresh() { return undefined; } //this.detector.detectChanges();
   ngOnInit() {
     this.webs.on("refreshGame", (el: any) => {
       this.you = el.you;
       this.data = el;
       this.step = el.you_hodish ? el.step : -1;
-      console.log(el);
       if (el.help_ask) this.openHelpDialog();
       // this.you = undefined;
       // setTimeout(() => this.you = this.data?.you, 1);
       this.can_sbros = !this.data!.field.is_fight;
+      this.share.munchkin = this.data;
       this.refresh;
     })
 
@@ -93,9 +94,6 @@ export class MunchkinComponent {
 
   dataMesto: toPlayer | undefined;
 
-  useCard(id: number) {
-    this.webs.emit("useCard", id);
-  }
   useCardMesto(body: toPlayer) {
     const card = this.data?.you.cards.find(e => e.id == body.id)
     if ((card?.abstractData.cardType == "Класс" && this.data?.classes_mesto)
@@ -103,16 +101,8 @@ export class MunchkinComponent {
     ) { this.dataMesto = body; this.refresh; }
     else this.useCard(body.id)
   }
-  useSide(id: number) {
-    const dialog = this.dialog.open(AskSideComponent);
-    dialog.afterClosed().subscribe(result => {
-      if (result == undefined) return;
-      const tmp: toSide = {
-        id_card: id,
-        side: result
-      }
-      this.webs.emit("useCardSide", tmp);
-    })
+  useCard(id: number) {
+    this.webs.emit("useCard", id);
   }
   closeYou() { this.dataMesto = undefined; }
   canEnd() { return !((this.step == 3) && ((this.data?.you.max_cards ?? 0) >= (this.data?.you.cards.length ?? 0))) }
@@ -132,13 +122,7 @@ export class MunchkinComponent {
 }
 
 
-
-export interface toSide {
-  id_card: number,
-  side: boolean // true - Человек, false - Монстр
-}
-
-interface refreshGame {
+export interface refreshGame {
   queue: string,
   step: 0 | 1 | 2 | 3,
   field: GameField,
