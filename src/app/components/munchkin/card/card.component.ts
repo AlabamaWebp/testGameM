@@ -33,8 +33,8 @@ export class CardComponent {
   @Output() use_mesto = new EventEmitter<toPlayer>();
   // @Output() use_side = new EventEmitter<number>();
   // @Output() use_card = new EventEmitter<number>();
-  @Output() sbros = new EventEmitter<number>();
-
+  // @Output() sbros = new EventEmitter<number>();
+  sbros(id: number) { this.webs.emit("sbrosCard", id) }
   useCard() {
     const id = this.data?.id;
     if (!id && id != 0) return
@@ -51,7 +51,7 @@ export class CardComponent {
     else if (this.is_side) this.useSide(id);
     else this.useCard2(id)
   }
-  sbrosCard() { this.sbros.emit(this.data?.id); }
+  sbrosCard() { this.sbros(this.data!.id); }
   sellCard() { this.webs.emit("sellCard", this.data?.id); }
   ngOnChanges(d: SimpleChanges) {
     if (d["data"]?.currentValue) {

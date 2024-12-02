@@ -96,8 +96,7 @@
         </div>
         <div class="cards">
             @for (item of data.you.cards; track item) {
-            <app-card class="card" [data]="item" [can_sbros]="data.step == 3" (use_mesto)="useCardMesto($event)"
-              (sbros)="sbros($event)" [main]="!data.end"></app-card>
+            <app-card class="card" [data]="item" [can_sbros]="data.step == 3" (use_mesto)="useCardMesto($event)" [main]="!data.end"></app-card>
             }
         </div>
     </footer>
