@@ -18,7 +18,7 @@ export class WebsocketService {
       }
     })
   }
-
+  url = "http://localhost" // "http://192.168.172.189"
   isConnect() {
     return this.socket ? true : false;
   }
@@ -29,7 +29,7 @@ export class WebsocketService {
         return
       else name = tmp;
     }
-    this.socket = io('http://localhost:3001', {
+    this.socket = io(this.url + ':3001', {
       extraHeaders: { "name": new TextEncoder().encode(name).toString() }
     });
     this.socket.on("disconnect", (e) => {
@@ -71,7 +71,6 @@ export class WebsocketService {
   }
 
   checkNickname(nickname: string) {
-    return this.http.post("http://localhost:3000/nickname", { nickname: nickname });
+    return this.http.post(this.url + ":3000/nickname", { nickname: nickname });
   }
-
 }
