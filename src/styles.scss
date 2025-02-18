@@ -104,3 +104,11 @@ app-card {
 .oa {overflow: auto;}
 .jcs { display: flex; justify-content: start;}
 .vhidden {visibility: hidden;}
+.create {
+    mat-form-field {
+        width: 400px !important;
+    }
+    .mdc-label {
+        color: white;
+    }
+}
